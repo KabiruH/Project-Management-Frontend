@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# Web Application README
+## Overview
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This web application is designed to manage and track participant enrollments in various programs, including their payments and the award centers they are associated with. The flow chart below illustrates the overall process flow of the application.
 
-## Available Scripts
+# Key Components
 
-In the project directory, you can run:
+### Award Centers
+        These are the locations or institutions where participants can receive awards or recognitions. This component is linked to the Payments and Programs modules.
 
-### `npm start`
+### Participants
+        This module manages information about the individuals enrolled in various programs. It interacts with the Programs, Enrollments, and Award Centers modules.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Programs
+        These are the various courses or activities participants can enroll in. This module is central to the application's operation, linking with Participants, Payments, and Enrollments.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Payments
+        This component handles all financial transactions related to participant enrollments in programs. It ensures that payments are tracked and processed correctly.
 
-### `npm test`
+### Enrollments
+        This module manages the enrollment status of participants in programs. It tracks the enrollment dates and any related information.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Process Flow
 
-### `npm run build`
+### Participants Enrollment
+        Participants enroll in programs through the Enrollments module.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Program Enrollment Status
+        The system checks if the enrollment has an end date:
+            Yes: If the enrollment has an end date, it proceeds to check if the program duration is over.
+            No: The participant remains enrolled.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Program Duration Check
+        If the enrollment has an end date, the system checks if the program duration is over:
+            Yes: The participant is marked as having completed the program.
+            No: The participant remains enrolled.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Program Completion
+        Once a participant has completed a program, the completion status is updated, and the system may interact with the Award Centers for any awards.
 
-### `npm run eject`
+## Usage
+### Setting Up
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    Clone the repository:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    bash
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+        git clone git@github.com:KabiruH/Project-Management-Frontend.Git
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Navigate to the project directory:
 
-## Learn More
+bash
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+        cd web-app
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Install dependencies:
 
-### Code Splitting
+        npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Start the application:
 
-### Analyzing the Bundle Size
+bash
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+        npm start
 
-### Making a Progressive Web App
+## Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+    Enroll Participants: Easily enroll participants into various programs.
+    Track Payments: Manage and track all payments associated with program enrollments.
+    Manage Award Centers: Associate participants with award centers for recognition.
+    Monitor Program Status: Keep track of participant enrollment status and program completion.
 
-### Advanced Configuration
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+    Fork the repository.
+    Create a new branch:
 
-### Deployment
+    bash
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+git checkout -b feature/your-feature
 
-### `npm run build` fails to minify
+### Commit your changes:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+bash
+
+git commit -m "Add your feature"
+
+### Push to the branch:
+
+bash
+
+    git push origin feature/your-feature
+
+    Open a pull request.
+
+## License
+
+This project is licensed under the MIT License

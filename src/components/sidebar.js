@@ -26,7 +26,7 @@ const Sidebar = () => {
   }, [darkMode]);
 
   const menuItems = [
-    { name: 'Dashboard', dropdown: ['Participant', 'Project', 'Program'] },
+    { name: 'Dashboard'},
     { name: 'Calendar' },
     { name: 'Institutions', dropdown: ['Register', 'Region', 'Status', 'Stages'] },
     { name: 'Participants', dropdown: ['Participant', 'Levels'] },

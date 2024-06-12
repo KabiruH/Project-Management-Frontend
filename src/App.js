@@ -1,12 +1,18 @@
 
 import './App.css';
 import Sidebar from './components/sidebar.js';
+import CalendarPage from './pages/calendar.js'
+import Institutions from './pages/insititutions.js'
 
 function App() {
   return (
     <div>
-   <Sidebar/>
-   </div>
+      <Sidebar/>
+      <CalendarPage/>
+      <Institutions/>
+ 
+ 
+    </div>
   );
 }
 

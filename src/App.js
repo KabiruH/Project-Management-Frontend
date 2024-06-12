@@ -8,7 +8,7 @@ import DashboardStatsGrid from './pages/dashboard.js'
 import Footer from './components/footer.js'
 import Participants from './pages/participants.js'
 import Project from './pages/project.js';
-
+import Helper from './pages/helpers.js'
 
 
 const Layout = ({ children }) => (
@@ -33,6 +33,8 @@ function App() {
         <Route path="/institutions" element={<Institutions />} />
         <Route path="/participants" element={<Participants />} />
         <Route path="/project" element={<Project />} />
+        {/* <Route path="/program" element={<Program />} /> */}
+        <Route path="/helpers" element={<Helper />} />
       </Routes>
 
 

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import Layout from '../components/layout'
 
-const InstitutionsPage = () => {
+const Institutions = () => {
   const [institutions, setInstitutions] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -49,6 +50,7 @@ const InstitutionsPage = () => {
   );
 
   return (
+    <Layout>
     <div className="p-5">
       <h1 className="text-2xl mb-4">Institutions</h1>
       <div className="flex justify-between mb-4">
@@ -194,7 +196,8 @@ const InstitutionsPage = () => {
         </div>
       </Modal>
     </div>
+    </Layout>
   );
 };
 
-export default InstitutionsPage;
+export default Institutions;

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import Layout from '../components/layout'
 
 const Project = () => {
   const [projects, setProjects] = useState([]);
@@ -53,6 +54,7 @@ const Project = () => {
   );
 
   return (
+    <Layout>
     <div className="p-5">
       <h1 className="text-2xl mb-4">Projects</h1>
       <div className="flex justify-between mb-4">
@@ -210,6 +212,7 @@ const Project = () => {
         </div>
       </Modal>
     </div>
+    </Layout>
   );
 };
 

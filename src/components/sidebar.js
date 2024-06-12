@@ -44,7 +44,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className={`w-64 h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-200 text-black'} p-5`}>
+    <div className={`w-64 h-screen ${darkMode ? 'bg-white text-white' : 'bg-gray-200 text-black'} p-5`}>
       <div className="mb-5 flex items-center">
         <img src="./assets/logo.png" alt='' qclassName="w-10 h-10 mr-2" />
         <span className="font-semibold text-lg">The President's Award - Kenya</span>

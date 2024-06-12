@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import Modal from 'react-modal';
 import 'react-calendar/dist/Calendar.css';
+import Layout from '../components/layout'
 
 const CalendarPage = () => {
   const [date, setDate] = useState(new Date());
@@ -53,6 +54,7 @@ const CalendarPage = () => {
   };
 
   return (
+    <Layout>
     <div className="calendar-page p-5 h-screen flex flex-col items-center bg-gray-50">
       <h1 className="text-2xl mb-4">Calendar</h1>
       <div className="w-full flex justify-center">
@@ -90,6 +92,7 @@ const CalendarPage = () => {
         </div>
       </Modal>
     </div>
+    </Layout>
   );
 };
 

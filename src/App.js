@@ -12,7 +12,7 @@ function App() {
   return (
     <div>
       <DashboardStatsGrid/>
-       <Sidebar/>
+   
       <CalendarPage/>
       <Institutions/>
       <Participants/>

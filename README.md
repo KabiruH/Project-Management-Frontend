@@ -1,4 +1,4 @@
-# Web Application README
+# Project Manager
 ## Overview
 
 This web application is designed to manage and track participant enrollments in various programs, including their payments and the award centers they are associated with. The flow chart below illustrates the overall process flow of the application.
@@ -74,7 +74,7 @@ Monitor Program Status: Keep track of participant enrollment status and program 
 Fork the repository.
 Create a new branch:
 
-    bash
+bash
 
         git checkout -b feature/your-feature
 

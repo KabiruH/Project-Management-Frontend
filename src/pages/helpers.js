@@ -131,14 +131,20 @@ const Helper = () => {
             onChange={handleInputChange}
             className="w-full p-2 border border-gray-300 rounded"
           />
-          <input
-            type="text"
-            name="gender"
-            placeholder="Gender"
-            value={newHelper.gender}
-            onChange={handleInputChange}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
+        <div>
+            <label htmlFor="gender">Gender</label>
+            <select
+              id="gender"
+              name="gender"
+              value={newHelper.gender}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
           <input
             type="text"
             name="idNumber"

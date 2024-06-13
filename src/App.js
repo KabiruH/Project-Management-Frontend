@@ -9,6 +9,7 @@ import Footer from './components/footer.js'
 import Participants from './pages/participants.js'
 import Project from './pages/project.js';
 import Helper from './pages/helpers.js'
+import Trainings from './pages/training.js'
 
 
 const Layout = ({ children }) => (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/project" element={<Project />} />
         {/* <Route path="/program" element={<Program />} /> */}
         <Route path="/helpers" element={<Helper />} />
+        <Route path="/training" element={<Trainings />} />
       </Routes>
 
 

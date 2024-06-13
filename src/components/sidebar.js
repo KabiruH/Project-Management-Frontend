@@ -38,7 +38,7 @@ const Sidebar = () => {
     { name: 'Training', path: '/training', icon: <FaCogs />, dropdown: ['Trainings', 'Categories', 'Levels', 'Training Type'] },
     { name: 'Financial', path: '/financial', icon: <FaCogs />, dropdown: ['Budget', 'Budget Request', 'Funding Type'] },
     { name: 'Partnership', path: '/partnerships', icon: <FaCogs />, dropdown: ['Partners', 'Partner Type'] },
-    { name: 'Research', icon: <FaCogs />, dropdown: ['Feedback', 'Feedback Type'] },
+    { name: 'Research', path: '/research', icon: <FaCogs />, dropdown: ['Feedback', 'Feedback Type'] },
     { name: 'Reports', icon: <FaCogs />, dropdown: ['Participants', 'Institutions', 'Financial Reports'] },
     { name: 'Users', icon: <FaUser />, dropdown: ['User', 'User Type'] },
     { name: 'Settings', path: '/settings', icon: <FaCogs /> },
@@ -48,7 +48,7 @@ const Sidebar = () => {
   return (
     <div className={`w-64 h-screen ${darkMode ? 'bg-black text-white' : 'bg-gray-200 text-black'} p-5`}>
       <div className="mb-5 flex items-center">
-        <img src='../assets/logo.png' alt='Logo' className="w-10 h-10 mr-2" />
+      <img src='../assets/logo.png' alt='Logo' className="w-24 h-14 mr-5 scale-150" />
         <span className="font-semibold text-lg">The President's Award - Kenya</span>
       </div>
       <button

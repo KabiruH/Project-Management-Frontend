@@ -12,6 +12,9 @@ import Helper from './pages/helpers.js'
 import Trainings from './pages/training.js'
 import Financial from './pages/financial.js'
 import Partnership from './pages/partnerships.js'
+import Research from './pages/research.js'
+import SignIn from './pages/signin.js'
+
 
 
 const Layout = ({ children }) => (
@@ -31,6 +34,7 @@ function App() {
   
       <Routes>
 
+      <Route path="/signin" element={<SignIn />} />
         <Route exact path="/" element={<DashboardStatsGrid />} />
         <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/institutions" element={<Institutions />} />
@@ -41,6 +45,8 @@ function App() {
         <Route path="/training" element={<Trainings />} />
         <Route path="/financial" element={<Financial />} />
         <Route path="/partnerships" element={<Partnership />} />
+        <Route path="/research" element={<Research />} />
+        
       </Routes>
 
       <Footer />

@@ -25,12 +25,12 @@ export default function Home() {
           <video
             ref={videoRef}
             src={require("./videoplayback.mp4")}
-            className="rounded-full"
+            className="rounded-full "
             style={{
               width: '80%',
               height: '80%',
               objectFit: 'cover',
-              clipPath: 'ellipse(50% 50% at 50% 50%)',
+              
             }}
             muted
             autoPlay
@@ -43,7 +43,7 @@ export default function Home() {
             {isMuted ? 'Unmute' : 'Mute'}
           </button>
         </div>
-        <div className="text-white text-xl flex flex-col pl-40 justify-center gap-6 absolute top-20 bg-white/30 h-full w-full">
+        <div className="text-white text-xl flex flex-col pl-40 justify-center gap-6 absolute top-20 h-full w-full">
           <h1 className="text-6xl font-semibold uppercase">
             The President's <br />
             <span className="text-rose-600">Award</span> - Kenya.
@@ -76,24 +76,7 @@ export default function Home() {
         </Link>
 
         </div>
-        <Link
-          to='/signin'
-          className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
-        >
-          Join Us
-          <svg
-            className="w-5 h-5 ml-2 -mr-1"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </Link>
+       
         
       </div>
 

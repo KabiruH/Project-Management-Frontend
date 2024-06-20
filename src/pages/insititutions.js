@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import Layout from '../components/layout';
+import { addInstitution as addInstitutionService } from '../services/institutionService';
 
 const Institutions = () => {
   const [institutions, setInstitutions] = useState([]);
@@ -8,14 +9,20 @@ const Institutions = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const [newInstitution, setNewInstitution] = useState({
-    name: '',
-    email: '',
-    contact: '',
-    subcounty: '',
-    county: '',
+    institutionID: '',
+    institutionName: '',
+    stageID: '',
+    statusID: '',
+    institutionEmail: '',
+    institutionContact: '',
+    subCounty: '',
+    countyID: 0,
     contactPerson: '',
     contactNumber: '',
+    licenseStartDate: '',
+    licenseEndDate: '',
     awardLeader: '',
+    notes: '',
   });
   const [currentInstitution, setCurrentInstitution] = useState(null);
 
@@ -42,14 +49,20 @@ const Institutions = () => {
 
   const resetNewInstitution = () => {
     setNewInstitution({
-      name: '',
-      email: '',
-      contact: '',
-      subcounty: '',
-      county: '',
+      institutionID: '',
+      institutionName: '',
+      stageID: '',
+      statusID: '',
+      institutionEmail: '',
+      institutionContact: '',
+      subCounty: '',
+      countyID: 0,
       contactPerson: '',
       contactNumber: '',
+      licenseStartDate: '',
+      licenseEndDate: '',
       awardLeader: '',
+      notes: '',
     });
   };
 
@@ -58,9 +71,14 @@ const Institutions = () => {
     setNewInstitution((prev) => ({ ...prev, [name]: value }));
   };
 
-  const addInstitution = () => {
-    setInstitutions([...institutions, newInstitution]);
-    closeModal();
+  const addInstitution = async () => {
+    try {
+      await addInstitutionService(newInstitution);
+      setInstitutions([...institutions, newInstitution]);
+      closeModal();
+    } catch (error) {
+      console.error('Error adding institution:', error);
+    }
   };
 
   const updateInstitution = () => {
@@ -72,7 +90,7 @@ const Institutions = () => {
   };
 
   const filteredInstitutions = institutions.filter((institution) =>
-    institution.name.toLowerCase().includes(searchTerm.toLowerCase())
+    institution.institutionName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -98,7 +116,8 @@ const Institutions = () => {
           <table className="min-w-full bg-white">
             <thead>
               <tr>
-                <th className="px-4 py-2 border">Name</th>
+              <th className="px-4 py-2 border">ID</th>
+              <th className="px-4 py-2 border">Name</th>
                 <th className="px-4 py-2 border">Stage</th>
                 <th className="px-4 py-2 border">Status</th>
                 <th className="px-4 py-2 border">Email</th>
@@ -116,17 +135,18 @@ const Institutions = () => {
             <tbody>
               {filteredInstitutions.map((institution, index) => (
                 <tr key={index} className="hover:bg-gray-100">
-                  <td className="px-4 py-2 border">{institution.name}</td>
-                  <td className="px-4 py-2 border">{institution.stage}</td>
-                  <td className="px-4 py-2 border">{institution.status}</td>
-                  <td className="px-4 py-2 border">{institution.email}</td>
-                  <td className="px-4 py-2 border">{institution.contact}</td>
-                  <td className="px-4 py-2 border">{institution.subcounty}</td>
-                  <td className="px-4 py-2 border">{institution.county}</td>
+                  <td className="px-4 py-2 border">{institution.institutionID}</td>
+                  <td className="px-4 py-2 border">{institution.institutionName}</td>
+                  <td className="px-4 py-2 border">{institution.stageID}</td>
+                  <td className="px-4 py-2 border">{institution.statusID}</td>
+                  <td className="px-4 py-2 border">{institution.institutionEmail}</td>
+                  <td className="px-4 py-2 border">{institution.institutionContact}</td>
+                  <td className="px-4 py-2 border">{institution.subCounty}</td>
+                  <td className="px-4 py-2 border">{institution.countyID}</td>
                   <td className="px-4 py-2 border">{institution.contactPerson}</td>
                   <td className="px-4 py-2 border">{institution.contactNumber}</td>
-                  <td className="px-4 py-2 border">{institution.licenseStart}</td>
-                  <td className="px-4 py-2 border">{institution.licenseEnd}</td>
+                  <td className="px-4 py-2 border">{institution.licenseStartDate}</td>
+                  <td className="px-4 py-2 border">{institution.licenseEndDate}</td>
                   <td className="px-4 py-2 border">{institution.awardLeader}</td>
                   <td className="px-4 py-2 border">
                     <button
@@ -152,41 +172,65 @@ const Institutions = () => {
           <div className="space-y-4">
             <input
               type="text"
-              name="name"
+              name="institutionID"
+              placeholder="Institution ID"
+              value={newInstitution.institutionID}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <input
+              type="text"
+              name="institutionName"
               placeholder="Institution Name"
-              value={newInstitution.name}
+              value={newInstitution.institutionName}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <input
+              type="text"
+              name="stageID"
+              placeholder="Stage ID"
+              value={newInstitution.stageID}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <input
+              type="text"
+              name="statusID"
+              placeholder="Status ID"
+              value={newInstitution.statusID}
               onChange={handleInputChange}
               className="w-full p-2 border border-gray-300 rounded"
             />
             <input
               type="email"
-              name="email"
+              name="institutionEmail"
               placeholder="Institution Email"
-              value={newInstitution.email}
+              value={newInstitution.institutionEmail}
               onChange={handleInputChange}
               className="w-full p-2 border border-gray-300 rounded"
             />
             <input
               type="text"
-              name="contact"
+              name="institutionContact"
               placeholder="Institution Contact"
-              value={newInstitution.contact}
+              value={newInstitution.institutionContact}
               onChange={handleInputChange}
               className="w-full p-2 border border-gray-300 rounded"
             />
             <input
               type="text"
-              name="subcounty"
+              name="subCounty"
               placeholder="Subcounty"
-              value={newInstitution.subcounty}
+              value={newInstitution.subCounty}
               onChange={handleInputChange}
               className="w-full p-2 border border-gray-300 rounded"
             />
             <input
-              type="text"
-              name="county"
-              placeholder="County"
-              value={newInstitution.county}
+              type="number"
+              name="countyID"
+              placeholder="County ID"
+              value={newInstitution.countyID}
               onChange={handleInputChange}
               className="w-full p-2 border border-gray-300 rounded"
             />
@@ -207,10 +251,33 @@ const Institutions = () => {
               className="w-full p-2 border border-gray-300 rounded"
             />
             <input
+              type="datetime-local"
+              name="licenseStartDate"
+              placeholder="License Start Date"
+              value={newInstitution.licenseStartDate}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <input
+              type="datetime-local"
+              name="licenseEndDate"
+              placeholder="License End Date"
+              value={newInstitution.licenseEndDate}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <input
               type="text"
               name="awardLeader"
               placeholder="Award Leader"
               value={newInstitution.awardLeader}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <textarea
+              name="notes"
+              placeholder="Notes"
+              value={newInstitution.notes}
               onChange={handleInputChange}
               className="w-full p-2 border border-gray-300 rounded"
             />
@@ -239,90 +306,136 @@ const Institutions = () => {
         >
           <h2 className="text-xl mb-4">Edit Institution</h2>
           <div className="space-y-4">
+          <input
+              type="text"
+              name="institutionID"
+              placeholder="Institution ID"
+              value={newInstitution.institutionID}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
             <input
               type="text"
-              name="name"
+              name="institutionName"
               placeholder="Institution Name"
-              value={newInstitution.name}
+              value={newInstitution.institutionName}
               onChange={handleInputChange}
-                className="w-full p-2 border border-gray-300 rounded"
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Institution Email"
-                  value={newInstitution.email}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                />
-                <input
-                  type="text"
-                  name="contact"
-                  placeholder="Institution Contact"
-                  value={newInstitution.contact}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                />
-                <input
-                  type="text"
-                  name="subcounty"
-                  placeholder="Subcounty"
-                  value={newInstitution.subcounty}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                />
-                <input
-                  type="text"
-                  name="county"
-                  placeholder="County"
-                  value={newInstitution.county}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                />
-                <input
-                  type="text"
-                  name="contactPerson"
-                  placeholder="Contact Person"
-                  value={newInstitution.contactPerson}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                />
-                <input
-                  type="text"
-                  name="contactNumber"
-                  placeholder="Contact Number"
-                  value={newInstitution.contactNumber}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                />
-                <input
-                  type="text"
-                  name="awardLeader"
-                  placeholder="Award Leader"
-                  value={newInstitution.awardLeader}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                />
-              </div>
-              <div className="flex justify-end mt-4">
-                <button
-                  onClick={updateInstitution}
-                  className="bg-blue-500 text-white p-2 rounded mr-2"
-                >
-                  Update
-                </button>
-                <button
-                  onClick={closeEditModal}
-                  className="bg-red-500 text-white p-2 rounded"
-                >
-                  Cancel
-                </button>
-              </div>
-            </Modal>
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <input
+              type="text"
+              name="stageID"
+              placeholder="Stage ID"
+              value={newInstitution.stageID}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <input
+              type="text"
+              name="statusID"
+              placeholder="Status ID"
+              value={newInstitution.statusID}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <input
+              type="email"
+              name="institutionEmail"
+              placeholder="Institution Email"
+              value={newInstitution.institutionEmail}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <input
+              type="text"
+              name="institutionContact"
+              placeholder="Institution Contact"
+              value={newInstitution.institutionContact}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <input
+              type="text"
+              name="subCounty"
+              placeholder="Subcounty"
+              value={newInstitution.subCounty}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <input
+              type="number"
+              name="countyID"
+              placeholder="County ID"
+              value={newInstitution.countyID}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <input
+              type="text"
+              name="contactPerson"
+              placeholder="Contact Person"
+              value={newInstitution.contactPerson}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <input
+              type="text"
+              name="contactNumber"
+              placeholder="Contact Number"
+              value={newInstitution.contactNumber}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <input
+              type="datetime-local"
+              name="licenseStartDate"
+              placeholder="License Start Date"
+              value={newInstitution.licenseStartDate}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <input
+              type="datetime-local"
+              name="licenseEndDate"
+              placeholder="License End Date"
+              value={newInstitution.licenseEndDate}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <input
+              type="text"
+              name="awardLeader"
+              placeholder="Award Leader"
+              value={newInstitution.awardLeader}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+            <textarea
+              name="notes"
+              placeholder="Notes"
+              value={newInstitution.notes}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
           </div>
-        </Layout>
-      );
-    };
-    
-    export default Institutions;
-    
+          <div className="flex justify-end mt-4">
+            <button
+              onClick={updateInstitution}
+              className="bg-blue-500 text-white p-2 rounded mr-2"
+            >
+              Update
+            </button>
+            <button
+              onClick={closeEditModal}
+              className="bg-red-500 text-white p-2 rounded"
+            >
+              Cancel
+            </button>
+          </div>
+        </Modal>
+      </div>
+    </Layout>
+  );
+};
+
+export default Institutions;

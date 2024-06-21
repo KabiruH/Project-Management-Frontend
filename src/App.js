@@ -17,6 +17,8 @@ import Home from './pages/homepage.js';
 import Navbar from './components/navbar.js';
 import { DarkModeProvider } from './components/darkMode.js';
 
+
+
 const Layout = ({ children }) => (
   <div className="flex">
     <Sidebar />

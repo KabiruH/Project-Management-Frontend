@@ -3,6 +3,8 @@ import Modal from 'react-modal';
 import Layout from '../components/layout';
 import { addInstitution as addInstitutionService } from '../services/institutionService';
 
+Modal.setAppElement('#root'); // Ensure the root element is set for accessibility
+
 const Institutions = () => {
   const [institutions, setInstitutions] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');

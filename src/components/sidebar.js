@@ -17,11 +17,12 @@ const Sidebar = () => {
     { name: 'Institutions',
         icon: <FaBuilding />,
          dropdown: [
-          {'Instutions', path: '/institutions' },
-           {'Region', path:'/institutions/region'},
-            ,
-             'Status', 
-             'Stages'] },
+          {name:'Instutions', path: '/institutions/addinsititutions' },
+          {name:'counties', path:'/institutions/counties'},
+          {name:'status', path: '/institutions/status'},
+          {name:'stages', path: '/institutions/stages'},
+        ] 
+      },
     { name: 'Participants', path: '/participants', icon: <FaUser />, dropdown: ['Participant', 'Levels'] },
     { name: 'Project', path: '/project', icon: <FaProjectDiagram />, dropdown: ['Projects', 'Status', 'Testimonials', 'Donors'] },
     { name: 'Program', icon: <FaCogs />, dropdown: ['Programs'] },

@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/sidebar.js';
 import CalendarPage from './pages/calendar.js';
-import Institutions from './pages/insititutions.js';
+import Institutions from './pages/institutions/addInstitutions.js';
 import DashboardStatsGrid from './pages/dashboard.js';
 import Footer from './components/footer.js';
 import Participants from './pages/participants.js';
@@ -38,7 +38,7 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route exact path="/dashboard" element={<DashboardStatsGrid />} />
           <Route path="/calendar" element={<CalendarPage />} />
-          <Route path="/institutions" element={<Institutions />} />
+          <Route path="/institutions/addInsititutions" element={<Institutions />} />
           <Route path="/participants" element={<Participants />} />
            <Route path="/partnertypes" element={<PartnerType />} />
           <Route path="/project" element={<Project />} />

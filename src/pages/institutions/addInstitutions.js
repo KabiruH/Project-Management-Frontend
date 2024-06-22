@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import Layout from '../components/layout';
-import { addInstitution as addInstitutionService } from '../services/institutionService';
+import Layout from '../../components/layout';
+import { addInstitution as addInstitutionService } from '../../services/institutionService';
 
 Modal.setAppElement('#root'); // Ensure the root element is set for accessibility
 
@@ -83,12 +83,17 @@ const Institutions = () => {
     }
   };
 
-  const updateInstitution = () => {
-    const updatedInstitutions = institutions.map((inst) =>
-      inst === currentInstitution ? newInstitution : inst
-    );
-    setInstitutions(updatedInstitutions);
-    closeEditModal();
+  const updateInstitution = async () => {
+    try {
+      await addInstitutionService(newInstitution); // Update the service call accordingly
+      const updatedInstitutions = institutions.map((inst) =>
+        inst.institutionID === currentInstitution.institutionID ? newInstitution : inst
+      );
+      setInstitutions(updatedInstitutions);
+      closeEditModal();
+    } catch (error) {
+      console.error('Error updating institution:', error);
+    }
   };
 
   const filteredInstitutions = institutions.filter((institution) =>
@@ -111,15 +116,15 @@ const Institutions = () => {
             onClick={openModal}
             className="bg-blue-500 text-white p-2 rounded"
           >
-            Add Institution
+            Add
           </button>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white">
             <thead>
               <tr>
-              <th className="px-4 py-2 border">ID</th>
-              <th className="px-4 py-2 border">Name</th>
+                <th className="px-4 py-2 border">ID</th>
+                <th className="px-4 py-2 border">Name</th>
                 <th className="px-4 py-2 border">Stage</th>
                 <th className="px-4 py-2 border">Status</th>
                 <th className="px-4 py-2 border">Email</th>
@@ -138,7 +143,7 @@ const Institutions = () => {
               {filteredInstitutions.map((institution, index) => (
                 <tr key={index} className="hover:bg-gray-100">
                   <td className="px-4 py-2 border">{institution.institutionID}</td>
-                  <td className="px-4 py-2 border">{institution.institutionName}</td>
+                  <td className="px-4(py-2) border">{institution.institutionName}</td>
                   <td className="px-4 py-2 border">{institution.stageID}</td>
                   <td className="px-4 py-2 border">{institution.statusID}</td>
                   <td className="px-4 py-2 border">{institution.institutionEmail}</td>
@@ -253,7 +258,7 @@ const Institutions = () => {
               className="w-full p-2 border border-gray-300 rounded"
             />
             <input
-              type="datetime-local"
+              type="date"
               name="licenseStartDate"
               placeholder="License Start Date"
               value={newInstitution.licenseStartDate}
@@ -261,7 +266,7 @@ const Institutions = () => {
               className="w-full p-2 border border-gray-300 rounded"
             />
             <input
-              type="datetime-local"
+              type="date"
               name="licenseEndDate"
               placeholder="License End Date"
               value={newInstitution.licenseEndDate}
@@ -283,22 +288,23 @@ const Institutions = () => {
               onChange={handleInputChange}
               className="w-full p-2 border border-gray-300 rounded"
             />
-          </div>
-          <div className="flex justify-end mt-4">
-            <button
-              onClick={addInstitution}
-              className="bg-blue-500 text-white p-2 rounded mr-2"
-            >
-              Add
-            </button>
-            <button
-              onClick={closeModal}
-              className="bg-red-500 text-white p-2 rounded"
-            >
-              Cancel
-            </button>
+            <div className="flex justify-end space-x-4">
+              <button
+                onClick={closeModal}
+                className="bg-gray-500 text-white p-2 rounded"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={addInstitution}
+                className="bg-blue-500 text-white p-2 rounded"
+              >
+                Add
+              </button>
+            </div>
           </div>
         </Modal>
+
         <Modal
           isOpen={editModalIsOpen}
           onRequestClose={closeEditModal}
@@ -308,7 +314,7 @@ const Institutions = () => {
         >
           <h2 className="text-xl mb-4">Edit Institution</h2>
           <div className="space-y-4">
-          <input
+            <input
               type="text"
               name="institutionID"
               placeholder="Institution ID"
@@ -389,7 +395,7 @@ const Institutions = () => {
               className="w-full p-2 border border-gray-300 rounded"
             />
             <input
-              type="datetime-local"
+              type="date"
               name="licenseStartDate"
               placeholder="License Start Date"
               value={newInstitution.licenseStartDate}
@@ -397,7 +403,7 @@ const Institutions = () => {
               className="w-full p-2 border border-gray-300 rounded"
             />
             <input
-              type="datetime-local"
+              type="date"
               name="licenseEndDate"
               placeholder="License End Date"
               value={newInstitution.licenseEndDate}
@@ -419,20 +425,20 @@ const Institutions = () => {
               onChange={handleInputChange}
               className="w-full p-2 border border-gray-300 rounded"
             />
-          </div>
-          <div className="flex justify-end mt-4">
-            <button
-              onClick={updateInstitution}
-              className="bg-blue-500 text-white p-2 rounded mr-2"
-            >
-              Update
-            </button>
-            <button
-              onClick={closeEditModal}
-              className="bg-red-500 text-white p-2 rounded"
-            >
-              Cancel
-            </button>
+            <div className="flex justify-end space-x-4">
+              <button
+                onClick={closeEditModal}
+                className="bg-gray-500 text-white p-2 rounded"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={updateInstitution}
+                className="bg-blue-500 text-white p-2 rounded"
+              >
+                Save
+              </button>
+            </div>
           </div>
         </Modal>
       </div>

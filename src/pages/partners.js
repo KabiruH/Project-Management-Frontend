@@ -10,8 +10,8 @@ const Partnership = () => {
     const [newPartner, setNewPartner] = useState({
         partnerID: '',
         partnerName: '',
-        email: '',
-        phoneNumber: '',
+        partnerEmail: '',
+        phoneNo: '',
         partnerType: '',
     });
 
@@ -24,8 +24,8 @@ const Partnership = () => {
         setNewPartner({
             partnerID: '',
             partnerName: '',
-            email: '',
-            phoneNumber: '',
+            partnerEmail: '',
+            phoneNo: '',
             partnerType: '',
         });
     };
@@ -52,7 +52,7 @@ const Partnership = () => {
     return (
         <Layout>
             <div className="p-5">
-                <h1 className="text-2xl mb-4">Partnership Page</h1>
+                <h1 className="text-2xl mb-4">Partners</h1>
                 <div className="flex justify-between mb-4">
                     <input
                         type="text"
@@ -65,7 +65,7 @@ const Partnership = () => {
                         onClick={openModal}
                         className="bg-blue-500 text-white p-2 rounded"
                     >
-                        Add Partner
+                        Add
                     </button>
                 </div>
                 <div className="overflow-x-auto">
@@ -84,8 +84,8 @@ const Partnership = () => {
                                 <tr key={index} className="hover:bg-gray-100">
                                     <td className="px-4 py-2 border">{partner.partnerID}</td>
                                     <td className="px-4 py-2 border">{partner.partnerName}</td>
-                                    <td className="px-4 py-2 border">{partner.email}</td>
-                                    <td className="px-4 py-2 border">{partner.phoneNumber}</td>
+                                    <td className="px-4 py-2 border">{partner.partnerEmail}</td>
+                                    <td className="px-4 py-2 border">{partner.phoneNo}</td>
                                     <td className="px-4 py-2 border">{partner.partnerType}</td>
                                 </tr>
                             ))}
@@ -119,17 +119,17 @@ const Partnership = () => {
                         />
                         <input
                             type="email"
-                            name="email"
+                            name="partnerEmail"
                             placeholder="Email"
-                            value={newPartner.email}
+                            value={newPartner.partnerEmail}
                             onChange={handleInputChange}
                             className="w-full p-2 border border-gray-300 rounded"
                         />
                         <input
                             type="text"
-                            name="phoneNumber"
+                            name="phoneNo"
                             placeholder="Phone Number"
-                            value={newPartner.phoneNumber}
+                            value={newPartner.phoneNo}
                             onChange={handleInputChange}
                             className="w-full p-2 border border-gray-300 rounded"
                         />

@@ -10,13 +10,13 @@ import Project from './pages/project.js';
 import Helper from './pages/helpers.js';
 import Trainings from './pages/training.js';
 import Financial from './pages/financial.js';
-import Partnership from './pages/partnerships.js';
+import Partnership from './pages/partners.js';
 import Research from './pages/research.js';
 import SignIn from './pages/signin.js';
 import Home from './pages/homepage.js';
 import Navbar from './components/navbar.js';
 import { DarkModeProvider } from './components/darkMode.js';
-
+import PartnerType from './pages/partnertype.js';
 
 
 const Layout = ({ children }) => (
@@ -40,6 +40,7 @@ function App() {
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/institutions" element={<Institutions />} />
           <Route path="/participants" element={<Participants />} />
+           <Route path="/partnertypes" element={<PartnerType />} />
           <Route path="/project" element={<Project />} />
           <Route path="/helpers" element={<Helper />} />
           <Route path="/training" element={<Trainings />} />

@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import Layout from '../components/layout'
+import Layout from '../components/layout';
+import { addPartnerships } from '../services/partnershipService';
 
 const Partnership = () => {
     const [partners, setPartners] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [newPartner, setNewPartner] = useState({
+        partnerID: '',
         partnerName: '',
-        email: '',
-        phoneNumber: '',
+        partnerEmail: '',
+        phoneNo: '',
         partnerType: '',
     });
 
@@ -20,9 +22,10 @@ const Partnership = () => {
     const closeModal = () => {
         setModalIsOpen(false);
         setNewPartner({
+            partnerID: '',
             partnerName: '',
-            email: '',
-            phoneNumber: '',
+            partnerEmail: '',
+            phoneNo: '',
             partnerType: '',
         });
     };
@@ -32,9 +35,14 @@ const Partnership = () => {
         setNewPartner((prev) => ({ ...prev, [name]: value }));
     };
 
-    const addPartner = () => {
-        setPartners([...partners, newPartner]);
-        closeModal();
+    const addPartner = async () => {
+        try {
+            const addedPartner = await addPartnerships(newPartner);
+            setPartners([...partners, addedPartner]);
+            closeModal();
+        } catch (error) {
+            console.error('Error adding partner:', error);
+        }
     };
 
     const filteredPartners = partners.filter((partner) =>
@@ -44,7 +52,7 @@ const Partnership = () => {
     return (
         <Layout>
             <div className="p-5">
-                <h1 className="text-2xl mb-4">Partnership Page</h1>
+                <h1 className="text-2xl mb-4">Partners</h1>
                 <div className="flex justify-between mb-4">
                     <input
                         type="text"
@@ -57,13 +65,14 @@ const Partnership = () => {
                         onClick={openModal}
                         className="bg-blue-500 text-white p-2 rounded"
                     >
-                        Add Partner
+                        Add
                     </button>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="min-w-full bg-white">
                         <thead>
                             <tr>
+                                <th className="px-4 py-2 border">Partner ID</th>
                                 <th className="px-4 py-2 border">Partner Name</th>
                                 <th className="px-4 py-2 border">Email</th>
                                 <th className="px-4 py-2 border">Phone Number</th>
@@ -73,9 +82,10 @@ const Partnership = () => {
                         <tbody>
                             {filteredPartners.map((partner, index) => (
                                 <tr key={index} className="hover:bg-gray-100">
+                                    <td className="px-4 py-2 border">{partner.partnerID}</td>
                                     <td className="px-4 py-2 border">{partner.partnerName}</td>
-                                    <td className="px-4 py-2 border">{partner.email}</td>
-                                    <td className="px-4 py-2 border">{partner.phoneNumber}</td>
+                                    <td className="px-4 py-2 border">{partner.partnerEmail}</td>
+                                    <td className="px-4 py-2 border">{partner.phoneNo}</td>
                                     <td className="px-4 py-2 border">{partner.partnerType}</td>
                                 </tr>
                             ))}
@@ -93,6 +103,14 @@ const Partnership = () => {
                     <div className="space-y-4">
                         <input
                             type="text"
+                            name="partnerID"
+                            placeholder="Partner ID"
+                            value={newPartner.partnerID}
+                            onChange={handleInputChange}
+                            className="w-full p-2 border border-gray-300 rounded"
+                        />
+                        <input
+                            type="text"
                             name="partnerName"
                             placeholder="Partner Name"
                             value={newPartner.partnerName}
@@ -101,17 +119,17 @@ const Partnership = () => {
                         />
                         <input
                             type="email"
-                            name="email"
+                            name="partnerEmail"
                             placeholder="Email"
-                            value={newPartner.email}
+                            value={newPartner.partnerEmail}
                             onChange={handleInputChange}
                             className="w-full p-2 border border-gray-300 rounded"
                         />
                         <input
                             type="text"
-                            name="phoneNumber"
+                            name="phoneNo"
                             placeholder="Phone Number"
-                            value={newPartner.phoneNumber}
+                            value={newPartner.phoneNo}
                             onChange={handleInputChange}
                             className="w-full p-2 border border-gray-300 rounded"
                         />

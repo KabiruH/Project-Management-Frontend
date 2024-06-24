@@ -17,7 +17,7 @@ const Sidebar = () => {
     { name: 'Institutions',
         icon: <FaBuilding />,
          dropdown: [
-          {name:'Instutions', path: '/institutions/addinsititutions' },
+          {name:'Instutions', path: '/institutions/addInstitutions' },
           {name:'counties', path:'/institutions/counties'},
           {name:'status', path: '/institutions/status'},
           {name:'stages', path: '/institutions/stages'},

@@ -1,23 +1,22 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Sidebar from './components/sidebar.js';
-import CalendarPage from './pages/calendar.js';
-import Institutions from './pages/institutions/addInstitutions.js';
-import DashboardStatsGrid from './pages/dashboard.js';
-import Footer from './components/footer.js';
-import Participants from './pages/participants.js';
-import Project from './pages/project.js';
-import Helper from './pages/helpers.js';
-import Trainings from './pages/training.js';
-import Financial from './pages/financial.js';
-import Partnership from './pages/partners.js';
-import Research from './pages/research.js';
-import SignIn from './pages/signin.js';
-import Home from './pages/homepage.js';
-import Navbar from './components/navbar.js';
-import { DarkModeProvider } from './components/darkMode.js';
-import PartnerType from './pages/partnertype.js';
-
+import Sidebar from './components/sidebar';
+import CalendarPage from './pages/calendar';
+import AddInstitutions from './pages/institutions/addInstitutions';
+import DashboardStatsGrid from './pages/dashboard';
+import Footer from './components/footer';
+import Participants from './pages/participants';
+import Project from './pages/project';
+import Helper from './pages/helpers';
+import Trainings from './pages/training';
+import Financial from './pages/financial';
+import Partnership from './pages/partners';
+import Research from './pages/research';
+import SignIn from './pages/signin';
+import Home from './pages/homepage';
+import Navbar from './components/navbar';
+import { DarkModeProvider } from './components/darkMode';
+import PartnerType from './pages/partnertype';
 
 const Layout = ({ children }) => (
   <div className="flex">
@@ -38,9 +37,9 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route exact path="/dashboard" element={<DashboardStatsGrid />} />
           <Route path="/calendar" element={<CalendarPage />} />
-          <Route path="/institutions/addInsititutions" element={<Institutions />} />
+          <Route path="/institutions/addInstitutions" element={<AddInstitutions />} />
           <Route path="/participants" element={<Participants />} />
-           <Route path="/partnertypes" element={<PartnerType />} />
+          <Route path="/partnertypes" element={<PartnerType />} />
           <Route path="/project" element={<Project />} />
           <Route path="/helpers" element={<Helper />} />
           <Route path="/training" element={<Trainings />} />

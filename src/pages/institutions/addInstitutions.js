@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
-import InstitutionForm from '../../components/forms/institutionForm';
-import InstitutionTable from '../../components/tables/institutionTable';
+import InstitutionForm from '../../components/forms/institutionF';
+import InstitutionTable from '../../components/tables/institutionT';
 import { addInstitution as addInstitutionService, getInstitutionById, updateInstitution, deleteInstitution, getInstitutions } from '../../services/institutionService';
 import Layout from '../../components/layout';
 

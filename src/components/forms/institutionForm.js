@@ -2,7 +2,7 @@ import React from 'react';
 import Input from '../common/Input';
 import styles from '../../styles/modal.module.css'; // Correct import for CSS modules
 
-const InstitutionForm = ({ formValues, handleInputChange, errors }) => {
+const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
   return (
     <form className={styles.form}>
       <div className="space-y-4">
@@ -101,8 +101,9 @@ const InstitutionForm = ({ formValues, handleInputChange, errors }) => {
           <Input
             name="licenseStartDate"
             placeholder="License Start Date"
+            type="datetime-local"
             value={formValues.licenseStartDate}
-            onChange={handleInputChange}
+            onChange={handleDateChange} // Make sure this is correct
           />
           {errors.licenseStartDate && <p className="text-red-500">{errors.licenseStartDate[0]}</p>}
         </div>
@@ -110,8 +111,9 @@ const InstitutionForm = ({ formValues, handleInputChange, errors }) => {
           <Input
             name="licenseEndDate"
             placeholder="License End Date"
+            type="datetime-local"
             value={formValues.licenseEndDate}
-            onChange={handleInputChange}
+            onChange={handleDateChange} // Make sure this is correct
           />
           {errors.licenseEndDate && <p className="text-red-500">{errors.licenseEndDate[0]}</p>}
         </div>

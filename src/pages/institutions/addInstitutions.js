@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
 import InstitutionForm from '../../components/forms/institutionForm';
 import InstitutionTable from '../../components/tables/institutionTable';
@@ -26,6 +26,7 @@ const AddInstitution = () => {
     awardLeader: '',
     notes: '',
   });
+  const [errors, setErrors] = useState({});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -39,13 +40,17 @@ const AddInstitution = () => {
       setInstitutions((prev) => [...prev, addedInstitution]);
       setIsModalOpen(false);
     } catch (error) {
-      console.error('Error adding institution:', error);
-      alert(`Failed to add institution: ${error.message}`);
+      console.error('Error in addInstitution:', error.response.data);
+      setErrors(error.response.data.errors || {});
+      alert(`Failed to add institution: ${error.response.data.title}`);
     }
   };
 
   const openAddInstitutionModal = () => setIsModalOpen(true);
-  const closeAddInstitutionModal = () => setIsModalOpen(false);
+  const closeAddInstitutionModal = () => {
+    setIsModalOpen(false);
+    setErrors({});
+  };
 
   const deleteInstitution = (institutionID) => {
     setInstitutions((prev) => prev.filter(inst => inst.institutionID !== institutionID));
@@ -68,7 +73,11 @@ const AddInstitution = () => {
       </div>
       <Modal isOpen={isModalOpen} onRequestClose={closeAddInstitutionModal} contentLabel="Add Institution">
         <h2 className="text-xl mb-4">Add Institution</h2>
-        <InstitutionForm formValues={newInstitution} handleInputChange={handleInputChange} onSubmit={addInstitution} />
+        <InstitutionForm 
+          formValues={newInstitution} 
+          handleInputChange={handleInputChange} 
+          errors={errors} // Ensure errors is passed as an object
+        />
         <div className="flex justify-end mt-4">
           <button onClick={addInstitution} className="bg-green-500 text-white p-2 rounded mr-2">
             Save

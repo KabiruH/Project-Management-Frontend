@@ -8,6 +8,15 @@ const columns = [
   { Header: 'Status', accessor: 'statusID' },
   { Header: 'Email', accessor: 'institutionEmail' },
   { Header: 'Contact', accessor: 'institutionContact' },
+  { Header: 'Sub-County', accessor: 'subCounty' },
+  { Header: 'County', accessor: 'county' },
+  { Header: 'Contact Person', accessor: 'contactPerson' },
+  { Header: 'Contact Number', accessor: 'contactNumber' },
+  { Header: 'Lincense Startdate', accessor: 'licenseStartDate' },
+  { Header: 'Lincense Enddate', accessor: 'licenseEndDate' },
+  { Header: 'Award Leader', accessor: 'AwardLeader' },
+  { Header: 'Notes', accessor: 'notes' },
+
 ];
 
 const InstitutionTable = ({ institutions, openEditModal, deleteInstitution }) => {

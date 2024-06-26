@@ -1,8 +1,8 @@
 import apiClient from './apiClient';
 
-const addInstitutionStages = async (InstitutionStagesData) => {
+const addStages = async (StagesData) => {
   try {
-    const response = await apiClient.post('/api/InstitutionStages', InstitutionStagesData);
+    const response = await apiClient.post('/api/InstitutionStages', StagesData);
     return response.data;
   } catch (error) {
     console.error('Error in addInstitutionStages:', error.response.data);
@@ -10,36 +10,36 @@ const addInstitutionStages = async (InstitutionStagesData) => {
   }
 };
 
-const getInstitutionStagesById = async (InstitutionStagesId) => {
+const getStagesById = async (stagesId) => {
   try {
-    const response = await apiClient.get(`/api/InstitutionStages/${InstitutionStagesId}`);
+    const response = await apiClient.get(`/api/InstitutionStages/${stagesId}`);
     return response.data;
   } catch (error) {
-    console.error(`Error fetching InstitutionStages with ID ${InstitutionStagesId}:`, error.response.data);
+    console.error(`Error fetching InstitutionStages with ID ${stagesId}:`, error.response.data);
     throw error;
   }
 };
 
-const updateInstitutionStages = async (InstitutionStagesId, updatedData) => {
+const updateStages = async (stagesId, updatedData) => {
   try {
-    const response = await apiClient.put(`/api/InstitutionStages/${InstitutionStagesId}`, updatedData);
+    const response = await apiClient.put(`/api/InstitutionStages/${stagesId}`, updatedData);
     return response.data;
   } catch (error) {
-    console.error(`Error updating InstitutionStages with ID ${InstitutionStagesId}:`, error.response.data);
+    console.error(`Error updating InstitutionStages with ID ${stagesId}:`, error.response.data);
     throw error;
   }
 };
 
-const deleteInstitutionStages = async (InstitutionStagesId) => {
+const deleteStages = async (stagesId) => {
   try {
-    await apiClient.delete(`/api/InstitutionStages/${InstitutionStagesId}`);
+    await apiClient.delete(`/api/InstitutionStages/${stagesId}`);
   } catch (error) {
-    console.error(`Error deleting InstitutionStages with ID ${InstitutionStagesId}:`, error.response.data);
+    console.error(`Error deleting InstitutionStages with ID ${stagesId}:`, error.response.data);
     throw error;
   }
 };
 
-const getInstitutionStages = async () => {
+const getStages = async () => {
   try {
     const response = await apiClient.get('/api/InstitutionStages');
     return response.data;
@@ -49,4 +49,4 @@ const getInstitutionStages = async () => {
   }
 };
 
-export { addInstitutionStages, getInstitutionStagesById, updateInstitutionStages, deleteInstitutionStages, getInstitutionStages };
+export { addStages, getStagesById, updateStages, deleteStages, getStages };

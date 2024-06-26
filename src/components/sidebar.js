@@ -19,8 +19,8 @@ const Sidebar = () => {
          dropdown: [
           {name:'Institution', path: '/institutions/addInstitutions' },
           {name:'counties', path:'/institutions/addCounties'},
-          {name:'status', path: '/institutions/status'},
-          {name:'stages', path: '/institutions/stages'},
+          {name:'status', path: '/institutions/institutionStatus'},
+          {name:'stages', path: '/institutions/institutionStages'},
         ] 
       },
     { name: 'Participants', path: '/participants', icon: <FaUser />, dropdown: ['Participant', 'Levels'] },

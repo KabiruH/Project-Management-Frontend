@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import Layout from '../components/layout';
-import { addPartnerships } from '../services/partnershipService';
+import { addPartnerships } from '../services/partnershipS';
 
 const Partnership = () => {
     const [partners, setPartners] = useState([]);

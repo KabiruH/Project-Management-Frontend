@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import InstitutionForm from '../../components/forms/institutionF';
 import InstitutionTable from '../../components/tables/institutionT';
-import { addInstitution as addInstitutionService, getInstitutionById, updateInstitution, deleteInstitution, getInstitutions } from '../../services/institutionService';
+import { addInstitution as addInstitutionService, getInstitutionById, updateInstitution, deleteInstitution, getInstitutions } from '../../services/institutionS';
 import Layout from '../../components/layout';
 
 Modal.setAppElement('#root');
@@ -170,6 +170,7 @@ const AddInstitution = () => {
 
   return (
     <Layout>
+      <h1 className="text-2xl font-bold mb-4">Institutions</h1>
       <div className="p-4">
         <button
           onClick={openAddInstitutionModal}

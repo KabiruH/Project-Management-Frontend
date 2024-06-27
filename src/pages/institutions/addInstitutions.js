@@ -1,5 +1,3 @@
-// src/pages/institutions/addInstitutions.js
-
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import InstitutionForm from '../../components/forms/institutionF';
@@ -20,7 +18,7 @@ const AddInstitution = () => {
     institutionEmail: '',
     institutionContact: '',
     subCounty: '',
-    countyID: 0,
+    countyID: '',
     contactPerson: '',
     contactNumber: '',
     licenseStartDate: '',
@@ -49,7 +47,7 @@ const AddInstitution = () => {
     const { name, value } = e.target;
     setNewInstitution((prev) => ({
       ...prev,
-      [name]: name === 'countyID' ? parseInt(value, 10) : value,
+      [name]: value,
     }));
   };
 
@@ -57,24 +55,19 @@ const AddInstitution = () => {
     const { name, value } = e.target;
     setNewInstitution((prev) => ({
       ...prev,
-      [name]: (value),
+      [name]: value,
     }));
   };
 
   const addNewInstitution = async () => {
     try {
       const institutionPayload = { ...newInstitution };
-      if (!institutionPayload.licenseStartDate) {
-        delete institutionPayload.licenseStartDate;
-      }
-      if (!institutionPayload.licenseEndDate) {
-        delete institutionPayload.licenseEndDate;
-      }
 
       console.log('New Institution Payload:', institutionPayload);
       const addedInstitution = await addInstitutionService(institutionPayload);
       setInstitutions((prev) => [...prev, addedInstitution]);
       setIsModalOpen(false);
+      setErrors({});
     } catch (error) {
       console.error('Error adding institution:', error.response.data);
       setErrors(error.response.data.errors || {});
@@ -93,7 +86,7 @@ const AddInstitution = () => {
       institutionEmail: '',
       institutionContact: '',
       subCounty: '',
-      countyID: 0,
+      countyID: '',
       contactPerson: '',
       contactNumber: '',
       licenseStartDate: '',
@@ -113,38 +106,30 @@ const AddInstitution = () => {
       setSelectedInstitutionId(institution.institutionID);
       setNewInstitution({
         ...fetchedInstitution,
-        licenseStartDate: fetchedInstitution.licenseStartDate ? new Date(fetchedInstitution.licenseStartDate).toISOString().slice(0, 16) : '',
-        licenseEndDate: fetchedInstitution.licenseEndDate ? new Date(fetchedInstitution.licenseEndDate).toISOString().slice(0, 16) : '',
+        licenseStartDate: fetchedInstitution.licenseStartDate,
+        licenseEndDate: fetchedInstitution.licenseEndDate,
       });
     } catch (error) {
       console.error(`Error fetching institution with ID ${institution.institutionID}:`, error.response.data);
     }
   };
   
-
   const updateExistingInstitution = async () => {
     try {
       const institutionPayload = { ...newInstitution };
-      if (newInstitution.licenseStartDate) {
-        institutionPayload.licenseStartDate = new Date(newInstitution.licenseStartDate).toISOString().split('T')[0];
-      }
-      
-      if (newInstitution.licenseEndDate) {
-        institutionPayload.licenseEndDate = new Date(newInstitution.licenseEndDate).toISOString().split('T')[0];
-      }
   
       console.log('Updated Institution Payload:', institutionPayload);
   
       const updatedInstitution = await updateInstitution(selectedInstitutionId, institutionPayload);
       setInstitutions((prev) => prev.map(inst => (inst.institutionID === selectedInstitutionId ? updatedInstitution : inst)));
       setIsModalOpen(false);
+      setErrors({});
     } catch (error) {
       console.error(`Error updating institution with ID ${selectedInstitutionId}:`, error.response.data);
       setErrors(error.response.data.errors || {});
       alert(`Failed to update institution: ${error.response.data.title}\nDetails: ${JSON.stringify(error.response.data.errors, null, 2)}`);
     }
   };
-  
 
   const deleteExistingInstitution = async (institutionId) => {
     try {

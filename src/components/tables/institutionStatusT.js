@@ -2,12 +2,12 @@ import React from 'react';
 import Table from '../common/Table';
 
 const columns = [
-  { Header: 'County ID', accessor: 'statusID' },
-  { Header: 'County Name', accessor: 'statusName' },
+  { Header: 'Status ID', accessor: 'statusID' },
+  { Header: 'Status Name', accessor: 'statusName' },
   { Header: 'Notes', accessor: 'notes' },
 ];
 
-const StatusTable = ({ Statuses, openEditModal, deleteStatus }) => {
+const StatusTable = ({ status, openEditModal, deleteStatus }) => {
   const renderRowActions = ({ statusID }) => (
     <div>
       <button
@@ -29,7 +29,7 @@ const StatusTable = ({ Statuses, openEditModal, deleteStatus }) => {
   return (
     <Table
       columns={columns}
-      data={Statuses}
+      data={status}
       renderRowActions={renderRowActions}
     />
   );

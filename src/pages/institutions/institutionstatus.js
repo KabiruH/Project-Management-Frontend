@@ -36,7 +36,7 @@ const AddStatus = () => {
     const { name, value } = e.target;
     setNewStatus((prev) => ({
       ...prev,
-      [name]: name === 'statusID' ? parseInt(value, 10) : value,
+      [name]: value,
     }));
   };
 

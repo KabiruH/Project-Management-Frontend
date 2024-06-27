@@ -6,9 +6,10 @@ import AddInstitution from './pages/institutions/addInstitutions';
 import AddCounty from './pages/institutions/addCounties';
 import AddStatus from './pages/institutions/institutionStatus';
 import AddStages from './pages/institutions/institutionStages';
+import AddParticipant from './pages/participants/participant';
+import AddLevels from './pages/participants/participantLevels';
 import DashboardStatsGrid from './pages/dashboard';
 import Footer from './components/footer';
-import Participants from './pages/participants';
 import Project from './pages/project';
 import Helper from './pages/helpers';
 import Trainings from './pages/training';
@@ -44,7 +45,8 @@ function App() {
           <Route path="/institutions/addCounties" element={<AddCounty />} />
           <Route path='/institutions/institutionStages' element={<AddStages />} />
           <Route path='/institutions/institutionStatus' element={<AddStatus />} />
-          <Route path="/participants" element={<Participants />} />
+          <Route path="/participants/participant" element={<AddParticipant />} />
+          <Route path="/participants/participantLevels" element={<AddLevels />} />
           <Route path="/partnertypes" element={<PartnerType />} />
           <Route path="/project" element={<Project />} />
           <Route path="/helpers" element={<Helper />} />

@@ -36,7 +36,7 @@ const AddStages = () => {
     const { name, value } = e.target;
     setNewStage((prev) => ({
       ...prev,
-      [name]: name === 'stageID' ? parseInt(value, 10) : value,
+      [name]: value,
     }));
   };
 

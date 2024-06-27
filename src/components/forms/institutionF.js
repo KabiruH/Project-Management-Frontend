@@ -73,7 +73,6 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           <Input
             name="countyID"
             placeholder="County ID"
-            type="number"
             value={formValues.countyID}
             onChange={handleInputChange}
           />
@@ -101,7 +100,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           <Input
             name="licenseStartDate"
             placeholder="License Start Date"
-            type="datetime-local"
+            type="date"
             value={formValues.licenseStartDate}
             onChange={handleDateChange} // Make sure this is correct
           />
@@ -111,7 +110,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           <Input
             name="licenseEndDate"
             placeholder="License End Date"
-            type="datetime-local"
+            type="date"
             value={formValues.licenseEndDate}
             onChange={handleDateChange} // Make sure this is correct
           />

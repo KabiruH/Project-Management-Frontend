@@ -20,7 +20,7 @@ const AddLevels = () => {
   const [selectedLevelsID, setSelectedLevelsID] = useState(null);
 
   useEffect(() => {
-    const fetchedstatus = async () => {
+    const fetchedlevels = async () => {
       try {
         const fetchedLevels = await getLevels();
         setLevels(fetchedLevels);
@@ -29,7 +29,7 @@ const AddLevels = () => {
       }
     };
 
-    fetchedstatus();
+    fetchedlevels();
   }, []);
 
   const handleInputChange = (e) => {
@@ -50,15 +50,15 @@ const AddLevels = () => {
 
   const addNewLevels = async () => {
     try {
-      const statusPayload = {
+      const levelsPayload = {
         levelID: String(newLevels.levelID), // Ensure LevelsID is a string
         levelName: newLevels.levelName,
         notes: newLevels.notes,
       };
   
-      console.log('New levels Payload:', statusPayload);
-      const addedstatus = await addLevelsService(statusPayload);
-      setLevels((prev) => [...prev, addedstatus]);
+      console.log('New levels Payload:', levelsPayload);
+      const addedlevels = await addLevelsService(levelsPayload);
+      setLevels((prev) => [...prev, addedlevels]);
       setIsModalOpen(false);
     } catch (error) {
       console.error('Error adding levels:', error.response.data);
@@ -94,11 +94,11 @@ const AddLevels = () => {
 
   const updateExistingLevels = async () => {
     try {
-      const statusPayload = { ...newLevels };
+      const levelsPayload = { ...newLevels };
 
-      console.log('Updated levels Payload:', statusPayload);
+      console.log('Updated levels Payload:', levelsPayload);
 
-      const updatedLevels = await updateLevels(selectedLevelsID, statusPayload);
+      const updatedLevels = await updateLevels(selectedLevelsID, levelsPayload);
       setLevels((prev) => prev.map(inst => (inst.levelID === selectedLevelsID ? updatedLevels : inst)));
       setIsModalOpen(false);
     } catch (error) {

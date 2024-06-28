@@ -33,7 +33,14 @@ const Sidebar = () => {
        
     { name: 'Project', path: '/project', icon: <FaProjectDiagram />, dropdown: ['Projects', 'Status', 'Testimonials', 'Donors'] },
     { name: 'Program', icon: <FaCogs />, dropdown: ['Programs'] },
-    { name: 'Helpers', path: '/helpers', icon: <FaUser />, dropdown: ['Award Leaders', 'Volunteers'] },
+    { name: 'Helpers', 
+      icon: <FaUser />,
+   dropdown: [
+    { name: 'Helper', path: '/helpers/helper' }, 
+    { name: 'Helper Type', path: '/helpers/helperType' }, 
+   ]
+   },
+ 
     { name: 'Training', path: '/training', icon: <FaCogs />, dropdown: ['Trainings', 'Categories', 'Levels', 'Training Type'] },
     { name: 'Financial', path: '/financial', icon: <FaCogs />, dropdown: ['Budget', 'Budget Request', 'Funding Type'] },
     {

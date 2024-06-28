@@ -1,230 +1,188 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
-import Layout from '../components/layout'
+import HelpersForm from '../../components/forms/helperF';
+import HelpersTable from '../../components/tables/helperT';
+import { addHelper as addHelperService, getHelperById, updateHelper, deleteHelper, getHelper } from '../../services/helperS';
+import Layout from '../../components/layout';
 
-const Helper = () => {
-  const [helpers, setHelpers] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [newHelper, setNewHelper] = useState({
-    name: '',
-    institution: '',
-    gender: '',
-    idNumber: '',
-    phoneNumber: '',
-    email: '',
-    subCounty: '',
-    county: '',
-    helperType: 'Volunteer',
-    regionalCoordinator: '',
-  });
+Modal.setAppElement('#root');
 
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-    setNewHelper({
-      name: '',
-      institution: '',
+const AddHelper = () => {
+  const [Helpers, setHelpers] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newHelper, setNewHelper] = useState({ 
+      
+      helperID: '',
+      helperName: '',
+      institutionName: '',
       gender: '',
-      idNumber: '',
-      phoneNumber: '',
+      idNo: '',
+      phoneNo: '',
       email: '',
       subCounty: '',
       county: '',
-      helperType: 'Volunteer',
-      regionalCoordinator: '',
-    });
-  };
+      helperType: '',
+      coordinator: '',
+  });
+  const [errors, setErrors] = useState({});
+  const [editMode, setEditMode] = useState(false);
+  const [selectedHelperId, setSelectedHelperId] = useState(null);
+
+  useEffect(() => {
+    const fetchHelpers = async () => {
+      try {
+        const fetchedHelpers = await getHelper();
+        setHelpers(fetchedHelpers);
+      } catch (error) {
+        console.error('Error fetching Helpers:', error.response.data);
+      }
+    };
+
+    fetchHelpers();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewHelper((prev) => ({ ...prev, [name]: value }));
+    setNewHelper((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const addHelper = () => {
-    setHelpers([...helpers, newHelper]);
-    closeModal();
+  const handleDateChange = (e) => {
+    const { name, value } = e.target;
+    setNewHelper((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const filteredHelpers = helpers.filter((helper) =>
-    helper.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const addNewHelper = async () => {
+    try {
+      const helperPayload = { ...newHelper };
+
+      console.log('New Helper Payload:', helperPayload);
+      const addedHelper = await addHelperService(helperPayload);
+      setHelpers((prev) => [...prev, addedHelper]);
+      setIsModalOpen(false);
+      setErrors({});
+    } catch (error) {
+      console.error('Error adding helper:', error.response.data);
+      setErrors(error.response.data.errors || {});
+      alert(`Failed to add helper: ${error.response.data.title}\nDetails: ${JSON.stringify(error.response.data.errors, null, 2)}`);
+    }
+  };
+
+  const openAddHelperModal = () => {
+    setEditMode(false);
+    setIsModalOpen(true);
+    setNewHelper({
+      helperID: '',
+      helperName: '',
+      institutionName: '',
+      gender: '',
+      idNo: '',
+      phoneNo: '',
+      email: '',
+      subCounty: '',
+      county: '',
+      helperType: '',
+      coordinator: '',
+    });
+  };
+
+  const openEditHelperModal = async (helper) => {
+    try {
+      console.log('Fetching helper with ID:', helper.helperID);
+      const fetchedHelper = await getHelperById(helper.helperID);
+      console.log('Fetched Helper:', fetchedHelper);
+      setEditMode(true);
+      setIsModalOpen(true);
+      setSelectedHelperId(helper.helperID);
+      setNewHelper({
+        ...fetchedHelper,
+        licenseStartDate: fetchedHelper.licenseStartDate,
+        licenseEndDate: fetchedHelper.licenseEndDate,
+      });
+    } catch (error) {
+      console.error(`Error fetching helper with ID ${helper.helperID}:`, error.response.data);
+    }
+  };
+  
+  const updateExistingHelper = async () => {
+    try {
+      const helperPayload = { ...newHelper };
+  
+      console.log('Updated Helper Payload:', helperPayload);
+  
+      const updatedHelper = await updateHelper(selectedHelperId, helperPayload);
+      setHelpers((prev) => prev.map(inst => (inst.helperID === selectedHelperId ? updatedHelper : inst)));
+      setIsModalOpen(false);
+      setErrors({});
+    } catch (error) {
+      console.error(`Error updating helper with ID ${selectedHelperId}:`, error.response.data);
+      setErrors(error.response.data.errors || {});
+      alert(`Failed to update helper: ${error.response.data.title}\nDetails: ${JSON.stringify(error.response.data.errors, null, 2)}`);
+    }
+  };
+
+  const deleteExistingHelper = async (helperID) => {
+    try {
+      await deleteHelper(helperID);
+      setHelpers((prev) => prev.filter(inst => inst.helperID !== helperID));
+    } catch (error) {
+      console.error(`Error deleting helper with ID ${helperID}:`, error.response.data);
+      alert(`Failed to delete helper: ${error.response.data.title}`);
+    }
+  };
+
+  const closeAddHelperModal = () => {
+    setIsModalOpen(false);
+    setEditMode(false);
+    setErrors({});
+  };
+
+  const deleteHelperHandler = (helperID) => {
+    if (window.confirm(`Are you sure you want to delete helper with ID ${helperID}?`)) {
+      deleteExistingHelper(helperID);
+    }
+  };
 
   return (
     <Layout>
-    <div className="p-5">
-      <h1 className="text-2xl mb-4">Helpers</h1>
-      <div className="flex justify-between mb-4">
-        <input
-          type="text"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="border border-gray-300 rounded p-2 w-1/3"
-        />
+      <h1 className="text-2xl font-bold mb-4">Helpers</h1>
+      <div className="p-4">
         <button
-          onClick={openModal}
-          className="bg-blue-500 text-white p-2 rounded"
+          onClick={openAddHelperModal}
+          className="bg-blue-500 text-white p-2 rounded mb-4"
         >
           Add Helper
         </button>
+        <HelpersTable
+          Helpers={Helpers}
+          openEditModal={openEditHelperModal}
+          deleteHelper={deleteHelperHandler}
+        />
       </div>
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white">
-          <thead>
-            <tr>
-              <th className="px-4 py-2 border">Name</th>
-              <th className="px-4 py-2 border">Institution</th>
-              <th className="px-4 py-2 border">Gender</th>
-              <th className="px-4 py-2 border">ID Number</th>
-              <th className="px-4 py-2 border">Phone Number</th>
-              <th className="px-4 py-2 border">Email</th>
-              <th className="px-4 py-2 border">Sub County</th>
-              <th className="px-4 py-2 border">County</th>
-              <th className="px-4 py-2 border">Helper Type</th>
-              <th className="px-4 py-2 border">Regional Coordinator</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredHelpers.map((helper, index) => (
-              <tr key={index} className="hover:bg-gray-100">
-                <td className="px-4 py-2 border">{helper.name}</td>
-                <td className="px-4 py-2 border">{helper.institution}</td>
-                <td className="px-4 py-2 border">{helper.gender}</td>
-                <td className="px-4 py-2 border">{helper.idNumber}</td>
-                <td className="px-4 py-2 border">{helper.phoneNumber}</td>
-                <td className="px-4 py-2 border">{helper.email}</td>
-                <td className="px-4 py-2 border">{helper.subCounty}</td>
-                <td className="px-4 py-2 border">{helper.county}</td>
-                <td className="px-4 py-2 border">{helper.helperType}</td>
-                <td className="px-4 py-2 border">{helper.regionalCoordinator}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Add Helper"
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg"
-        overlayClassName="fixed inset-0 bg-black bg-opacity-50"
-      >
-        <h2 className="text-xl mb-4">Add Helper</h2>
-        <div className="space-y-4">
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={newHelper.name}
-            onChange={handleInputChange}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-          <input
-            type="text"
-            name="institution"
-            placeholder="Institution"
-            value={newHelper.institution}
-            onChange={handleInputChange}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-        <div>
-            <label htmlFor="gender">Gender</label>
-            <select
-              id="gender"
-              name="gender"
-              value={newHelper.gender}
-              onChange={handleInputChange}
-              className="w-full p-2 border border-gray-300 rounded"
-            >
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-          </div>
-          <input
-            type="text"
-            name="idNumber"
-            placeholder="ID Number"
-            value={newHelper.idNumber}
-            onChange={handleInputChange}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-          <input
-            type="text"
-            name="phoneNumber"
-            placeholder="Phone Number"
-            value={newHelper.phoneNumber}
-            onChange={handleInputChange}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={newHelper.email}
-            onChange={handleInputChange}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-          <input
-            type="text"
-            name="subCounty"
-            placeholder="Sub County"
-            value={newHelper.subCounty}
-            onChange={handleInputChange}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-          <input
-            type="text"
-            name="county"
-            placeholder="County"
-            value={newHelper.county}
-            onChange={handleInputChange}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-          <div>
-            <label htmlFor="helperType">Helper Type</label>
-            <select
-              id="helperType"
-              name="helperType"
-              value={newHelper.helperType}
-              onChange={handleInputChange}
-              className="w-full p-2 border border-gray-300 rounded"
-            >
-              <option value="Volunteer">Volunteer</option>
-              <option value="Award Leader">Award Leader</option>
-            </select>
-          </div>
-          <input
-            type="text"
-            name="regionalCoordinator"
-            placeholder="Regional Coordinator"
-            value={newHelper.regionalCoordinator}
-            onChange={handleInputChange}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-        </div>
+      <Modal isOpen={isModalOpen} onRequestClose={closeAddHelperModal} contentLabel={editMode ? "Edit Helper" : "Add Helper"}>
+        <h2 className="text-xl mb-4">{editMode ? 'Edit Helper' : 'Add Helper'}</h2>
+        <HelpersForm
+          formValues={newHelper} 
+          handleInputChange={handleInputChange} 
+          handleDateChange={handleDateChange} 
+          errors={errors} 
+        />
         <div className="flex justify-end mt-4">
-          <button
-            onClick={addHelper}
-            className="bg-blue-500 text-white p-2 rounded mr-2"
-          >
-            Add
+          <button onClick={editMode ? updateExistingHelper : addNewHelper} className="bg-green-500 text-white p-2 rounded mr-2">
+            {editMode ? 'Update' : 'Save'}
           </button>
-          <button
-            onClick={closeModal}
-            className="bg-red-500 text-white p-2 rounded"
-          >
+          <button onClick={closeAddHelperModal} className="bg-gray-500 text-white p-2 rounded">
             Cancel
           </button>
         </div>
       </Modal>
-    </div>
     </Layout>
   );
 };
 
-export default Helper;
+export default AddHelper;

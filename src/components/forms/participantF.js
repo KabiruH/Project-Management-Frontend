@@ -65,7 +65,7 @@ const ParticipantForm = ({ formValues, handleInputChange, handleDateChange, erro
         <div>
           <Input
             name="institutionName"
-            placeholder="Contact Person"
+            placeholder="Institution Name"
             value={formValues.institutionName}
             onChange={handleInputChange}
           />

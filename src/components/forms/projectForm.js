@@ -46,7 +46,7 @@ const ProjectForm = ({ onSubmit }) => {
           value={formValues.institutionName}
           onChange={handleInputChange}
         />
-        <Input
+         <Input
           name="startDate"
           placeholder="Start Date"
           value={formValues.startDate}

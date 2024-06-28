@@ -7,6 +7,7 @@ const addProject = async (projectData) => {
     } catch (error) {
         if (error.response) {
             console.error('Error in addProject:', error.response.data); // Log detailed error
+            console.error('Validation Errors:', error.response.data.errors); // Log validation errors
         } else {
             console.error('Error in addProject:', error.message); // Log generic error
         }
@@ -21,6 +22,7 @@ const updateProject = async (projectId, projectData) => {
     } catch (error) {
         if (error.response) {
             console.error('Error in updateProject:', error.response.data); // Log detailed error
+            console.error('Validation Errors:', error.response.data.errors); // Log validation errors
         } else {
             console.error('Error in updateProject:', error.message); // Log generic error
         }
@@ -35,6 +37,7 @@ const getProjects = async () => {
     } catch (error) {
         if (error.response) {
             console.error('Error in getProjects:', error.response.data); // Log detailed error
+            console.error('Validation Errors:', error.response.data.errors); // Log validation errors
         } else {
             console.error('Error in getProjects:', error.message); // Log generic error
         }
@@ -49,6 +52,7 @@ const deleteProject = async (projectId) => {
     } catch (error) {
         if (error.response) {
             console.error('Error in deleteProject:', error.response.data); // Log detailed error
+            console.error('Validation Errors:', error.response.data.errors); // Log validation errors
         } else {
             console.error('Error in deleteProject:', error.message); // Log generic error
         }

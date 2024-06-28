@@ -2,37 +2,36 @@ import React from 'react';
 import Input from '../common/Input';
 import styles from '../../styles/modal.module.css'; // Correct import for CSS modules
 
-const ParticipantForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
+const HelpersForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
   return (
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
           <Input
-            name="adminNumber"
-            placeholder="Admin Number"
-            value={formValues.adminNumber}
+            name="helperID"
+            placeholder="Helper ID"
+            value={formValues.helperID}
             onChange={handleInputChange}
           />
-          {errors.adminNumber && <p className="text-red-500">{errors.adminNumber[0]}</p>}
+          {errors.helperID && <p className="text-red-500">{errors.helperID[0]}</p>}
         </div>
         <div>
           <Input
-            name="name"
+            name="helperName"
             placeholder="Name"
-            value={formValues.name}
+            value={formValues.helperName}
             onChange={handleInputChange}
           />
-          {errors.name && <p className="text-red-500">{errors.name[0]}</p>}
+          {errors.helperName && <p className="text-red-500">{errors.helperName[0]}</p>}
         </div>
         <div>
           <Input
-            name="dob"
-            placeholder="Date of Birth"
-            type="date"
-            value={formValues.dob}
+            name="institutionName"
+            placeholder="Institution Name"
+            value={formValues.institutionName}
             onChange={handleInputChange}
           />
-          {errors.dob && <p className="text-red-500">{errors.dob[0]}</p>}
+          {errors.institutionName && <p className="text-red-500">{errors.institutionName[0]}</p>}
         </div>
         <div>
           <Input
@@ -45,12 +44,23 @@ const ParticipantForm = ({ formValues, handleInputChange, handleDateChange, erro
         </div>
         <div>
           <Input
-            name="phoneNumber"
-            placeholder="Phone Number"
-            value={formValues.phoneNumber}
+            name="idNo"
+            placeholder="ID Number"
+            type="date"
+            value={formValues.idNo}
             onChange={handleInputChange}
           />
-          {errors.phoneNumber && <p className="text-red-500">{errors.phoneNumber[0]}</p>}
+          {errors.idNo && <p className="text-red-500">{errors.idNo[0]}</p>}
+        </div>
+       
+        <div>
+          <Input
+            name="phoneNo"
+            placeholder="Phone Number"
+            value={formValues.phoneNo}
+            onChange={handleInputChange}
+          />
+          {errors.phoneNo && <p className="text-red-500">{errors.phoneNo[0]}</p>}
         </div>
         <div>
           <Input
@@ -60,16 +70,6 @@ const ParticipantForm = ({ formValues, handleInputChange, handleDateChange, erro
             onChange={handleInputChange}
           />
           {errors.email && <p className="text-red-500">{errors.email[0]}</p>}
-        </div>
-        
-        <div>
-          <Input
-            name="institutionName"
-            placeholder="Institution Name"
-            value={formValues.institutionName}
-            onChange={handleInputChange}
-          />
-          {errors.institutionName && <p className="text-red-500">{errors.institutionName[0]}</p>}
         </div>
         <div>
           <Input
@@ -91,25 +91,25 @@ const ParticipantForm = ({ formValues, handleInputChange, handleDateChange, erro
         </div>
         <div>
           <Input
-            name="awardLevel"
-            placeholder="Award Level"
-            value={formValues.awardLevel}
+            name="helperType"
+            placeholder="Helper Type"
+            value={formValues.helperType}
             onChange={handleInputChange}
           />
-          {errors.awardLevel && <p className="text-red-500">{errors.awardLevel[0]}</p>}
+          {errors.helperType && <p className="text-red-500">{errors.helperType[0]}</p>}
         </div>
         <div>
           <Input
-            name="awardLeader"
-            placeholder="Award Leader"
-            value={formValues.awardLeader}
+            name="coordinator"
+            placeholder="Coordinator"
+            value={formValues.coordinator}
             onChange={handleInputChange}
           />
-          {errors.awardLeader && <p className="text-red-500">{errors.awardLeader[0]}</p>}
+          {errors.coordinator && <p className="text-red-500">{errors.coordinator[0]}</p>}
         </div>
       </div>
     </form>
   );
 };
 
-export default ParticipantForm;
+export default HelpersForm;

@@ -8,10 +8,11 @@ import AddStatus from './pages/institutions/institutionStatus';
 import AddStages from './pages/institutions/institutionStages';
 import AddParticipant from './pages/participants/participant';
 import AddLevels from './pages/participants/participantLevels';
+import AddHelper from './pages/helpers/helper';
+import AddHelperTypes from './pages/helpers/helperType';
 import DashboardStatsGrid from './pages/dashboard';
 import Footer from './components/footer';
 import Project from './pages/project';
-import Helper from './pages/helpers';
 import Trainings from './pages/training';
 import Financial from './pages/financial';
 import Partnership from './pages/partners';
@@ -47,9 +48,10 @@ function App() {
           <Route path='/institutions/institutionStatus' element={<AddStatus />} />
           <Route path="/participants/participant" element={<AddParticipant />} />
           <Route path="/participants/participantLevels" element={<AddLevels />} />
+          <Route path="/helpers/helper" element={<AddHelper />} />
+          <Route path="/helpers/helperType" element={<AddHelperTypes />} />
           <Route path="/partnertypes" element={<PartnerType />} />
           <Route path="/project" element={<Project />} />
-          <Route path="/helpers" element={<Helper />} />
           <Route path="/training" element={<Trainings />} />
           <Route path="/financial" element={<Financial />} />
           <Route path="/partnerships" element={<Partnership />} />

@@ -59,10 +59,10 @@ const AddParticipant = () => {
 
   const addNewParticipant = async () => {
     try {
-      const institutionPayload = { ...newParticipant };
+      const participantPayload = { ...newParticipant };
 
-      console.log('New Participant Payload:', institutionPayload);
-      const addedParticipant = await addParticipantService(institutionPayload);
+      console.log('New Participant Payload:', participantPayload);
+      const addedParticipant = await addParticipantService(participantPayload);
       setParticipants((prev) => [...prev, addedParticipant]);
       setIsModalOpen(false);
       setErrors({});
@@ -101,8 +101,8 @@ const AddParticipant = () => {
       setSelectedParticipantId(participant.adminNumber);
       setNewParticipant({
         ...fetchedParticipant,
-        licenseStartDate: fetchedParticipant.licenseStartDate,
-        licenseEndDate: fetchedParticipant.licenseEndDate,
+        dateOfBirth: fetchedParticipant.dateOfBirth,
+       
       });
     } catch (error) {
       console.error(`Error fetching participant with ID ${participant.adminNumber}:`, error.response.data);
@@ -111,11 +111,11 @@ const AddParticipant = () => {
   
   const updateExistingParticipant = async () => {
     try {
-      const institutionPayload = { ...newParticipant };
+      const participantPayload = { ...newParticipant };
   
-      console.log('Updated Participant Payload:', institutionPayload);
+      console.log('Updated Participant Payload:', participantPayload);
   
-      const updatedParticipant = await updateParticipant(selectedParticipantId, institutionPayload);
+      const updatedParticipant = await updateParticipant(selectedParticipantId, participantPayload);
       setParticipants((prev) => prev.map(inst => (inst.adminNumber === selectedParticipantId ? updatedParticipant : inst)));
       setIsModalOpen(false);
       setErrors({});

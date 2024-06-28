@@ -17,16 +17,30 @@ const Sidebar = () => {
     { name: 'Institutions',
         icon: <FaBuilding />,
          dropdown: [
-          {name:'Instutions', path: '/institutions/addInstitutions' },
-          {name:'counties', path:'/institutions/counties'},
-          {name:'status', path: '/institutions/status'},
-          {name:'stages', path: '/institutions/stages'},
+          {name:'Institution', path: '/institutions/addInstitutions' },
+          {name:'counties', path:'/institutions/addCounties'},
+          {name:'status', path: '/institutions/institutionStatus'},
+          {name:'stages', path: '/institutions/institutionStages'},
         ] 
       },
-    { name: 'Participants', path: '/participants', icon: <FaUser />, dropdown: ['Participant', 'Levels'] },
+    { name: 'Participants',
+      icon: <FaUser />,
+      dropdown: [
+        { name: 'Participant', path: '/participants/participant' },
+        {name: 'Levels', path: '/participants/participantLevels'}
+          ] 
+        },
+       
     { name: 'Project', path: '/project', icon: <FaProjectDiagram />, dropdown: ['Projects', 'Status', 'Testimonials', 'Donors'] },
     { name: 'Program', icon: <FaCogs />, dropdown: ['Programs'] },
-    { name: 'Helpers', path: '/helpers', icon: <FaUser />, dropdown: ['Award Leaders', 'Volunteers'] },
+    { name: 'Helpers', 
+      icon: <FaUser />,
+   dropdown: [
+    { name: 'Helper', path: '/helpers/helper' }, 
+    { name: 'Helper Type', path: '/helpers/helperType' }, 
+   ]
+   },
+ 
     { name: 'Training', path: '/training', icon: <FaCogs />, dropdown: ['Trainings', 'Categories', 'Levels', 'Training Type'] },
     { name: 'Financial', path: '/financial', icon: <FaCogs />, dropdown: ['Budget', 'Budget Request', 'Funding Type'] },
     {

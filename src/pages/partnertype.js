@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import Layout from '../components/layout';
-import { addPartnerType, getPartnerTypes } from '../services/partnershipService';
+import { addPartnerType, getPartnerTypes } from '../services/partnershipS';
 
 const PartnerType = () => {
     const [partnerTypes, setPartnerTypes] = useState([]);

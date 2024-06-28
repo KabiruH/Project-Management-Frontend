@@ -2,12 +2,17 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/sidebar';
 import CalendarPage from './pages/calendar';
-import AddInstitutions from './pages/institutions/addInstitutions';
+import AddInstitution from './pages/institutions/addInstitutions';
+import AddCounty from './pages/institutions/addCounties';
+import AddStatus from './pages/institutions/institutionStatus';
+import AddStages from './pages/institutions/institutionStages';
+import AddParticipant from './pages/participants/participant';
+import AddLevels from './pages/participants/participantLevels';
+import AddHelper from './pages/helpers/helper';
+import AddHelperTypes from './pages/helpers/helperType';
 import DashboardStatsGrid from './pages/dashboard';
 import Footer from './components/footer';
-import Participants from './pages/participants';
 import Project from './pages/project';
-import Helper from './pages/helpers';
 import Trainings from './pages/training';
 import Financial from './pages/financial';
 import Partnership from './pages/partners';
@@ -37,11 +42,16 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route exact path="/dashboard" element={<DashboardStatsGrid />} />
           <Route path="/calendar" element={<CalendarPage />} />
-          <Route path="/institutions/addInstitutions" element={<AddInstitutions />} />
-          <Route path="/participants" element={<Participants />} />
+          <Route path="/institutions/addInstitutions" element={<AddInstitution />} />
+          <Route path="/institutions/addCounties" element={<AddCounty />} />
+          <Route path='/institutions/institutionStages' element={<AddStages />} />
+          <Route path='/institutions/institutionStatus' element={<AddStatus />} />
+          <Route path="/participants/participant" element={<AddParticipant />} />
+          <Route path="/participants/participantLevels" element={<AddLevels />} />
+          <Route path="/helpers/helper" element={<AddHelper />} />
+          <Route path="/helpers/helperType" element={<AddHelperTypes />} />
           <Route path="/partnertypes" element={<PartnerType />} />
           <Route path="/project" element={<Project />} />
-          <Route path="/helpers" element={<Helper />} />
           <Route path="/training" element={<Trainings />} />
           <Route path="/financial" element={<Financial />} />
           <Route path="/partnerships" element={<Partnership />} />

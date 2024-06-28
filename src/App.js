@@ -18,6 +18,7 @@ import Financial from './pages/financial';
 import Partnership from './pages/partners';
 import Research from './pages/research';
 import SignIn from './pages/signin';
+import Signup from './pages/signup'
 import Home from './pages/homepage';
 import Navbar from './components/navbar';
 import { DarkModeProvider } from './components/darkMode';
@@ -40,6 +41,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<Signup />} />
           <Route exact path="/dashboard" element={<DashboardStatsGrid />} />
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/institutions/addInstitutions" element={<AddInstitution />} />

@@ -3,7 +3,7 @@ import Input from '../common/Input';
 import styles from '../../styles/modal.module.css';
 import useForm from '../../hooks/useForm';
 
-const ProjectForm = ({ onSubmit }) => {
+const ProjectForm = ({ onSubmit, handleDateChange }) => {
   const initialState = {
     projectID: '',
     projectName: '',
@@ -18,7 +18,7 @@ const ProjectForm = ({ onSubmit }) => {
     notes: '',
   };
   
-  const { formValues, handleInputChange, setFormValues } = useForm(initialState);
+  const { formValues, handleInputChange } = useForm(initialState);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +28,7 @@ const ProjectForm = ({ onSubmit }) => {
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <div className="space-y-4">
-      <Input
+        <Input
           name="projectID"
           placeholder="Project ID"
           value={formValues.projectID}
@@ -46,17 +46,19 @@ const ProjectForm = ({ onSubmit }) => {
           value={formValues.institutionName}
           onChange={handleInputChange}
         />
-         <Input
+        <Input
           name="startDate"
+          type="date"
           placeholder="Start Date"
           value={formValues.startDate}
-          onChange={handleInputChange}
+          onChange={handleDateChange}
         />
         <Input
           name="endDate"
+          type="date"
           placeholder="End Date"
           value={formValues.endDate}
-          onChange={handleInputChange}
+          onChange={handleDateChange}
         />
         <Input
           name="cost"

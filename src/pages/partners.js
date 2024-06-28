@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import Layout from '../components/layout';
-import { addPartnerships, getPartnerships, updatePartnership, deletePartnership } from '../services/partnershipService';
+import { addPartnerships, getPartnerships, updatePartnership, deletePartnership } from '../services/partnershipS';
 import PartnersForm from '../components/forms/partnersForm'; // Adjust the path as necessary
 import useForm from '../hooks/useForm';
 import useModal from '../hooks/useModal';

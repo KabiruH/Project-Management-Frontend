@@ -85,6 +85,14 @@ const Project = () => {
     }
   };
 
+  const handleDateChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   const filteredProjects = projects.filter((project) =>
     project.projectName.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -126,6 +134,7 @@ const Project = () => {
           <ProjectForm
             formValues={formValues}
             handleInputChange={handleInputChange}
+            handleDateChange={handleDateChange} 
             onSubmit={addNewProject}
             closeModal={closeModal}
           />

@@ -38,8 +38,7 @@ const Sidebar = () => {
    dropdown: [
     { name: 'Helper', path: '/helpers/helper' }, 
     { name: 'Helper Type', path: '/helpers/helperType' }, 
-   ]
-   },
+   ]},
  
     { name: 'Training', path: '/training', icon: <FaCogs />, dropdown: ['Trainings', 'Categories', 'Levels', 'Training Type'] },
     { name: 'Financial', path: '/financial', icon: <FaCogs />, dropdown: ['Budget', 'Budget Request', 'Funding Type'] },
@@ -51,7 +50,11 @@ const Sidebar = () => {
         { name: 'Partner Type', path: '/partnertypes' }
       ]
     },
-    { name: 'Research', path: '/research', icon: <FaCogs />, dropdown: ['Feedback', 'Feedback Type'] },
+    { name: 'Research', 
+      icon: <FaCogs />, 
+      dropdown: [
+        { name: 'Feedback', path: '/research/feedback' },
+   ] },
     { name: 'Reports', icon: <FaCogs />, dropdown: ['Participants', 'Institutions', 'Financial Reports'] },
     { name: 'Users', icon: <FaUser />, dropdown: ['User', 'User Type'] },
   ];

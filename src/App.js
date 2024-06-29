@@ -16,7 +16,7 @@ import Project from './pages/project';
 import Trainings from './pages/training';
 import Financial from './pages/financial';
 import Partnership from './pages/partners';
-import Research from './pages/research';
+import AddFeedback from './pages/research/feedback';
 import SignIn from './pages/signin';
 import Home from './pages/homepage';
 import Navbar from './components/navbar';
@@ -55,7 +55,7 @@ function App() {
           <Route path="/training" element={<Trainings />} />
           <Route path="/financial" element={<Financial />} />
           <Route path="/partnerships" element={<Partnership />} />
-          <Route path="/research" element={<Research />} />
+          <Route path="/research/feedback" element={<AddFeedback />} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -1,52 +1,52 @@
 import apiClient from './apiClient';
 
-const addParticipant = async (ParticipantData) => {
+const addPartnership = async (PartnershipData) => {
   try {
-    const response = await apiClient.post('/api/Participants', ParticipantData);
+    const response = await apiClient.post('/api/Partnerships', PartnershipData);
     return response.data;
   } catch (error) {
-    console.error('Error in addParticipants:', error.response.data);
+    console.error('Error in addPartnerships:', error.response.data);
     throw error;
   }
 };
 
-const getParticipantById = async (adminNumber) => {
+const getPartnershipById = async (partnerID) => {
   try {
-    const response = await apiClient.get(`/api/Participants/${adminNumber}`);
+    const response = await apiClient.get(`/api/Partnerships/${partnerID}`);
     return response.data;
   } catch (error) {
-    console.error(`Error fetching Participants with ID ${adminNumber}:`, error.response.data);
+    console.error(`Error fetching Partnerships with ID ${partnerID}:`, error.response.data);
     throw error;
   }
 };
 
-const updateParticipant = async (adminNumber, updatedData) => {
+const updatePartnership = async (partnerID, updatedData) => {
   try {
-    const response = await apiClient.put(`/api/Participants/${adminNumber}`, updatedData);
+    const response = await apiClient.put(`/api/Partnerships/${partnerID}`, updatedData);
     return response.data;
   } catch (error) {
-    console.error(`Error updating Participants with ID ${adminNumber}:`, error.response.data);
+    console.error(`Error updating Partnerships with ID ${partnerID}:`, error.response.data);
     throw error;
   }
 };
 
-const deleteParticipant = async (adminNumber) => {
+const deletePartnership = async (partnerID) => {
   try {
-    await apiClient.delete(`/api/Participants/${adminNumber}`);
+    await apiClient.delete(`/api/Partnerships/${partnerID}`);
   } catch (error) {
-    console.error(`Error deleting Participants with ID ${adminNumber}:`, error.response.data);
+    console.error(`Error deleting Partnerships with ID ${partnerID}:`, error.response.data);
     throw error;
   }
 };
 
-const getParticipant = async () => {
+const getPartnership = async () => {
   try {
-    const response = await apiClient.get('/api/Participants');
+    const response = await apiClient.get('/api/Partnerships');
     return response.data;
   } catch (error) {
-    console.error('Error fetching Participants:', error.response.data);
+    console.error('Error fetching Partnerships:', error.response.data);
     throw error;
   }
 };
 
-export { addParticipant, getParticipantById, updateParticipant, deleteParticipant, getParticipant };
+export { addPartnership, getPartnershipById, updatePartnership, deletePartnership, getPartnership };

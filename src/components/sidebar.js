@@ -46,8 +46,8 @@ const Sidebar = () => {
       name: 'Partnership',
       icon: <FaCogs />,
       dropdown: [
-        { name: 'Partners', path: '/partnerships' },
-        { name: 'Partner Type', path: '/partnertypes' }
+        { name: 'Partners', path: '/partnership/partnership' },
+        { name: 'Partner Type', path: '/partnership/partnertype' }
       ]
     },
     { name: 'Research', 

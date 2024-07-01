@@ -38,7 +38,7 @@ const Sidebar = () => {
       icon: <FaProjectDiagram />, 
       dropdown: [
           {name: 'Projects', path: '/project'},
-          {name: 'Status'},
+          {name: 'Status', path: '/project/projectStatus'},
           {name: 'Testimonials'},
           {name: 'Donors'}
         ]

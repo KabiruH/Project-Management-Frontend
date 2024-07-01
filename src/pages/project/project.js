@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import Layout from '../components/layout.js';
-import ProjectForm from '../components/forms/projectForm.js';
-import ProjectTable from '../components/tables/projectTable.js';
-import { getProjects, addProject, updateProject, deleteProject as deleteProjectService } from '../services/projectService.js';
-import useForm from '../hooks/useForm';
-import useModal from '../hooks/useModal';
+import Layout from '../../components/layout.js';
+import ProjectForm from '../../components/forms/projectForm.js';
+import ProjectTable from '../../components/tables/projectTable.js';
+import { getProjects, addProject, updateProject, deleteProject as deleteProjectService } from '../../services/projectService.js';
+import useForm from '../../hooks/useForm.js';
+import useModal from '../../hooks/useModal.js';
 
 const Project = () => {
   const { formValues, handleInputChange, setFormValues } = useForm({

@@ -12,7 +12,8 @@ import AddHelper from './pages/helpers/helper';
 import AddHelperTypes from './pages/helpers/helperType';
 import DashboardStatsGrid from './pages/dashboard';
 import Footer from './components/footer';
-import Project from './pages/project';
+import Project from './pages/project/project';
+import ProjectStatus from './pages/project/projectStatus'
 import Trainings from './pages/training';
 import Financial from './pages/financial';
 import Partnership from './pages/partners';
@@ -54,6 +55,7 @@ function App() {
           <Route path="/helpers/helperType" element={<AddHelperTypes />} />
           <Route path="/partnertypes" element={<PartnerType />} />
           <Route path="/project" element={<Project />} />
+          <Route path="/project/projectStatus" element={<ProjectStatus />} />
           <Route path="/training" element={<Trainings />} />
           <Route path="/financial" element={<Financial />} />
           <Route path="/partnerships" element={<Partnership />} />

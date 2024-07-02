@@ -2,8 +2,8 @@ import React from 'react';
 import Table from '../common/Table';
 
 const columns = [
-    { Header: 'Project ID', accessor: 'projectID' },
-  { Header: 'Project Name', accessor: 'projectName' },
+  { Header: 'ID', accessor: 'projectID' },
+  { Header: 'Name', accessor: 'projectName' },
   { Header: 'Institution', accessor: 'institutionName' },
   { Header: 'Start Date', accessor: 'startDate' },
   { Header: 'End Date', accessor: 'endDate' },

@@ -1,63 +1,52 @@
 import apiClient from './apiClient';
 
-const addPartnerships = async (partnershipsData) => {
+const addPartnership = async (PartnershipData) => {
   try {
-    const response = await apiClient.post('/api/Partnerships', partnershipsData);
+    const response = await apiClient.post('/api/Partnerships', PartnershipData);
     return response.data;
   } catch (error) {
-    console.error('Error in addPartnerships:', error.response.data); // Log detailed error
+    console.error('Error in addPartnerships:', error.response.data);
     throw error;
   }
 };
 
-const addPartnerType = async (partnerTypeData) => {
+const getPartnershipById = async (partnerID) => {
   try {
-    const response = await apiClient.post('/api/PartnerTypes', partnerTypeData);
+    const response = await apiClient.get(`/api/Partnerships/${partnerID}`);
     return response.data;
   } catch (error) {
-    console.error('Error in addPartnerType:', error.response.data); // Log detailed error
+    console.error(`Error fetching Partnerships with ID ${partnerID}:`, error.response.data);
     throw error;
   }
 };
 
-const getPartnerTypes = async () => {
+const updatePartnership = async (partnerID, updatedData) => {
   try {
-    const response = await apiClient.get('/api/PartnerTypes');
+    const response = await apiClient.put(`/api/Partnerships/${partnerID}`, updatedData);
     return response.data;
   } catch (error) {
-    console.error('Error in getPartnerTypes:', error.response.data); // Log detailed error
-    throw error;
-  }
-};
-
-const getPartnerships = async () => {
-  try {
-    const response = await apiClient.get('/api/Partnerships');
-    return response.data;
-  } catch (error) {
-    console.error('Error in getPartnerships:', error.response.data); // Log detailed error
-    throw error;
-  }
-};
-
-const updatePartnership = async (partnerID, partnershipData) => {
-  try {
-    const response = await apiClient.put(`/api/Partnerships/${partnerID}`, partnershipData);
-    return response.data;
-  } catch (error) {
-    console.error('Error in updatePartnership:', error.response.data); // Log detailed error
+    console.error(`Error updating Partnerships with ID ${partnerID}:`, error.response.data);
     throw error;
   }
 };
 
 const deletePartnership = async (partnerID) => {
   try {
-    const response = await apiClient.delete(`/api/Partnerships/${partnerID}`);
-    return response.data;
+    await apiClient.delete(`/api/Partnerships/${partnerID}`);
   } catch (error) {
-    console.error('Error in deletePartnership:', error.response.data); // Log detailed error
+    console.error(`Error deleting Partnerships with ID ${partnerID}:`, error.response.data);
     throw error;
   }
 };
 
-export { addPartnerships, addPartnerType, getPartnerTypes, getPartnerships, updatePartnership, deletePartnership };
+const getPartnership = async () => {
+  try {
+    const response = await apiClient.get('/api/Partnerships');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching Partnerships:', error.response.data);
+    throw error;
+  }
+};
+
+export { addPartnership, getPartnershipById, updatePartnership, deletePartnership, getPartnership };

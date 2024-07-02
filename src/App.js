@@ -14,7 +14,8 @@ import DashboardStatsGrid from './pages/dashboard';
 import Footer from './components/footer';
 import Project from './pages/project';
 import Trainings from './pages/training';
-import Financial from './pages/financial';
+import AddBudget from './pages/financials/budget';
+import AddFundingType from './pages/financials/fundingtype';
 import AddPartnership from './pages/partnership/partnership';
 import AddPartnerTypes from './pages/partnership/partnertype';
 import AddFeedback from './pages/research/feedback';
@@ -53,8 +54,9 @@ function App() {
           <Route path="/partnership/partnership" element={<AddPartnership />} />
           <Route path="/partnership/partnertype" element={<AddPartnerTypes />} />
           <Route path="/project" element={<Project />} />
+          <Route path="/financials/budget" element={<AddBudget />} />
+          <Route path="/financials/fundingtype" element={<AddFundingType />} />
           <Route path="/training" element={<Trainings />} />
-          <Route path="/financial" element={<Financial />} />
           <Route path="/research/feedback" element={<AddFeedback />} />
         </Routes>
         <Footer />

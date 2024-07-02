@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import Layout from '../../components/layout.js';
-import ProjectForm from '../../components/forms/projectForm.js';
-import ProjectTable from '../../components/tables/projectTable.js';
-import { getProjects, addProject, updateProject, deleteProject as deleteProjectService } from '../../services/projectService.js';
-import useForm from '../../hooks/useForm.js';
-import useModal from '../../hooks/useModal.js';
+import Layout from '../../components/layout';
+import ProjectForm from '../../components/forms/projectForm';
+import ProjectTable from '../../components/tables/projectTable';
+import { addProject as addProjectService, getProjectById, updateProject, deleteProject, getProjects } from '../../services/projectService';
+
+
+Modal.setAppElement('#root');
 
 const Project = () => {
-  const { formValues, handleInputChange, setFormValues } = useForm({
-    projectID: '',
+  const [projects, setProjects] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newProject, setNewProject] = useState({
+    projectId: '',
     projectName: '',
     institutionName: '',
     startDate: '',
@@ -21,125 +24,172 @@ const Project = () => {
     coordinator: '',
     notes: '',
   });
-
-  const { isOpen, openModal, closeModal } = useModal();
-  
-  const [projects, setProjects] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [editingProject, setEditingProject] = useState(null);
+  const [errors, setErrors] = useState({});
+  const [editMode, setEditMode] = useState(false);
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const data = await getProjects();
-        setProjects(data);
+        const fetchedProjects = await getProjects();
+        setProjects(fetchedProjects);
       } catch (error) {
-        console.error('Error fetching projects:', error);
+        console.error('Error fetching projects:', error.response.data);
       }
     };
 
     fetchProjects();
   }, []);
 
-  const addNewProject = async () => {
-    try {
-      if (editingProject) {
-        await updateProject(editingProject._id, formValues);
-        setProjects(projects.map((proj) => (proj._id === editingProject._id ? formValues : proj)));
-      } else {
-        const newProject = await addProject(formValues);
-        setProjects([...projects, newProject]);
-      }
-      closeModal();
-      setFormValues({
-        projectID: '',
-        projectName: '',
-        institutionName: '',
-        startDate: '',
-        endDate: '',
-        cost: '',
-        subCounty: '',
-        county: '',
-        description: '',
-        coordinator: '',
-        notes: '',
-      });
-      setEditingProject(null);
-    } catch (error) {
-      console.error('Error adding/updating project:', error);
-    }
-  };
-
-  const openEditModal = (project) => {
-    setFormValues(project);
-    setEditingProject(project);
-    openModal();
-  };
-
-  const deleteProject = async (projectID) => {
-    try {
-      await deleteProjectService(projectID);
-      setProjects(projects.filter((project) => project._id !== projectID));
-    } catch (error) {
-      console.error('Error deleting project:', error);
-    }
-  };
-
-  const handleDateChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormValues((prev) => ({
+    setNewProject((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  const filteredProjects = projects.filter((project) =>
-    project.projectName.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleDateChange = (e) => {
+    const { name, value } = e.target;
+    setNewProject((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const addNewProject = async () => {
+    try {
+      const projectPayload = { ...newProject };
+
+      console.log('New Project Payload:', projectPayload);
+      const addedProject = await addProjectService(projectPayload);
+      setProjects((prev) => [...prev, addedProject]);
+      setIsModalOpen(false);
+      setErrors({});
+    } catch (error) {
+      console.error('Error adding project:', error.response.data);
+      setErrors(error.response.data.errors || {});
+      alert(`Failed to add project: ${error.response.data.title}\nDetails: ${JSON.stringify(error.response.data.errors, null, 2)}`);
+    }
+  };
+
+  const openAddProjectModal = () => {
+    setEditMode(false);
+    setIsModalOpen(true);
+    setNewProject({
+      projectId: '',
+      projectName: '',
+      institutionName: '',
+      startDate: '',
+      endDate: '',
+      cost: '',
+      subCounty: '',
+      county: '',
+      description: '',
+      coordinator: '',
+      notes: '',
+    });
+  };
+
+  const openEditProjectModal = async (project) => {
+    try {
+      console.log('Fetching project with ID:', project.projectID);
+      const fetchedProject = await getProjectById(project.projectID);
+      console.log('Fetched Project:', fetchedProject);
+  
+      setEditMode(true); // Sets the form to edit mode
+      setIsModalOpen(true); // Opens the modal
+      setSelectedProjectId(project.projectID); // Sets the ID of the selected project
+  
+      setNewProject({
+        ...fetchedProject,
+        startDate: fetchedProject.startDate,
+        endDate: fetchedProject.endDate,
+      }); // Initializes form fields with fetched project data
+    } catch (error) {
+      console.error(`Error fetching project with ID ${project.projectID}:`, error.message);
+      if (error.response) {
+        console.error(error.response.data);
+      } else {
+        alert('Failed to fetch project. Please check your network connection or CORS configuration.');
+      }
+    }
+  };
+  
+  
+
+  const updateExistingProject = async () => {
+    try {
+      const projectPayload = { ...newProject };
+
+      console.log('Updated Project Payload:', projectPayload);
+
+      const updatedProject = await updateProject(selectedProjectId, projectPayload);
+      setProjects((prev) => prev.map(proj => (proj.projectID === selectedProjectId ? updatedProject : proj)));
+      setIsModalOpen(false);
+      setErrors({});
+    } catch (error) {
+      console.error(`Error updating project with ID ${selectedProjectId}:`, error.response.data);
+      setErrors(error.response.data.errors || {});
+      alert(`Failed to update project: ${error.response.data.title}\nDetails: ${JSON.stringify(error.response.data.errors, null, 2)}`);
+    }
+  };
+
+  const deleteExistingProject = async (projectID) => {
+    try {
+      await deleteProject(projectID);
+      setProjects((prev) => prev.filter(proj => proj.projectID !== projectID));
+    } catch (error) {
+      console.error(`Error deleting project with ID ${projectID}:`, error.response.data);
+      alert(`Failed to delete project: ${error.response.data.title}`);
+    }
+  };
+
+  const closeAddProjectModal = () => {
+    setIsModalOpen(false);
+    setEditMode(false);
+    setErrors({});
+  };
+
+  const deleteProjectHandler = (projectID) => {
+    if (window.confirm(`Are you sure you want to delete project with ID ${projectID}?`)) {
+      deleteExistingProject(projectID);
+    }
+  };
 
   return (
     <Layout>
-      <div className="p-5">
-        <h1 className="text-2xl mb-4">Projects</h1>
-        <div className="flex justify-between mb-4">
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="border border-gray-300 rounded p-2 w-1/3"
-          />
-          <button
-            onClick={openModal}
-            className="bg-blue-500 text-white p-2 rounded"
-          >
-            Add Project
+      <h1 className="text-2xl font-bold mb-4">Projects</h1>
+      <div className="p-4">
+        <button
+          onClick={openAddProjectModal}
+          className="bg-blue-500 text-white p-2 rounded mb-4"
+        >
+          Add Project
+        </button>
+        <ProjectTable
+          projects={projects}
+          openEditModal={openEditProjectModal}
+          deleteProject={deleteProjectHandler}
+        />
+      </div>
+      <Modal isOpen={isModalOpen} onRequestClose={closeAddProjectModal} contentLabel={editMode ? "Edit Project" : "Add Project"}>
+        <h2 className="text-xl mb-4">{editMode ? 'Edit Project' : 'Add Project'}</h2>
+        <ProjectForm
+          formValues={newProject}
+          handleInputChange={handleInputChange}
+          handleDateChange={handleDateChange}
+          errors={errors}
+        />
+        <div className="flex justify-end mt-4">
+          <button onClick={editMode ? updateExistingProject : addNewProject} className="bg-green-500 text-white p-2 rounded mr-2">
+            {editMode ? 'Update' : 'Save'}
+          </button>
+          <button onClick={closeAddProjectModal} className="bg-gray-500 text-white p-2 rounded">
+            Cancel
           </button>
         </div>
-        <div className="overflow-x-auto">
-          <ProjectTable
-            projects={filteredProjects}
-            openEditModal={openEditModal}
-            deleteProject={deleteProject}
-          />
-        </div>
-        <Modal
-          isOpen={isOpen}
-          onRequestClose={closeModal}
-          contentLabel="Add Project"
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg"
-          overlayClassName="fixed inset-0 bg-black bg-opacity-50"
-        >
-          <h2 className="text-xl mb-4">{editingProject ? 'Edit Project' : 'Add Project'}</h2>
-          <ProjectForm
-            formValues={formValues}
-            handleInputChange={handleInputChange}
-            handleDateChange={handleDateChange} 
-            onSubmit={addNewProject}
-            closeModal={closeModal}
-          />
-        </Modal>
-      </div>
+      </Modal>
     </Layout>
   );
 };

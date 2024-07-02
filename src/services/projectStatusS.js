@@ -5,65 +5,55 @@ const addProjectStatus = async (projectStatusData) => {
         const response = await apiClient.post('/api/ProjectStatuses', projectStatusData);
         return response.data;
     } catch (error) {
-        if (error.response) {
-            console.error('Error in addProjectStatus:', error.response.data);
-        } else {
-            console.error('Error in addProjectStatus:', error.message);
-        }
+        console.error('Error in addProjectStatus:', error.response ? error.response.data : error.message);
         throw error;
     }
 };
 
-const getProjectStatusById = async (statusId) => {
-  try {
-    const response = await apiClient.get(`/api/ProjectStatuses/${statusId}`);
-    return response.data;
-  } catch (error) {
-    console.error(`Error fetching ProjectStatus with ID ${statusId}:`, error.response.data);
-    throw error;
-  }
+const getProjectStatusById = async (projectStatusID) => {
+    try {
+        const response = await apiClient.get(`/api/ProjectStatuses/${projectStatusID}`);
+        return response.data;
+    } catch (error) {
+        console.error(`Error fetching ProjectStatus with ID ${projectStatusID}:`, error.response ? error.response.data : error.message);
+        throw error;
+    }
 };
 
-const updateProjectStatus = async (projectStatusId, projectStatusData) => {
+const updateProjectStatus = async (projectStatusID, projectStatusData) => {
     try {
-      const response = await apiClient.put(`/api/ProjectStatuses/${projectStatusId}`, projectStatusData);
-      return response.data;
+        const response = await apiClient.put(`/api/ProjectStatuses/${projectStatusID}`, projectStatusData);
+        return response.data;
     } catch (error) {
-      if (error.response) {
-        console.error('Error in updateProjectStatus:', error.response.data);
-      } else {
-        console.error('Error in updateProjectStatus:', error.message);
-      }
-      throw error;
+        console.error('Error in updateProjectStatus:', error.response ? error.response.data : error.message);
+        throw error;
     }
-  };
-  
-const deleteProjectStatus = async (projectStatusId) => {
+};
+
+const deleteProjectStatus = async (projectStatusID) => {
     try {
-      const response = await apiClient.delete(`/api/ProjectStatuses/${projectStatusId}`);
-      return response.data;
+        const response = await apiClient.delete(`/api/ProjectStatuses/${projectStatusID}`);
+        return response.data;
     } catch (error) {
-      if (error.response) {
-        console.error('Error in deleteProjectStatus:', error.response.data);
-      } else {
-        console.error('Error in deleteProjectStatus:', error.message);
-      }
-      throw error;
+        console.error('Error in deleteProjectStatus:', error.response ? error.response.data : error.message);
+        throw error;
     }
-  };
+};
 
 const getProjectStatuses = async () => {
     try {
-      const response = await apiClient.get('/api/ProjectStatuses');
-      return response.data;
+        const response = await apiClient.get('/api/ProjectStatuses');
+        return response.data;
     } catch (error) {
-      if (error.response) {
-        console.error('Error in getProjectStatuses:', error.response.data);
-      } else {
-        console.error('Error in getProjectStatuses:', error.message);
-      }
-      throw error;
+        console.error('Error in getProjectStatuses:', error.response ? error.response.data : error.message);
+        throw error;
     }
-  };
+};
 
-export { addProjectStatus, getProjectStatusById, updateProjectStatus, deleteProjectStatus, getProjectStatuses };
+export {
+    addProjectStatus,
+    getProjectStatusById,
+    updateProjectStatus,
+    deleteProjectStatus,
+    getProjectStatuses
+};

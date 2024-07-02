@@ -13,7 +13,7 @@ const ProjectStatusForm = ({ formValues, handleInputChange, errors }) => {
             value={formValues.ProjectStatusID}
             onChange={handleInputChange}
           />
-          {errors.ProjectStatusID && <p className="text-red-500">{errors.ProjectStatusID[0]}</p>}
+          {errors.statusID && <p className="text-red-500">{errors.ProjectStatusID[0]}</p>}
         </div>
         <div>
           <Input
@@ -22,7 +22,7 @@ const ProjectStatusForm = ({ formValues, handleInputChange, errors }) => {
             value={formValues.StatusName}
             onChange={handleInputChange}
           />
-          {errors.StatusName && <p className="text-red-500">{errors.StatusName[0]}</p>}
+          {errors.statusName && <p className="text-red-500">{errors.StatusName[0]}</p>}
         </div>
         <div>
           <Input
@@ -31,7 +31,7 @@ const ProjectStatusForm = ({ formValues, handleInputChange, errors }) => {
             value={formValues.Notes}
             onChange={handleInputChange}
           />
-          {errors.Notes && <p className="text-red-500">{errors.Notes[0]}</p>}
+          {errors.notes && <p className="text-red-500">{errors.Notes[0]}</p>}
         </div>
       </div>
     </form>

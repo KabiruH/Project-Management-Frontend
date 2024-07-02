@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
-import ProjectStatusForm from '../../components/forms/projectStatusF'
-import ProjectStatusTable from '../../components/tables/projectStatusT'
-import { addProjectStatus, getProjectStatusById, updateProjectStatus, deleteProjectStatus, getProjectStatuses } from '../../services/projectStatusS';
+import ProjectStatusForm from '../../components/forms/projectStatusF';
+import ProjectStatusTable from '../../components/tables/projectStatusT';
+import { addProjectStatus, getProjectStatusById, updateProjectStatus, deleteProjectStatus, getProjectStatuses } from '../../services/projectStatusS'; // Assuming correct paths and functions from your projectStatusS service
 import Layout from '../../components/layout';
 
 Modal.setAppElement('#root');
 
-const AddProjectStatus = () => {
-  const [projectStatuses, setProjectStatuses] = useState([]);
+const ProjectStatus = () => {
+  const [ProjectStatuses, setProjectStatuses] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newProjectStatus, setNewProjectStatus] = useState({
     ProjectStatusID: '',
@@ -23,11 +23,13 @@ const AddProjectStatus = () => {
     const fetchProjectStatuses = async () => {
       try {
         const fetchedProjectStatuses = await getProjectStatuses();
-        setProjectStatuses(fetchedProjectStatuses);
+        console.log('Fetched Project Statuses:', fetchedProjectStatuses);
+        setProjectStatuses(fetchedProjectStatuses); // Update state with fetched data
       } catch (error) {
-        console.error('Error fetching project statuses:', error.response.data);
+        console.error('Error fetching project statuses:', error);
       }
     };
+  
     fetchProjectStatuses();
   }, []);
 
@@ -78,7 +80,7 @@ const AddProjectStatus = () => {
         ...fetchedStatus,
       });
     } catch (error) {
-      console.error(`Error fetching project status with ID ${status.ProjectStatusID}:`, error.response.data);
+      console.error(`Error fetching project status with ID ${status.ProjectStatusID}:`, error.response ? error.response.data : error.message);
     }
   };
 
@@ -101,12 +103,12 @@ const AddProjectStatus = () => {
     }
   };
 
-  const deleteExistingProjectStatus = async (statusID) => {
+  const deleteExistingProjectStatus = async (ProjectStatusID) => {
     try {
-      await deleteProjectStatus(statusID);
-      setProjectStatuses((prev) => prev.filter(status => status.ProjectStatusID !== statusID));
+      await deleteProjectStatus(ProjectStatusID);
+      setProjectStatuses((prev) => prev.filter(status => status.ProjectStatusID !== ProjectStatusID));
     } catch (error) {
-      console.error(`Error deleting project status with ID ${statusID}:`, error.response.data);
+      console.error(`Error deleting project status with ID ${ProjectStatusID}:`, error.response ? error.response.data : error.message);
       alert(`Failed to delete project status: ${error.response.data.title}`);
     }
   };
@@ -117,9 +119,9 @@ const AddProjectStatus = () => {
     setErrors({});
   };
 
-  const deleteProjectStatusHandler = (statusID) => {
-    if (window.confirm(`Are you sure you want to delete project status with ID ${statusID}?`)) {
-      deleteExistingProjectStatus(statusID);
+  const deleteProjectStatusHandler = (ProjectStatusID) => {
+    if (window.confirm(`Are you sure you want to delete project status with ID ${ProjectStatusID}?`)) {
+      deleteExistingProjectStatus(ProjectStatusID);
     }
   };
 
@@ -134,17 +136,17 @@ const AddProjectStatus = () => {
           Add Project Status
         </button>
         <ProjectStatusTable
-          projectStatuses={projectStatuses}
+          status={ProjectStatuses} 
           openEditModal={openEditProjectStatusModal}
-          deleteProjectStatus={deleteProjectStatusHandler}
+          deleteStatus={deleteProjectStatusHandler}
         />
       </div>
       <Modal isOpen={isModalOpen} onRequestClose={closeAddProjectStatusModal} contentLabel={editMode ? "Edit Project Status" : "Add Project Status"}>
         <h2 className="text-xl mb-4">{editMode ? 'Edit Project Status' : 'Add Project Status'}</h2>
-        <ProjectStatusForm 
-          formValues={newProjectStatus} 
-          handleInputChange={handleInputChange} 
-          errors={errors} 
+        <ProjectStatusForm
+          formValues={newProjectStatus}
+          handleInputChange={handleInputChange}
+          errors={errors}
         />
         <div className="flex justify-end mt-4">
           <button onClick={editMode ? updateExistingProjectStatus : addNewProjectStatus} className="bg-green-500 text-white p-2 rounded mr-2">
@@ -159,4 +161,4 @@ const AddProjectStatus = () => {
   );
 };
 
-export default AddProjectStatus;
+export default ProjectStatus;

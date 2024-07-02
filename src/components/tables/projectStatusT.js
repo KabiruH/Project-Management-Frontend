@@ -1,5 +1,5 @@
-import React from 'react';
-import Table from '../common/Table';
+import { useState } from 'react';
+import Table from '../common/Table'; // Assuming Table component handles empty data
 
 const columns = [
   { Header: 'Status ID', accessor: 'ProjectStatusID' },
@@ -8,6 +8,12 @@ const columns = [
 ];
 
 const ProjectStatusTable = ({ status = [], openEditModal, deleteStatus }) => {
+  const [isLoading, setIsLoading] = useState(false); // State for loading indicator
+  const [error, setError] = useState(null); // State for error handling
+
+  // Console log data received for debugging
+  console.log('Project statuses received:', status);
+
   const renderRowActions = ({ ProjectStatusID }) => (
     <div>
       <button
@@ -16,7 +22,6 @@ const ProjectStatusTable = ({ status = [], openEditModal, deleteStatus }) => {
       >
         Edit
       </button>
-      
       <button
         onClick={() => deleteStatus(ProjectStatusID)}
         className="bg-red-500 text-white p-1 rounded"
@@ -29,8 +34,11 @@ const ProjectStatusTable = ({ status = [], openEditModal, deleteStatus }) => {
   return (
     <Table
       columns={columns}
-      data={status}
+      // Check if data exists before rendering rows
+      data={status.length > 0 ? status : []}
       renderRowActions={renderRowActions}
+      isLoading={isLoading}
+      error={error}
     />
   );
 };

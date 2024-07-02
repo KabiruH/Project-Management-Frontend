@@ -4,8 +4,8 @@ import Sidebar from './components/sidebar';
 import CalendarPage from './pages/calendar';
 import AddInstitution from './pages/institutions/addInstitutions';
 import AddCounty from './pages/institutions/addCounties';
-import AddStatus from './pages/institutions/institutionStatus';
-import AddStages from './pages/institutions/institutionStages';
+import AddStatus from './pages/institutions/institutionstatus';
+import AddStages from './pages/institutions/institutionstages';
 import AddParticipant from './pages/participants/participant';
 import AddLevels from './pages/participants/participantLevels';
 import AddHelper from './pages/helpers/helper';
@@ -15,15 +15,16 @@ import Footer from './components/footer';
 import Project from './pages/project/project';
 import ProjectStatus from './pages/project/projectStatus'
 import Trainings from './pages/training';
-import Financial from './pages/financial';
-import Partnership from './pages/partners';
-import Research from './pages/research';
+import AddBudget from './pages/financials/budget';
+import AddFundingType from './pages/financials/fundingtype';
+import AddPartnership from './pages/partnership/partnership';
+import AddPartnerTypes from './pages/partnership/partnertype';
+import AddFeedback from './pages/research/feedback';
 import SignIn from './pages/signin';
 import Signup from './pages/signup'
 import Home from './pages/homepage';
 import Navbar from './components/navbar';
 import { DarkModeProvider } from './components/darkMode';
-import PartnerType from './pages/partnertype';
 
 const Layout = ({ children }) => (
   <div className="flex">
@@ -53,13 +54,13 @@ function App() {
           <Route path="/participants/participantLevels" element={<AddLevels />} />
           <Route path="/helpers/helper" element={<AddHelper />} />
           <Route path="/helpers/helperType" element={<AddHelperTypes />} />
-          <Route path="/partnertypes" element={<PartnerType />} />
+          <Route path="/partnership/partnership" element={<AddPartnership />} />
+          <Route path="/partnership/partnertype" element={<AddPartnerTypes />} />
           <Route path="/project" element={<Project />} />
-          <Route path="/project/projectStatus" element={<ProjectStatus />} />
+          <Route path="/financials/budget" element={<AddBudget />} />
+          <Route path="/financials/fundingtype" element={<AddFundingType />} />
           <Route path="/training" element={<Trainings />} />
-          <Route path="/financial" element={<Financial />} />
-          <Route path="/partnerships" element={<Partnership />} />
-          <Route path="/research" element={<Research />} />
+          <Route path="/research/feedback" element={<AddFeedback />} />
         </Routes>
         <Footer />
       </BrowserRouter>

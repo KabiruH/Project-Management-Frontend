@@ -19,9 +19,9 @@ const Sidebar = () => {
       icon: <FaBuilding />,
       dropdown: [
         { name: 'Institution', path: '/institutions/addInstitutions' },
-        { name: 'counties', path: '/institutions/addCounties' },
-        { name: 'status', path: '/institutions/institutionStatus' },
-        { name: 'stages', path: '/institutions/institutionStages' },
+        { name: 'Counties', path: '/institutions/addCounties' },
+        { name: 'Status', path: '/institutions/institutionStatus' },
+        { name: 'Stages', path: '/institutions/institutionStages' },
       ]
     },
     {
@@ -32,40 +32,65 @@ const Sidebar = () => {
         { name: 'Levels', path: '/participants/participantLevels' }
       ]
     },
-
     {
-      name: 'Project', 
-      icon: <FaProjectDiagram />, 
+      name: 'Project',
+      icon: <FaProjectDiagram />,
       dropdown: [
-          {name: 'Projects', path: '/project'},
-          {name: 'Status', path: '/project/projectStatus'},
-          {name: 'Testimonials'},
-          {name: 'Donors'}
-        ]
+        { name: 'Projects', path: '/project' },
+        { name: 'Status', path: '/project/projectStatus' },
+        { name: 'Testimonials' },
+        { name: 'Donors' }
+      ]
     },
-    { name: 'Program', icon: <FaCogs />, dropdown: ['Programs'] },
+    {
+      name: 'Program',
+      icon: <FaCogs />,
+      dropdown: [{ name: 'Programs' }]
+    },
     {
       name: 'Helpers',
       icon: <FaUser />,
       dropdown: [
         { name: 'Helper', path: '/helpers/helper' },
-        { name: 'Helper Type', path: '/helpers/helperType' },
+        { name: 'Helper Type', path: '/helpers/helperType' }
       ]
     },
-
-    { name: 'Training', path: '/training', icon: <FaCogs />, dropdown: ['Trainings', 'Categories', 'Levels', 'Training Type'] },
-    { name: 'Financial', path: '/financial', icon: <FaCogs />, dropdown: ['Budget', 'Budget Request', 'Funding Type'] },
+    {
+      name: 'Training',
+      icon: <FaCogs />,
+      dropdown: ['Trainings', 'Categories', 'Levels', 'Training Type']
+    },
+    {
+      name: 'Financial',
+      icon: <FaCogs />,
+      dropdown: [
+        { name: 'Budget', path: '/financials/budget' },
+        { name: 'Funding Type', path: '/financials/fundingType' }
+      ]
+    },
     {
       name: 'Partnership',
       icon: <FaCogs />,
       dropdown: [
-        { name: 'Partners', path: '/partnerships' },
-        { name: 'Partner Type', path: '/partnertypes' }
+        { name: 'Partners', path: '/partnership/partnership' },
+        { name: 'Partner Type', path: '/partnership/partnertype' }
       ]
     },
-    { name: 'Research', path: '/research', icon: <FaCogs />, dropdown: ['Feedback', 'Feedback Type'] },
-    { name: 'Reports', icon: <FaCogs />, dropdown: ['Participants', 'Institutions', 'Financial Reports'] },
-    { name: 'Users', icon: <FaUser />, dropdown: ['User', 'User Type'] },
+    {
+      name: 'Research',
+      icon: <FaCogs />,
+      dropdown: [{ name: 'Feedback', path: '/research/feedback' }]
+    },
+    {
+      name: 'Reports',
+      icon: <FaCogs />,
+      dropdown: ['Participants', 'Institutions', 'Financial Reports']
+    },
+    {
+      name: 'Users',
+      icon: <FaUser />,
+      dropdown: ['User', 'User Type']
+    },
   ];
 
   return (
@@ -87,12 +112,16 @@ const Sidebar = () => {
               <ul className="ml-4 mt-1">
                 {item.dropdown.map((subItem, subIndex) => (
                   <li key={subIndex} className="mb-1">
-                    <Link
-                      to={subItem.path || ''}
-                      className="w-full text-left p-2 hover:bg-gray-400 dark:hover:bg-gray-700 focus:outline-none block"
-                    >
-                      {subItem.name}
-                    </Link>
+                    {typeof subItem === 'object' ? (
+                      <Link
+                        to={subItem.path || ''}
+                        className="w-full text-left p-2 hover:bg-gray-400 dark:hover:bg-gray-700 focus:outline-none block"
+                      >
+                        {subItem.name}
+                      </Link>
+                    ) : (
+                      <div className="w-full text-left p-2">{subItem}</div>
+                    )}
                   </li>
                 ))}
               </ul>

@@ -38,14 +38,14 @@ const Sidebar = () => {
       dropdown: [
         { name: 'Projects', path: '/project' },
         { name: 'Status', path: '/project/projectStatus' },
-        { name: 'Testimonials' },
-        { name: 'Donors' }
+        { name: 'Testimonials', path: '/project/testimonials' },
+        { name: 'Donors', path: '/project/donors' }
       ]
     },
     {
       name: 'Program',
       icon: <FaCogs />,
-      dropdown: [{ name: 'Programs' }]
+      dropdown: [{ name: 'Program', path: '/program/program' }]
     },
     {
       name: 'Helpers',

@@ -38,7 +38,7 @@ const Sidebar = () => {
       dropdown: [
         { name: 'Projects', path: '/project' },
         { name: 'Status', path: '/project/projectStatus' },
-        { name: 'Testimonials' },
+        { name: 'Testimonials', path: '/project/testimonials' },
         { name: 'Donors', path: '/project/donors' }
       ]
     },

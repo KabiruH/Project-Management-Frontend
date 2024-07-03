@@ -4,8 +4,8 @@ import Sidebar from './components/sidebar';
 import CalendarPage from './pages/calendar';
 import AddInstitution from './pages/institutions/addInstitutions';
 import AddCounty from './pages/institutions/addCounties';
-import AddStatus from './pages/institutions/institutionstatus';
-import AddStages from './pages/institutions/institutionstages';
+import AddStatus from './pages/institutions/institutionStatus';
+import AddStages from './pages/institutions/institutionStages';
 import AddParticipant from './pages/participants/participant';
 import AddLevels from './pages/participants/participantLevels';
 import AddHelper from './pages/helpers/helper';
@@ -14,6 +14,7 @@ import DashboardStatsGrid from './pages/dashboard';
 import Footer from './components/footer';
 import Project from './pages/project/project';
 import ProjectStatus from './pages/project/projectStatus'
+import AddProgram from './pages/program/program';
 import Trainings from './pages/training';
 import AddBudget from './pages/financials/budget';
 import AddFundingType from './pages/financials/fundingtype';
@@ -57,6 +58,7 @@ function App() {
           <Route path="/partnership/partnership" element={<AddPartnership />} />
           <Route path="/partnership/partnertype" element={<AddPartnerTypes />} />
           <Route path="/project" element={<Project />} />
+          <Route path="/program/program" element={<AddProgram />} />
           <Route path="/financials/budget" element={<AddBudget />} />
           <Route path="/financials/fundingtype" element={<AddFundingType />} />
           <Route path="/training" element={<Trainings />} />

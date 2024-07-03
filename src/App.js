@@ -63,6 +63,7 @@ function App() {
           <Route path="/project/projectstatus" element={<ProjectStatus />} />
           <Route path="/project/donors" element={<AddDonor />} />
           <Route path="/project/testimonials" element={<AddTestimonial />} />
+          <Route path="/program/program" element={<AddProgram />} />
           <Route path="/financials/budget" element={<AddBudget />} />
           <Route path="/financials/fundingtype" element={<AddFundingType />} />
           <Route path="/training" element={<Trainings />} />

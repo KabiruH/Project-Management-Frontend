@@ -45,7 +45,7 @@ const Sidebar = () => {
     {
       name: 'Program',
       icon: <FaCogs />,
-      dropdown: [{ name: 'Programs' }]
+      dropdown: [{ name: 'Program', path: '/program/program' }]
     },
     {
       name: 'Helpers',

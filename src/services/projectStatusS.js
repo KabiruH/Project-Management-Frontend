@@ -31,13 +31,20 @@ const updateProjectStatus = async (projectStatusID, projectStatusData) => {
 };
 
 const deleteProjectStatus = async (projectStatusID) => {
-    try {
-        const response = await apiClient.delete(`/api/ProjectStatuses/${projectStatusID}`);
-        return response.data;
+  try {
+      const response = await apiClient.delete(`/api/ProjectStatuses/${projectStatusID}`);
+      console.log(`Deleted project status with ID ${projectStatusID}`);
+      return response.data;
     } catch (error) {
-        console.error('Error in deleteProjectStatus:', error.response ? error.response.data : error.message);
-        throw error;
-    }
+      if (error.response) {
+          console.error('Error in deleteProjectStatus:', error.response.data);
+      } else if (error.request) {
+          console.error('Error in deleteProjectStatus: No response received', error.request);
+      } else {
+          console.error('Error in deleteProjectStatus:', error.message);
+      }
+      throw error;
+  }
 };
 
 const getProjectStatuses = async () => {

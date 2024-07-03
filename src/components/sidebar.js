@@ -39,7 +39,7 @@ const Sidebar = () => {
         { name: 'Projects', path: '/project' },
         { name: 'Status', path: '/project/projectStatus' },
         { name: 'Testimonials' },
-        { name: 'Donors' }
+        { name: 'Donors', path: '/project/donors' }
       ]
     },
     {

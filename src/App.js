@@ -10,6 +10,7 @@ import AddParticipant from './pages/participants/participant';
 import AddLevels from './pages/participants/participantLevels';
 import AddHelper from './pages/helpers/helper';
 import AddHelperTypes from './pages/helpers/helperType';
+import AddDonor from './pages/project/donors'
 import DashboardStatsGrid from './pages/dashboard';
 import Footer from './components/footer';
 import Project from './pages/project/project';
@@ -57,6 +58,8 @@ function App() {
           <Route path="/partnership/partnership" element={<AddPartnership />} />
           <Route path="/partnership/partnertype" element={<AddPartnerTypes />} />
           <Route path="/project" element={<Project />} />
+          <Route path="/project/projectstatus" element={<ProjectStatus />} />
+          <Route path="/project/donors" element={<AddDonor />} />
           <Route path="/financials/budget" element={<AddBudget />} />
           <Route path="/financials/fundingtype" element={<AddFundingType />} />
           <Route path="/training" element={<Trainings />} />

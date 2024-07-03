@@ -13,7 +13,6 @@ import AddHelperTypes from './pages/helpers/helperType';
 import DashboardStatsGrid from './pages/dashboard';
 import Footer from './components/footer';
 import Project from './pages/project/project';
-import ProjectStatus from './pages/project/projectStatus'
 import AddProgram from './pages/program/program';
 import Trainings from './pages/training';
 import AddBudget from './pages/financials/budget';

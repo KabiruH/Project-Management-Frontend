@@ -1,8 +1,54 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Input from '../common/Input';
 import styles from '../../styles/modal.module.css'; // Correct import for CSS modules
+import {getStages} from '../../services/institutionStageS'
+import {getStatus} from '../../services/institutionStatusS'
 
 const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
+ 
+  const [stages, setStages] = useState([]);
+  const [statuses, setStatuses] = useState([]);
+  const [loadingStages, setLoadingStages] = useState(true);
+  const [loadingStatuses, setLoadingStatuses] = useState(true);
+
+
+  useEffect(() => {
+    const fetchStages = async () => {
+      setLoadingStages(true); // Set loading to true initially
+      try {
+        const fetchedStages = await getStages();
+        setStages(fetchedStages);
+        //console.log(fetchedStages)
+      } catch (error) {
+        error('Error fetching Institution Stages:', error);
+      } finally {
+        setLoadingStages(false); // Set loading to false after fetching
+      }
+    };
+    fetchStages();
+    
+  }, []);
+
+  useEffect(() => {
+  const fetchStatuses = async () => {
+    setLoadingStatuses(true);
+    try {
+      const fetchedStatuses = await getStatus();
+      setStatuses(fetchedStatuses);
+      console.log(fetchedStatuses)
+    } catch (error) {
+      error('Error fetching Institution Statuses:', error);
+    } finally {
+      setLoadingStatuses(false);
+    }
+  };
+
+  fetchStatuses();
+}, []);
+
+  
+ 
+ 
   return (
     <form className={styles.form}>
       <div className="space-y-4">
@@ -26,26 +72,58 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           />
           {errors.institutionName && <p className="text-red-500">{errors.institutionName[0]}</p>}
         </div>
+       
+       
+       
+       
         <div>
-          <label htmlFor="stageID">Stage ID:</label>
-          <Input
-            name="stageID"
-            placeholder="Stage ID"
-            value={formValues.stageID}
-            onChange={handleInputChange}
-          />
+          <label htmlFor="stageID">Stage:</label>
+          {loadingStages ? (
+            <p>Loading stages...</p>
+          ) : (
+            <select
+              className="w-full p-2 border border-gray-300 rounded"
+              name="stageID"
+              value={formValues.stageID}
+              onChange={handleInputChange}
+            >
+              <option value="">Select Stage</option>
+              {stages.map((stage) => (
+                <option key={stage.stageName} value={stage.stageName}>
+                  {stage.stageName}  {/* Assuming 'name' property holds stage name */}
+                </option>
+              ))}
+            </select>
+          )}
           {errors.stageID && <p className="text-red-500">{errors.stageID[0]}</p>}
         </div>
+     
+     
+     
         <div>
-          <label htmlFor="statusID">Status ID:</label>
-          <Input
-            name="statusID"
-            placeholder="Status ID"
-            value={formValues.statusID}
-            onChange={handleInputChange}
-          />
+          <label htmlFor="statusID">Status:</label>
+          {loadingStatuses ? (
+            <p>Loading statuses...</p>
+          ) : (
+            <select
+              className="w-full p-2 border border-gray-300 rounded"
+              name="statusID"
+              value={formValues.statusID}
+              onChange={handleInputChange}
+            >
+              <option value="">Select Status</option>
+              {statuses.map((status) => (
+                <option key={status.statusName} value={status.statusName}>
+                  {status.statusName} {/* Assuming 'name' property holds status name */}
+                </option>
+              ))}
+            </select>
+          )}
           {errors.statusID && <p className="text-red-500">{errors.statusID[0]}</p>}
         </div>
+
+
+
         <div>
           <label htmlFor="institutionEmail">Institution Email:</label>
           <Input

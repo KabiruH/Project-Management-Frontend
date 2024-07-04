@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
 import Input from '../common/Input';
-import styles from '../../styles/modal.module.css'; // Correct import for CSS modules
+import styles from '../../styles/modal.module.css'; 
+import { getInstitutions } from '../../services/institutionS'
 
 const ProgramForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
+  
+  const [institutions, setInstitutions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedInstitutions = await getInstitutions();
+        setInstitutions(fetchedInstitutions);
+      } catch (error) {
+        console.error('Error fetching institutions:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+  
   return (
     <form className={styles.form}>
       <div className="space-y-4">
@@ -27,14 +46,25 @@ const ProgramForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.programName && <p className="text-red-500">{errors.programName[0]}</p>}
         </div>
         <div>
-          <label htmlFor="institutionName">Institution Name:</label>
-          <Input
-            name="institutionName"
-            placeholder="Institution Name"
-            value={formValues.institutionName}
-            onChange={handleInputChange}
-          />
-          {errors.institutionName && <p className="text-red-500">{errors.institutionName[0]}</p>}
+          <label htmlFor="institutionID">Institution:</label>
+          {loading ? (
+            <p>Loading institutions...</p>
+          ) : (
+            <select
+              name="institutionName"
+              value={formValues.institutionName}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            >
+              <option value="">Select Institution</option>
+              {institutions.map((institution) => (
+                <option key={institution.institutionName} value={institution.institutionName}>
+                  {institution.institutionName}
+                </option>
+              ))}
+            </select>
+          )}
+          {errors.institutionID && <p className="text-red-500">{errors.institutionID[0]}</p>}
         </div>
         <div>
           <label htmlFor="startDate">Start Date:</label>

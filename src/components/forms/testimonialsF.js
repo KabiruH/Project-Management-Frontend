@@ -7,6 +7,7 @@ const TestimonialsForm = ({ formValues, handleInputChange, errors }) => {
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
+          <label htmlFor="UserID">User ID:</label>
           <Input
             name="UserID"
             placeholder="User ID"
@@ -16,6 +17,7 @@ const TestimonialsForm = ({ formValues, handleInputChange, errors }) => {
           {errors.UserID && <p className="text-red-500">{errors.UserID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="Username">User Name:</label>
           <Input
             name="Username"
             placeholder="Name"
@@ -25,6 +27,7 @@ const TestimonialsForm = ({ formValues, handleInputChange, errors }) => {
           {errors.Username && <p className="text-red-500">{errors.Username[0]}</p>}
         </div>
         <div>
+          <label htmlFor="Role">User Role:</label>
           <Input
             name="Role"
             placeholder="Role"
@@ -34,6 +37,7 @@ const TestimonialsForm = ({ formValues, handleInputChange, errors }) => {
           {errors.Role && <p className="text-red-500">{errors.Role[0]}</p>}
         </div>
         <div>
+          <label htmlFor="Description">Testimonial:</label>
           <Input
             name="Description"
             placeholder="Description"
@@ -43,6 +47,7 @@ const TestimonialsForm = ({ formValues, handleInputChange, errors }) => {
           {errors.Description && <p className="text-red-500">{errors.Description[0]}</p>}
         </div>
         <div>
+          <label htmlFor="Notes">Internal Notes:</label>
           <Input
             name="Notes"
             placeholder="Notes"

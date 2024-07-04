@@ -7,6 +7,7 @@ const HelpersForm = ({ formValues, handleInputChange, handleDateChange, errors }
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
+          <label htmlFor="helperID">Helper ID:</label>
           <Input
             name="helperID"
             placeholder="Helper ID"
@@ -16,6 +17,7 @@ const HelpersForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.helperID && <p className="text-red-500">{errors.helperID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="helperName">Name:</label>
           <Input
             name="helperName"
             placeholder="Name"
@@ -25,6 +27,7 @@ const HelpersForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.helperName && <p className="text-red-500">{errors.helperName[0]}</p>}
         </div>
         <div>
+          <label htmlFor="institutionName">Institution Name:</label>
           <Input
             name="institutionName"
             placeholder="Institution Name"
@@ -34,6 +37,7 @@ const HelpersForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.institutionName && <p className="text-red-500">{errors.institutionName[0]}</p>}
         </div>
         <div>
+          <label htmlFor="gender">Gender:</label>
           <Input
             name="gender"
             placeholder="Gender"
@@ -43,6 +47,7 @@ const HelpersForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.gender && <p className="text-red-500">{errors.gender[0]}</p>}
         </div>
         <div>
+          <label htmlFor="idNo">ID Number:</label>
           <Input
             name="idNo"
             placeholder="ID Number"
@@ -52,8 +57,8 @@ const HelpersForm = ({ formValues, handleInputChange, handleDateChange, errors }
           />
           {errors.idNo && <p className="text-red-500">{errors.idNo[0]}</p>}
         </div>
-       
         <div>
+          <label htmlFor="phoneNo">Phone Number:</label>
           <Input
             name="phoneNo"
             placeholder="Phone Number"
@@ -63,6 +68,7 @@ const HelpersForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.phoneNo && <p className="text-red-500">{errors.phoneNo[0]}</p>}
         </div>
         <div>
+          <label htmlFor="email">Email:</label>
           <Input
             name="email"
             placeholder="Email"
@@ -72,6 +78,7 @@ const HelpersForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.email && <p className="text-red-500">{errors.email[0]}</p>}
         </div>
         <div>
+          <label htmlFor="subCounty">Sub County:</label>
           <Input
             name="subCounty"
             placeholder="Sub County"
@@ -81,6 +88,7 @@ const HelpersForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.subCounty && <p className="text-red-500">{errors.subCounty[0]}</p>}
         </div>
         <div>
+          <label htmlFor="county">County:</label>
           <Input
             name="county"
             placeholder="County"
@@ -90,6 +98,7 @@ const HelpersForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.county && <p className="text-red-500">{errors.county[0]}</p>}
         </div>
         <div>
+        <label htmlFor="county">Helper Type:</label>
           <Input
             name="helperType"
             placeholder="Helper Type"
@@ -99,6 +108,7 @@ const HelpersForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.helperType && <p className="text-red-500">{errors.helperType[0]}</p>}
         </div>
         <div>
+        <label htmlFor="county">Coordinator:</label>
           <Input
             name="coordinator"
             placeholder="Coordinator"

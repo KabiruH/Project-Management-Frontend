@@ -7,31 +7,34 @@ const ProjectStatusForm = ({ formValues, handleInputChange, errors }) => {
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
+          <label htmlFor="projectStatusID">Project Status ID:</label>
           <Input
-            name="ProjectStatusID"
+            name="projectStatusID" // Use camelCase for consistency
             placeholder="Status ID"
-            value={formValues.ProjectStatusID}
+            value={formValues.projectStatusID} // Use camelCase for consistency
             onChange={handleInputChange}
           />
-          {errors.statusID && <p className="text-red-500">{errors.ProjectStatusID[0]}</p>}
+          {errors.statusID && <p className="text-red-500">{errors.statusID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="statusName">Status Name:</label>
           <Input
-            name="StatusName"
+            name="statusName" // Use camelCase for consistency
             placeholder="Status Name"
-            value={formValues.StatusName}
+            value={formValues.statusName} // Use camelCase for consistency
             onChange={handleInputChange}
           />
-          {errors.statusName && <p className="text-red-500">{errors.StatusName[0]}</p>}
+          {errors.statusName && <p className="text-red-500">{errors.statusName[0]}</p>}
         </div>
         <div>
+          <label htmlFor="notes">Notes:</label>
           <Input
-            name="Notes"
+            name="notes"
             placeholder="Notes"
-            value={formValues.Notes}
+            value={formValues.notes}
             onChange={handleInputChange}
           />
-          {errors.notes && <p className="text-red-500">{errors.Notes[0]}</p>}
+          {errors.notes && <p className="text-red-500">{errors.notes[0]}</p>}
         </div>
       </div>
     </form>

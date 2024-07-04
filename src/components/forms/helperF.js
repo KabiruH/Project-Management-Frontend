@@ -1,8 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Input from '../common/Input';
 import styles from '../../styles/modal.module.css'; // Correct import for CSS modules
+import { getInstitutions } from '../../services/institutionS';
+import { getHelperTypes } from '../../services/helperTypeS';
 
 const HelpersForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
+  const [institutions, setInstitutions] = useState([]);
+  const [helperTypes, setHelperTypes] = useState([]); // Initialize as an empty array
+  const [loading, setLoading] = useState(true);
+  const [loadingHelperTypes, setLoadingHelperTypes] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedInstitutions = await getInstitutions();
+        setInstitutions(fetchedInstitutions);
+      } catch (error) {
+        console.error('Error fetching institutions:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const fetchHelperTypes = async () => {
+      // setLoadingHelperTypes(true);
+      try {
+        const fetchedHelpers = await getHelperTypes(); 
+        setHelperTypes(fetchedHelpers);
+        console.log(fetchedHelpers);
+      } catch (error) {
+        console.error('Error fetching helper types:', error);
+      } finally {
+        setLoadingHelperTypes(false);
+      }
+    };
+
+    fetchData();
+    fetchHelperTypes();
+  }, []);
+
   return (
     <form className={styles.form}>
       <div className="space-y-4">
@@ -27,23 +63,38 @@ const HelpersForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.helperName && <p className="text-red-500">{errors.helperName[0]}</p>}
         </div>
         <div>
-          <label htmlFor="institutionName">Institution Name:</label>
-          <Input
-            name="institutionName"
-            placeholder="Institution Name"
-            value={formValues.institutionName}
-            onChange={handleInputChange}
-          />
-          {errors.institutionName && <p className="text-red-500">{errors.institutionName[0]}</p>}
+          <label htmlFor="institutionID">Institution:</label>
+          {loading ? (
+            <p>Loading institutions...</p>
+          ) : (
+            <select
+              name="institutionName"
+              value={formValues.institutionName}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            >
+              <option value="">Select Institution</option>
+              {institutions.map((institution) => (
+                <option key={institution.institutionName} value={institution.institutionName}>
+                  {institution.institutionName}
+                </option>
+              ))}
+            </select>
+          )}
+          {errors.institutionID && <p className="text-red-500">{errors.institutionID[0]}</p>}
         </div>
         <div>
           <label htmlFor="gender">Gender:</label>
-          <Input
+          <select
             name="gender"
-            placeholder="Gender"
             value={formValues.gender}
             onChange={handleInputChange}
-          />
+            className="w-full p-2 border border-gray-300 rounded"
+          >
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
           {errors.gender && <p className="text-red-500">{errors.gender[0]}</p>}
         </div>
         <div>
@@ -51,7 +102,6 @@ const HelpersForm = ({ formValues, handleInputChange, handleDateChange, errors }
           <Input
             name="idNo"
             placeholder="ID Number"
-            type="date"
             value={formValues.idNo}
             onChange={handleInputChange}
           />
@@ -97,18 +147,35 @@ const HelpersForm = ({ formValues, handleInputChange, handleDateChange, errors }
           />
           {errors.county && <p className="text-red-500">{errors.county[0]}</p>}
         </div>
+
+
+
         <div>
-        <label htmlFor="county">Helper Type:</label>
-          <Input
-            name="helperType"
-            placeholder="Helper Type"
-            value={formValues.helperType}
-            onChange={handleInputChange}
-          />
+          <label htmlFor="HelperType">Helper Type:</label>
+          {loadingHelperTypes ? (
+            <p>Loading helper types...</p>
+          ) : (
+            <select
+              name="helperType"
+              value={formValues.helperType}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            >
+              <option value="">Select Helper Type</option>
+              {helperTypes.map((helper) => (
+                <option key={helper.typeName} value={helper.typeName}>
+                  {helper.typeName}
+                </option>
+              ))}
+            </select>
+          )}
           {errors.helperType && <p className="text-red-500">{errors.helperType[0]}</p>}
         </div>
+
+
+        
         <div>
-        <label htmlFor="county">Coordinator:</label>
+          <label htmlFor="coordinator">Coordinator:</label>
           <Input
             name="coordinator"
             placeholder="Coordinator"

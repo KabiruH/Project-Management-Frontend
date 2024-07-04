@@ -7,6 +7,7 @@ const DonorsForm = ({ formValues, handleInputChange, errors }) => {
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
+          <label htmlFor="DonorID">Donor ID:</label>
           <Input
             name="DonorID"
             placeholder="Donor ID"
@@ -16,6 +17,7 @@ const DonorsForm = ({ formValues, handleInputChange, errors }) => {
           {errors.DonorID && <p className="text-red-500">{errors.DonorID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="DonorName">Donor Name:</label>
           <Input
             name="DonorName"
             placeholder="Name"
@@ -24,8 +26,8 @@ const DonorsForm = ({ formValues, handleInputChange, errors }) => {
           />
           {errors.DonorName && <p className="text-red-500">{errors.DonorName[0]}</p>}
         </div>
-       
         <div>
+          <label htmlFor="Contact">Contact:</label>
           <Input
             name="Contact"
             placeholder="Contact"
@@ -35,6 +37,7 @@ const DonorsForm = ({ formValues, handleInputChange, errors }) => {
           {errors.Contact && <p className="text-red-500">{errors.Contact[0]}</p>}
         </div>
         <div>
+          <label htmlFor="Notes">Notes:</label>
           <Input
             name="Notes"
             placeholder="Notes"

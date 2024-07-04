@@ -7,24 +7,27 @@ const StatusForm = ({ formValues, handleInputChange, handleDateChange, errors })
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
+          <label htmlFor="statusID">Status ID:</label>
           <Input
             name="statusID"
-            placeholder="Stage ID"
+            placeholder="Status ID"
             value={formValues.statusID}
             onChange={handleInputChange}
           />
           {errors.statusID && <p className="text-red-500">{errors.statusID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="statusName">Status Name:</label>
           <Input
             name="statusName"
-            placeholder="Stage Name"
+            placeholder="Status Name"
             value={formValues.statusName}
             onChange={handleInputChange}
           />
           {errors.statusName && <p className="text-red-500">{errors.statusName[0]}</p>}
         </div>
         <div>
+          <label htmlFor="notes">Notes:</label>
           <Input
             name="notes"
             placeholder="Notes"

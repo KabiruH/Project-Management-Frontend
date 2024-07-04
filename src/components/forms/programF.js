@@ -7,6 +7,7 @@ const ProgramForm = ({ formValues, handleInputChange, handleDateChange, errors }
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
+          <label htmlFor="programID">Program ID:</label>
           <Input
             name="programID"
             placeholder="Program ID"
@@ -16,6 +17,7 @@ const ProgramForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.programID && <p className="text-red-500">{errors.programID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="programName">Program Name:</label>
           <Input
             name="programName"
             placeholder="Program Name"
@@ -25,6 +27,7 @@ const ProgramForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.programName && <p className="text-red-500">{errors.programName[0]}</p>}
         </div>
         <div>
+          <label htmlFor="institutionName">Institution Name:</label>
           <Input
             name="institutionName"
             placeholder="Institution Name"
@@ -34,6 +37,7 @@ const ProgramForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.institutionName && <p className="text-red-500">{errors.institutionName[0]}</p>}
         </div>
         <div>
+          <label htmlFor="startDate">Start Date:</label>
           <Input
             name="startDate"
             placeholder="Start Date"
@@ -44,6 +48,7 @@ const ProgramForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.startDate && <p className="text-red-500">{errors.startDate[0]}</p>}
         </div>
         <div>
+          <label htmlFor="endDate">End Date:</label>
           <Input
             name="endDate"
             placeholder="End Date"
@@ -54,6 +59,7 @@ const ProgramForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.endDate && <p className="text-red-500">{errors.endDate[0]}</p>}
         </div>
         <div>
+          <label htmlFor="cost">Program Cost:</label>
           <Input
             name="cost"
             placeholder="Program Cost"
@@ -63,6 +69,7 @@ const ProgramForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.cost && <p className="text-red-500">{errors.cost[0]}</p>}
         </div>
         <div>
+          <label htmlFor="subCounty">Sub County:</label>
           <Input
             name="subCounty"
             placeholder="Sub County"
@@ -72,6 +79,7 @@ const ProgramForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.subCounty && <p className="text-red-500">{errors.subCounty[0]}</p>}
         </div>
         <div>
+          <label htmlFor="county">County:</label>
           <Input
             name="county"
             placeholder="County"
@@ -81,6 +89,7 @@ const ProgramForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.county && <p className="text-red-500">{errors.county[0]}</p>}
         </div>
         <div>
+          <label htmlFor="description">Description:</label>
           <Input
             name="description"
             placeholder="Description"
@@ -90,6 +99,7 @@ const ProgramForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.description && <p className="text-red-500">{errors.description[0]}</p>}
         </div>
         <div>
+          <label htmlFor="coordinator">Program Coordinator:</label>
           <Input
             name="coordinator"
             placeholder="Program Coordinator"

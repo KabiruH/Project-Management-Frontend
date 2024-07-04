@@ -7,6 +7,7 @@ const StagesForm = ({ formValues, handleInputChange, handleDateChange, errors })
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
+          <label htmlFor="stageID">Stage ID:</label>
           <Input
             name="stageID"
             placeholder="Stage ID"
@@ -16,6 +17,7 @@ const StagesForm = ({ formValues, handleInputChange, handleDateChange, errors })
           {errors.stageID && <p className="text-red-500">{errors.stageID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="stageName">Stage Name:</label>
           <Input
             name="stageName"
             placeholder="Stage Name"
@@ -25,6 +27,7 @@ const StagesForm = ({ formValues, handleInputChange, handleDateChange, errors })
           {errors.stageName && <p className="text-red-500">{errors.stageName[0]}</p>}
         </div>
         <div>
+          <label htmlFor="notes">Notes:</label>
           <Input
             name="notes"
             placeholder="Notes"

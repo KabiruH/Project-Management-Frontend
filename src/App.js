@@ -14,7 +14,10 @@ import DashboardStatsGrid from './pages/dashboard';
 import Footer from './components/footer';
 import Project from './pages/project/project';
 import AddProgram from './pages/program/program';
-import Trainings from './pages/training';
+import AddTraining from './pages/training/training';
+import AddTrainingType from './pages/training/trainingType';
+import AddTrainingLevel from './pages/training/trainingLevel';
+import AddTrainingCategory from './pages/training/trainingCategory';
 import AddBudget from './pages/financials/budget';
 import AddFundingType from './pages/financials/fundingtype';
 import AddPartnership from './pages/partnership/partnership';
@@ -60,7 +63,10 @@ function App() {
           <Route path="/program/program" element={<AddProgram />} />
           <Route path="/financials/budget" element={<AddBudget />} />
           <Route path="/financials/fundingtype" element={<AddFundingType />} />
-          <Route path="/training" element={<Trainings />} />
+          <Route path="/training/training" element={<AddTraining />} />
+          <Route path="/training/trainingType" element={<AddTrainingType />} />
+          <Route path="/training/trainingLevel" element={<AddTrainingLevel />} />
+          <Route path="/training/trainingCategory" element={<AddTrainingCategory />} />
           <Route path="/research/feedback" element={<AddFeedback />} />
         </Routes>
         <Footer />

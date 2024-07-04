@@ -58,7 +58,12 @@ const Sidebar = () => {
     {
       name: 'Training',
       icon: <FaCogs />,
-      dropdown: ['Trainings', 'Categories', 'Levels', 'Training Type']
+      dropdown: [
+        { name: 'Training', path: '/training/training' },
+        { name: 'Training Level', path: '/training/trainingLevel' },
+        { name: 'Training Category', path: '/training/trainingCategory' },
+        { name: 'Training Type', path: '/training/trainingType' }
+      ]
     },
     {
       name: 'Financial',

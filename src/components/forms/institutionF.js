@@ -7,6 +7,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
+          <label htmlFor="institutionID">Institution ID:</label>
           <Input
             name="institutionID"
             placeholder="Institution ID"
@@ -16,6 +17,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.institutionID && <p className="text-red-500">{errors.institutionID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="institutionName">Institution Name:</label>
           <Input
             name="institutionName"
             placeholder="Institution Name"
@@ -25,6 +27,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.institutionName && <p className="text-red-500">{errors.institutionName[0]}</p>}
         </div>
         <div>
+          <label htmlFor="stageID">Stage ID:</label>
           <Input
             name="stageID"
             placeholder="Stage ID"
@@ -34,6 +37,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.stageID && <p className="text-red-500">{errors.stageID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="statusID">Status ID:</label>
           <Input
             name="statusID"
             placeholder="Status ID"
@@ -43,6 +47,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.statusID && <p className="text-red-500">{errors.statusID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="institutionEmail">Institution Email:</label>
           <Input
             name="institutionEmail"
             placeholder="Institution Email"
@@ -52,6 +57,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.institutionEmail && <p className="text-red-500">{errors.institutionEmail[0]}</p>}
         </div>
         <div>
+          <label htmlFor="institutionContact">Institution Contact:</label>
           <Input
             name="institutionContact"
             placeholder="Institution Contact"
@@ -61,6 +67,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.institutionContact && <p className="text-red-500">{errors.institutionContact[0]}</p>}
         </div>
         <div>
+          <label htmlFor="subCounty">Sub County:</label>
           <Input
             name="subCounty"
             placeholder="Sub County"
@@ -70,6 +77,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.subCounty && <p className="text-red-500">{errors.subCounty[0]}</p>}
         </div>
         <div>
+          <label htmlFor="countyID">County ID:</label>
           <Input
             name="countyID"
             placeholder="County ID"
@@ -79,6 +87,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.countyID && <p className="text-red-500">{errors.countyID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="contactPerson">Contact Person:</label>
           <Input
             name="contactPerson"
             placeholder="Contact Person"
@@ -88,6 +97,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.contactPerson && <p className="text-red-500">{errors.contactPerson[0]}</p>}
         </div>
         <div>
+        <label htmlFor="contactNumber">Contact Number:</label>
           <Input
             name="contactNumber"
             placeholder="Contact Number"
@@ -98,6 +108,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
         </div>
 
         <div>
+        <label htmlFor="licenseStartDate">License Start Date:</label>
           <Input
             name="licenseStartDate"
             placeholder="License Start Date"
@@ -108,6 +119,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.licenseStartDate && <p className="text-red-500">{errors.licenseStartDate[0]}</p>}
         </div>
         <div>
+        <label htmlFor="licenseEndDate">License End Date:</label>
           <Input
             name="licenseEndDate"
             placeholder="License End Date"
@@ -118,6 +130,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.licenseEndDate && <p className="text-red-500">{errors.licenseEndDate[0]}</p>}
         </div>
         <div>
+        <label htmlFor="awardLeader">Award Leader:</label>
           <Input
             name="awardLeader"
             placeholder="Award Leader"
@@ -127,6 +140,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.awardLeader && <p className="text-red-500">{errors.awardLeader[0]}</p>}
         </div>
         <div>
+        <label htmlFor="notes">Notes:</label>
           <textarea
             name="notes"
             placeholder="Notes"

@@ -7,6 +7,7 @@ const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
+          <label htmlFor="projectID">Project ID:</label>
           <Input
             name="projectID"
             placeholder="Project ID"
@@ -16,6 +17,7 @@ const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.projectID && <p className="text-red-500">{errors.projectID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="projectName">Project Name:</label>
           <Input
             name="projectName"
             placeholder="Project Name"
@@ -25,6 +27,7 @@ const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.projectName && <p className="text-red-500">{errors.projectName[0]}</p>}
         </div>
         <div>
+          <label htmlFor="institutionName">Institution Name:</label>
           <Input
             name="institutionName"
             placeholder="Institution"
@@ -34,6 +37,7 @@ const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.institutionName && <p className="text-red-500">{errors.institutionName[0]}</p>}
         </div>
         <div>
+          <label htmlFor="startDate">Start Date:</label>
           <Input
             name="startDate"
             type="date"
@@ -44,6 +48,7 @@ const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.startDate && <p className="text-red-500">{errors.startDate[0]}</p>}
         </div>
         <div>
+          <label htmlFor="endDate">End Date:</label>
           <Input
             name="endDate"
             type="date"
@@ -54,6 +59,7 @@ const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.endDate && <p className="text-red-500">{errors.endDate[0]}</p>}
         </div>
         <div>
+          <label htmlFor="cost">Project Cost:</label>
           <Input
             name="cost"
             placeholder="Cost"
@@ -63,6 +69,7 @@ const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.cost && <p className="text-red-500">{errors.cost[0]}</p>}
         </div>
         <div>
+          <label htmlFor="subCounty">Sub County:</label>
           <Input
             name="subCounty"
             placeholder="Sub County"
@@ -72,6 +79,7 @@ const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.subCounty && <p className="text-red-500">{errors.subCounty[0]}</p>}
         </div>
         <div>
+          <label htmlFor="county">County:</label>
           <Input
             name="county"
             placeholder="County"
@@ -81,6 +89,7 @@ const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.county && <p className="text-red-500">{errors.county[0]}</p>}
         </div>
         <div>
+          <label htmlFor="description">Description:</label>
           <Input
             name="description"
             placeholder="Description"
@@ -90,6 +99,7 @@ const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.description && <p className="text-red-500">{errors.description[0]}</p>}
         </div>
         <div>
+          <label htmlFor="coordinator">Coordinator Name:</label>
           <Input
             name="coordinator"
             placeholder="Coordinator's Name"
@@ -99,6 +109,7 @@ const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.coordinator && <p className="text-red-500">{errors.coordinator[0]}</p>}
         </div>
         <div>
+        <label htmlFor="notes">Notes:</label>
           <textarea
             name="notes"
             placeholder="Notes"

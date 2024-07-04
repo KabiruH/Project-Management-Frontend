@@ -7,6 +7,7 @@ const LevelsForm = ({ formValues, handleInputChange, handleDateChange, errors })
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
+          <label htmlFor="levelID">Level ID:</label>
           <Input
             name="levelID"
             placeholder="Level ID"
@@ -16,6 +17,7 @@ const LevelsForm = ({ formValues, handleInputChange, handleDateChange, errors })
           {errors.levelID && <p className="text-red-500">{errors.levelID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="levelName">Level Name:</label>
           <Input
             name="levelName"
             placeholder="Level Name"
@@ -25,6 +27,7 @@ const LevelsForm = ({ formValues, handleInputChange, handleDateChange, errors })
           {errors.levelName && <p className="text-red-500">{errors.levelName[0]}</p>}
         </div>
         <div>
+          <label htmlFor="notes">Notes:</label>
           <Input
             name="notes"
             placeholder="Notes"

@@ -1,59 +1,64 @@
 import React from 'react';
 import Input from '../common/Input';
-import styles from '../../styles/modal.module.css'; // Correct import for CSS modules
+import styles from '../../styles/modal.module.css';
+import useForm from '../../hooks/useForm';
 
-const PartnershipForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
+const PartnerForm = ({ formValues, onSubmit, handleInputChange }) => {
   return (
-    <form className={styles.form}>
+    <form onSubmit={onSubmit} className={styles.form}>
       <div className="space-y-4">
         <div>
+          <label htmlFor="partnerID">Partner ID:</label>
           <Input
             name="partnerID"
             placeholder="Partner ID"
             value={formValues.partnerID}
             onChange={handleInputChange}
           />
-          {errors.partnerID && <p className="text-red-500">{errors.partnerID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="partnerName">Partner Name:</label>
           <Input
             name="partnerName"
             placeholder="Partner Name"
             value={formValues.partnerName}
             onChange={handleInputChange}
           />
-          {errors.partnerName && <p className="text-red-500">{errors.partnerName[0]}</p>}
         </div>
         <div>
+          <label htmlFor="partnerEmail">Email:</label>
           <Input
             name="partnerEmail"
-            placeholder="Partner Email"
+            placeholder="Email"
             value={formValues.partnerEmail}
             onChange={handleInputChange}
           />
-          {errors.partnerEmail && <p className="text-red-500">{errors.partnerEmail[0]}</p>}
         </div>
         <div>
+          <label htmlFor="phoneNo">Phone Number:</label>
           <Input
             name="phoneNo"
-            placeholder="Phone No"
+            placeholder="Phone Number"
             value={formValues.phoneNo}
             onChange={handleInputChange}
           />
-          {errors.phoneNo && <p className="text-red-500">{errors.phoneNo[0]}</p>}
         </div>
         <div>
-          <Input
+          <label htmlFor="partnerType">Partner Type:</label>
+          <select
             name="partnerType"
-            placeholder="Partner Type"
             value={formValues.partnerType}
             onChange={handleInputChange}
-          />
-          {errors.partnerType && <p className="text-red-500">{errors.partnerType[0]}</p>}
+            className="w-full p-2 border border-gray-300 rounded"
+          >
+            <option value="">Select Partner Type</option>
+            <option value="current">Current</option>
+            <option value="upcoming">Upcoming</option>
+          </select>
         </div>
       </div>
     </form>
   );
 };
 
-export default PartnershipForm;
+export default PartnerForm;

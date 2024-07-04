@@ -39,7 +39,7 @@ function App() {
   return (
     <DarkModeProvider>
       <BrowserRouter>
-        <Navbar />
+        {/* <Navbar /> */}
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/signin" element={<SignIn />} />
@@ -62,7 +62,7 @@ function App() {
           <Route path="/training" element={<Trainings />} />
           <Route path="/research/feedback" element={<AddFeedback />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
     </DarkModeProvider>
   );

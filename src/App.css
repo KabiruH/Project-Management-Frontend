@@ -36,3 +36,60 @@
     transform: rotate(360deg);
   }
 }
+
+/* Text classnames */
+
+.subtitle1{
+  font-size: 36px;
+  font-weight: 700;
+}
+
+@media (max-width: 1200px) {
+  .subtitle1 {
+    font-size: 23px;
+  }
+}
+
+@media (max-width: 900px) {
+  .subtitle1 {
+    font-size: 20px;
+  }
+}
+
+.subtitle2{
+  font-size: 36px;
+}
+
+.body1{
+  font-size: 16px;
+  font-weight: 400
+}
+
+.body2{
+  font-size: 14px;
+  font-weight: 400
+}
+
+.bodyLarge{
+  font-size: 14px;
+  font-weight: 500
+}
+
+.h2 {
+  font-size: 42px;
+  font-weight: 700;
+}
+
+@media (max-width: 1200px) {
+  .h2 {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 900px) {
+  .h2 {
+    font-size: 24px;
+  }
+}
+
+

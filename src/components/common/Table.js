@@ -3,7 +3,7 @@ import React from 'react';
 const Table = ({ columns, data, renderRowActions }) => {
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full bg-white">
+      <table className="min-w-full bg-white text-black">
         <thead>
           <tr>
             {columns.map((col) => (

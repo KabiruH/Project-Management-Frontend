@@ -7,6 +7,7 @@ const CountyForm = ({ formValues, handleInputChange, handleDateChange, errors })
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
+          <label htmlFor="countyID">County ID:</label>
           <Input
             name="countyID"
             placeholder="County ID"
@@ -16,6 +17,7 @@ const CountyForm = ({ formValues, handleInputChange, handleDateChange, errors })
           {errors.countyID && <p className="text-red-500">{errors.countyID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="countyName">County Name:</label>
           <Input
             name="countyName"
             placeholder="County Name"
@@ -25,6 +27,7 @@ const CountyForm = ({ formValues, handleInputChange, handleDateChange, errors })
           {errors.countyName && <p className="text-red-500">{errors.countyName[0]}</p>}
         </div>
         <div>
+          <label htmlFor="subCounty">Sub County:</label>
           <Input
             name="subCounty"
             placeholder="Sub County"
@@ -34,6 +37,7 @@ const CountyForm = ({ formValues, handleInputChange, handleDateChange, errors })
           {errors.subCounty && <p className="text-red-500">{errors.subCounty[0]}</p>}
         </div>
         <div>
+          <label htmlFor="region">Region:</label>
           <Input
             name="region"
             placeholder="Region"
@@ -43,6 +47,7 @@ const CountyForm = ({ formValues, handleInputChange, handleDateChange, errors })
           {errors.region && <p className="text-red-500">{errors.region[0]}</p>}
         </div>
         <div>
+          <label htmlFor="notes">Notes:</label>
           <Input
             name="notes"
             placeholder="Notes"

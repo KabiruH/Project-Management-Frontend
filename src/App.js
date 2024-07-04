@@ -10,11 +10,12 @@ import AddParticipant from './pages/participants/participant';
 import AddLevels from './pages/participants/participantLevels';
 import AddHelper from './pages/helpers/helper';
 import AddHelperTypes from './pages/helpers/helperType';
-import AddDonor from './pages/project/donors'
-import AddTestimonial from './pages/project/testimonials'
 import DashboardStatsGrid from './pages/dashboard';
 import Footer from './components/footer';
-import Project from './pages/project/project';
+import AddDonor from './pages/project/donors';
+import AddProject from './pages/project/project';
+import AddProjectStatus from './pages/project/projectStatus';
+import AddTestimonial from './project/testimonials';
 import AddProgram from './pages/program/program';
 import AddTraining from './pages/training/training';
 import AddTrainingType from './pages/training/trainingType';
@@ -61,8 +62,8 @@ function App() {
           <Route path="/helpers/helperType" element={<AddHelperTypes />} />
           <Route path="/partnership/partnership" element={<AddPartnership />} />
           <Route path="/partnership/partnertype" element={<AddPartnerTypes />} />
-          <Route path="/project" element={<Project />} />
-          <Route path="/project/projectstatus" element={<ProjectStatus />} />
+          <Route path="/project/project" element={<AddProject />} />
+          <Route path="/project/projectstatus" element={<AddProjectStatus />} />
           <Route path="/project/donors" element={<AddDonor />} />
           <Route path="/project/testimonials" element={<AddTestimonial />} />
           <Route path="/program/program" element={<AddProgram />} />

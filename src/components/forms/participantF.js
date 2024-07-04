@@ -1,8 +1,47 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Input from '../common/Input';
-import styles from '../../styles/modal.module.css'; // Correct import for CSS modules
+import styles from '../../styles/modal.module.css';
+import { getInstitutions } from '../../services/institutionS'
+import { getLevels } from '../../services/participantLevelsS'
 
 const ParticipantForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
+
+  const [institutions, setInstitutions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [levels, setLevels] = useState([]);
+  const [loadingLevels, setLoadingLevels] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedInstitutions = await getInstitutions();
+        setInstitutions(fetchedInstitutions);
+      } catch (error) {
+        console.error('Error fetching institutions:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchLevels = async () => {
+      setLoadingLevels(true); // Set loading to true initially
+      try {
+        const fetchedLevels = await getLevels();
+        setLevels(fetchedLevels);
+        console.log(fetchedLevels); // Log fetched levels to ensure data structure
+      } catch (error) {
+        console.error('Error fetching award levels:', error);
+      } finally {
+        setLoadingLevels(false); // Set loading to false after fetching
+      }
+    };
+    fetchLevels();
+  }, []);
+
+
   return (
     <form className={styles.form}>
       <div className="space-y-4">
@@ -39,14 +78,18 @@ const ParticipantForm = ({ formValues, handleInputChange, handleDateChange, erro
         </div>
         <div>
           <label htmlFor="gender">Gender:</label>
-          <Input
+          <select className="w-full p-2 border border-gray-300 rounded"
             name="gender"
-            placeholder="Gender"
             value={formValues.gender}
             onChange={handleInputChange}
-          />
+          >
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
           {errors.gender && <p className="text-red-500">{errors.gender[0]}</p>}
         </div>
+
         <div>
           <label htmlFor="phoneNumber">Phone Number:</label>
           <Input
@@ -67,17 +110,28 @@ const ParticipantForm = ({ formValues, handleInputChange, handleDateChange, erro
           />
           {errors.email && <p className="text-red-500">{errors.email[0]}</p>}
         </div>
-
         <div>
-          <label htmlFor="institutionName">Institution Name:</label>
-          <Input
-            name="institutionName"
-            placeholder="Institution Name"
-            value={formValues.institutionName}
-            onChange={handleInputChange}
-          />
-          {errors.institutionName && <p className="text-red-500">{errors.institutionName[0]}</p>}
+          <label htmlFor="institutionID">Institution:</label>
+          {loading ? (
+            <p>Loading institutions...</p>
+          ) : (
+            <select
+              name="institutionName"
+              value={formValues.institutionName}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            >
+              <option value="">Select Institution</option>
+              {institutions.map((institution) => (
+                <option key={institution.institutionName} value={institution.institutionName}>
+                  {institution.institutionName}
+                </option>
+              ))}
+            </select>
+          )}
+          {errors.institutionID && <p className="text-red-500">{errors.institutionID[0]}</p>}
         </div>
+
         <div>
           <label htmlFor="subCounty">Sub County:</label>
           <Input
@@ -98,18 +152,33 @@ const ParticipantForm = ({ formValues, handleInputChange, handleDateChange, erro
           />
           {errors.county && <p className="text-red-500">{errors.county[0]}</p>}
         </div>
+
+
         <div>
           <label htmlFor="awardLevel">Award Level:</label>
-          <Input
-            name="awardLevel"
-            placeholder="Award Level"
-            value={formValues.awardLevel}
-            onChange={handleInputChange}
-          />
+          {loadingLevels ? (
+            <p>Loading award levels...</p>
+          ) : (
+            <select
+              name="awardLevel"
+              value={formValues.awardLevel}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            >
+              <option value="">Select Award Level</option>
+              {levels.map((level) => (
+                <option key={level.levelName} value={level.levelName}>
+                  {level.levelName}
+                </option>
+              ))}
+            </select>
+          )}
           {errors.awardLevel && <p className="text-red-500">{errors.awardLevel[0]}</p>}
         </div>
+
+
         <div>
-        <label htmlFor="awardLeader">Award Leader:</label>
+          <label htmlFor="awardLeader">Award Leader:</label>
           <Input
             name="awardLeader"
             placeholder="Award Leader"

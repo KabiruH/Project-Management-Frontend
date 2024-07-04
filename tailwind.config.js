@@ -9,7 +9,8 @@ module.exports = {
         primary: '#4318FF', 
         secondary: '#2B3674',
         main: '#2B3674',
-        greys: '#A3AED0'
+        greys: '#A3AED0',
+        buttonBg: '#00BFFF'
       },
       backgroundImage: {
         'auth-bg-image': "url('/public/auth-bg-image.png')"

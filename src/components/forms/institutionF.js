@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Input from '../common/Input';
 import styles from '../../styles/modal.module.css'; // Correct import for CSS modules
-import {getStages} from '../../services/institutionStageS'
-import {getStatus} from '../../services/institutionStatusS'
+import { getStages } from '../../services/institutionStageS'
+import { getStatus } from '../../services/institutionStatusS'
 
 const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
- 
+
   const [stages, setStages] = useState([]);
   const [statuses, setStatuses] = useState([]);
   const [loadingStages, setLoadingStages] = useState(true);
@@ -26,29 +26,28 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
       }
     };
     fetchStages();
-    
+
   }, []);
 
   useEffect(() => {
-  const fetchStatuses = async () => {
-    setLoadingStatuses(true);
-    try {
-      const fetchedStatuses = await getStatus();
-      setStatuses(fetchedStatuses);
-      console.log(fetchedStatuses)
-    } catch (error) {
-      error('Error fetching Institution Statuses:', error);
-    } finally {
-      setLoadingStatuses(false);
-    }
-  };
+    const fetchStatuses = async () => {
+      setLoadingStatuses(true);
+      try {
+        const fetchedStatuses = await getStatus();
+        setStatuses(fetchedStatuses);
+        console.log(fetchedStatuses)
+      } catch (error) {
+        error('Error fetching Institution Statuses:', error);
+      } finally {
+        setLoadingStatuses(false);
+      }
+    };
 
-  fetchStatuses();
-}, []);
+    fetchStatuses();
+  }, []);
 
-  
- 
- 
+
+
   return (
     <form className={styles.form}>
       <div className="space-y-4">
@@ -72,10 +71,6 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           />
           {errors.institutionName && <p className="text-red-500">{errors.institutionName[0]}</p>}
         </div>
-       
-       
-       
-       
         <div>
           <label htmlFor="stageID">Stage:</label>
           {loadingStages ? (
@@ -97,9 +92,6 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           )}
           {errors.stageID && <p className="text-red-500">{errors.stageID[0]}</p>}
         </div>
-     
-     
-     
         <div>
           <label htmlFor="statusID">Status:</label>
           {loadingStatuses ? (
@@ -175,7 +167,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.contactPerson && <p className="text-red-500">{errors.contactPerson[0]}</p>}
         </div>
         <div>
-        <label htmlFor="contactNumber">Contact Number:</label>
+          <label htmlFor="contactNumber">Contact Number:</label>
           <Input
             name="contactNumber"
             placeholder="Contact Number"
@@ -186,7 +178,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
         </div>
 
         <div>
-        <label htmlFor="licenseStartDate">License Start Date:</label>
+          <label htmlFor="licenseStartDate">License Start Date:</label>
           <Input
             name="licenseStartDate"
             placeholder="License Start Date"
@@ -197,7 +189,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.licenseStartDate && <p className="text-red-500">{errors.licenseStartDate[0]}</p>}
         </div>
         <div>
-        <label htmlFor="licenseEndDate">License End Date:</label>
+          <label htmlFor="licenseEndDate">License End Date:</label>
           <Input
             name="licenseEndDate"
             placeholder="License End Date"
@@ -208,7 +200,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.licenseEndDate && <p className="text-red-500">{errors.licenseEndDate[0]}</p>}
         </div>
         <div>
-        <label htmlFor="awardLeader">Award Leader:</label>
+          <label htmlFor="awardLeader">Award Leader:</label>
           <Input
             name="awardLeader"
             placeholder="Award Leader"
@@ -218,7 +210,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.awardLeader && <p className="text-red-500">{errors.awardLeader[0]}</p>}
         </div>
         <div>
-        <label htmlFor="notes">Notes:</label>
+          <label htmlFor="notes">Notes:</label>
           <textarea
             name="notes"
             placeholder="Notes"

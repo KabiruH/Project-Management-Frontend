@@ -15,7 +15,7 @@ import Footer from './components/footer';
 import AddDonor from './pages/project/donors';
 import AddProject from './pages/project/project';
 import AddProjectStatus from './pages/project/projectStatus';
-import AddTestimonial from './project/testimonials';
+import AddTestimonial from './pages/project/testimonials';
 import AddProgram from './pages/program/program';
 import AddTraining from './pages/training/training';
 import AddTrainingType from './pages/training/trainingType';

@@ -84,7 +84,8 @@ const Sidebar = () => {
     {
       name: 'Research',
       icon: <FaCogs />,
-      dropdown: [{ name: 'Feedback', path: '/research/feedback' }]
+      dropdown: [
+        { name: 'Feedback', path: '/research/feedback' }]
     },
     {
       name: 'Reports',

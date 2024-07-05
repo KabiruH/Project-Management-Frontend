@@ -6,7 +6,6 @@ import { addStages as addStagesService, getStagesById, updateStages, deleteStage
 import Layout from '../../components/layout';
 
 Modal.setAppElement('#root');
-
 const AddStages = () => {
   const [stages, setStages] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);

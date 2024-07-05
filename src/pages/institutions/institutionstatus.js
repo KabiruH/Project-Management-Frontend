@@ -6,7 +6,6 @@ import { addStatus as addStatusService, getStatusById, updateStatus, deleteStatu
 import Layout from '../../components/layout';
 
 Modal.setAppElement('#root');
-
 const AddStatus = () => {
   const [status, setStatus] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);

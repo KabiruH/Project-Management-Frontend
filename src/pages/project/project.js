@@ -8,7 +8,7 @@ import { addProject as addProjectService, getProjectById, updateProject, deleteP
 
 Modal.setAppElement('#root');
 
-const Project = () => {
+const AddProject = () => {
   const [projects, setProjects] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newProject, setNewProject] = useState({
@@ -194,4 +194,4 @@ const Project = () => {
   );
 };
 
-export default Project;
+export default AddProject;

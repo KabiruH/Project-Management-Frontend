@@ -12,16 +12,16 @@ const ProjectStatusTable = ({ projectstatuses = [], openEditModal, deleteStatus 
   // Console log data received for debugging
   console.log('Project statuses received:', projectstatuses);
 
-  const renderRowActions = (status) => (
+  const renderRowActions = (projectStatusID) => (
     <div>
       <button
-        onClick={() => openEditModal(status)}
+        onClick={() => openEditModal(projectStatusID)}
         className="bg-yellow-500 text-white p-1 rounded mr-2"
       >
         Edit
       </button>
       <button
-        onClick={() => deleteStatus(status.projectStatusID)}
+        onClick={() => deleteStatus(projectStatusID)}
         className="bg-red-500 text-white p-1 rounded"
       >
         Delete

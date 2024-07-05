@@ -7,7 +7,7 @@ import Layout from '../../components/layout';
 
 Modal.setAppElement('#root');
 
-const ProjectStatus = () => {
+const AddProjectStatus = () => {
   const [projectstatuses, setProjectStatuses] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newProjectStatus, setNewProjectStatus] = useState({
@@ -60,7 +60,7 @@ const ProjectStatus = () => {
     }
   };
 
-  const openAddProjectStatusModal = () => {
+  const openProjectStatusModal = () => {
     setEditMode(false);
     setIsModalOpen(true);
     setNewProjectStatus({
@@ -130,7 +130,7 @@ const ProjectStatus = () => {
       <h1 className="text-2xl font-bold mb-4">Project Statuses</h1>
       <div className="p-4">
         <button
-          onClick={openAddProjectStatusModal}
+          onClick={openProjectStatusModal}
           className="bg-blue-500 text-white p-2 rounded mb-4"
         >
           Add Project Status
@@ -161,4 +161,4 @@ const ProjectStatus = () => {
   );
 };
 
-export default ProjectStatus;
+export default AddProjectStatus;

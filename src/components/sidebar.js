@@ -36,7 +36,7 @@ const Sidebar = () => {
       name: 'Project',
       icon: <FaProjectDiagram />,
       dropdown: [
-        { name: 'Projects', path: '/project' },
+        { name: 'Projects', path: '/project/project' },
         { name: 'Status', path: '/project/projectStatus' },
         { name: 'Testimonials', path: '/project/testimonials' },
         { name: 'Donors', path: '/project/donors' }
@@ -58,7 +58,12 @@ const Sidebar = () => {
     {
       name: 'Training',
       icon: <FaCogs />,
-      dropdown: ['Trainings', 'Categories', 'Levels', 'Training Type']
+      dropdown: [
+        { name: 'Training', path: '/training/training' },
+        { name: 'Training Level', path: '/training/trainingLevel' },
+        { name: 'Training Category', path: '/training/trainingCategory' },
+        { name: 'Training Type', path: '/training/trainingType' }
+      ]
     },
     {
       name: 'Financial',
@@ -79,7 +84,8 @@ const Sidebar = () => {
     {
       name: 'Research',
       icon: <FaCogs />,
-      dropdown: [{ name: 'Feedback', path: '/research/feedback' }]
+      dropdown: [
+        { name: 'Feedback', path: '/research/feedback' }]
     },
     {
       name: 'Reports',

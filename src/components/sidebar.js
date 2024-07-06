@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { FaHome, FaCalendarAlt, FaBuilding, FaUser, FaProjectDiagram, FaCogs, FaSignOutAlt } from 'react-icons/fa';
 import { DarkModeContext } from './darkMode';
 
 const Sidebar = () => {
   const [dropdown, setDropdown] = useState(null);
   const { darkMode } = useContext(DarkModeContext);
-
+const navigate = useNavigate()
   const toggleDropdown = (item) => {
     setDropdown(dropdown === item ? null : item);
   };
@@ -129,6 +129,10 @@ const Sidebar = () => {
           </li>
         ))}
       </ul>
+      <div onClick={()=>{
+        localStorage.clear()
+        navigate('/signin')
+      }} className='w-full p-5 hover:bg-greys rounded mt-3 hover:text-white cursor-pointer'><span >Logout</span></div>
     </div>
   );
 };

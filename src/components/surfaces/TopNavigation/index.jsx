@@ -4,11 +4,10 @@ import { IoMenu } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
 
-import Button from "../../common/Button";
 import React, { useEffect, useRef,useState } from "react";
 import ButtonWithIcon from "../../common/ButtonWithIcon";
 
-const buttonConfig = [{Icon: <IoPersonAddSharp  className="text-white body1" /> ,name: 'Sign Up',path: 'signup'},{Icon: <IoLogInOutline className="text-white body1" />, name: "Sign In",path: 'signin'}]
+const buttonConfig = [{Icon: <IoPersonAddSharp  className="text-white body1" /> ,name: 'Register',path: 'signup'},{Icon: <IoLogInOutline className="text-white body1" />, name: "Login",path: 'signin'}]
 
 
 const TopNavigation = ({timeline}) => {
@@ -64,9 +63,13 @@ const TopNavigation = ({timeline}) => {
           The President's Award - Kenya
         </span>
       </div>
-      { openDropDown ? <div className='pr-5 md:hidden flex flex-col gap-3'>
-       { buttonConfig.map(({path,...props})=><ButtonWithIcon {...props} onClick={()=>navigate(path)} />)}
-      </div> :<IoMenu onClick={()=>setOpenDropDown(prev=>!prev)} type="button" className="md:hidden text-white text-[40px] mr-5" id="menu-button" aria-expanded="true" aria-haspopup="true" />}
+      { openDropDown ?<>
+        <IoMenu onClick={()=>setOpenDropDown(prev=>!prev)} type="button" className="md:hidden text-white text-[40px] mr-5" id="menu-button" aria-expanded="true" aria-haspopup="true" />
+       <div className=' md:hidden absolute right-4 top-16 flex flex-col gap-3 bg-white rounded'>
+        <div className="flex flex-col items-center">
+          {buttonConfig.map(({name,path,Icon})=><button onClick={()=>navigate(path)} className="text-secondary font-[500] hover:bg-slate-200 w-full px-3 py-1">{name}</button>)}
+        </div>
+      </div></> :<IoMenu onClick={()=>setOpenDropDown(prev=>!prev)} type="button" className="md:hidden text-white text-[40px] mr-5" id="menu-button" aria-expanded="true" aria-haspopup="true" />}
       
       <div className="pr-5 hidden md:flex gap-3" ref={el=> button1 = el}>
       { buttonConfig.map(({path,...props})=><ButtonWithIcon {...props} onClick={()=>navigate(path)} />)}

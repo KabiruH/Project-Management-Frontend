@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form"
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+import apiClient from '../services/apiClient';
 import AuthLayout from '../components/surfaces/authLayout';
 import Button from "../components/common/Button"
 import Checkbox from '../components/common/Checkbox';
 import InputContainer from "../components/surfaces/InputContainer"
 
+import { useAuth } from '../hooks/authContext';
 const inputConfig = [{label: 'Username',placeholder: "Enter Username",type: "text",name: "username"}, {label: 'Password',placeholder: "Enter Password",type: "password",name: "password"}];
 
 const schema = yup
@@ -17,7 +20,10 @@ const schema = yup
   .required()
 
 const Signin = ()=>{
-
+  const [loginError, setLoginError] = useState(false)
+  const { login } = useAuth();
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate()
     const {
         register,
         handleSubmit,
@@ -28,11 +34,31 @@ const Signin = ()=>{
 
       const registerFunction = (name) => register(name)
 
-      const onSubmit = (data) => console.log(data)
-
+      const onSubmit = async(data) => {
+      
+        try {
+          const response = await apiClient.post('api/User/Login', data)
+          const OurData = response.data
+            localStorage.setItem('token',OurData.token) 
+            navigate('/dashboard')
+        } catch (error) {
+          setLoginError(true)
+          setTimeout(()=>{
+            setLoginError(false)
+          },2000)
+        } 
+           }
       return(
           <AuthLayout>
               <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-10'>
+              {loginError && <div role="alert">
+                  <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+                    Login Failed
+                  </div>
+                  <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                    <p>Invalid username or password.</p>
+                  </div>
+              </div>}
               <div>
               <div className='flex flex-col gap-2'>
                 <h2 color='secondary' className='text-secondary subtitle1'>Sign In</h2>

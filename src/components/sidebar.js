@@ -36,16 +36,16 @@ const navigate = useNavigate()
       name: 'Project',
       icon: <FaProjectDiagram />,
       dropdown: [
-        { name: 'Projects', path: '/project' },
+        { name: 'Projects', path: '/project/project' },
         { name: 'Status', path: '/project/projectStatus' },
-        { name: 'Testimonials' },
-        { name: 'Donors' }
+        { name: 'Testimonials', path: '/project/testimonials' },
+        { name: 'Donors', path: '/project/donors' }
       ]
     },
     {
       name: 'Program',
       icon: <FaCogs />,
-      dropdown: [{ name: 'Programs' }]
+      dropdown: [{ name: 'Program', path: '/program/program' }]
     },
     {
       name: 'Helpers',
@@ -58,7 +58,12 @@ const navigate = useNavigate()
     {
       name: 'Training',
       icon: <FaCogs />,
-      dropdown: ['Trainings', 'Categories', 'Levels', 'Training Type']
+      dropdown: [
+        { name: 'Training', path: '/training/training' },
+        { name: 'Training Level', path: '/training/trainingLevel' },
+        { name: 'Training Category', path: '/training/trainingCategory' },
+        { name: 'Training Type', path: '/training/trainingType' }
+      ]
     },
     {
       name: 'Financial',
@@ -79,7 +84,8 @@ const navigate = useNavigate()
     {
       name: 'Research',
       icon: <FaCogs />,
-      dropdown: [{ name: 'Feedback', path: '/research/feedback' }]
+      dropdown: [
+        { name: 'Feedback', path: '/research/feedback' }]
     },
     {
       name: 'Reports',

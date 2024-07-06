@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Input from '../common/Input';
-import styles from '../../styles/modal.module.css';
+import styles from '../../styles/modal.module.css'; 
 import { getInstitutions } from '../../services/institutionS'
 
-const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
+const ProgramForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
+  
   const [institutions, setInstitutions] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -20,32 +21,29 @@ const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }
     };
     fetchData();
   }, []);
-
- 
- 
- 
+  
   return (
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
-          <label htmlFor="projectID">Project ID:</label>
+          <label htmlFor="programID">Program ID:</label>
           <Input
-            name="projectID"
-            placeholder="Project ID"
-            value={formValues.projectID}
+            name="programID"
+            placeholder="Program ID"
+            value={formValues.programID}
             onChange={handleInputChange}
           />
-          {errors.projectID && <p className="text-red-500">{errors.projectID[0]}</p>}
+          {errors.programID && <p className="text-red-500">{errors.programID[0]}</p>}
         </div>
         <div>
-          <label htmlFor="projectName">Project Name:</label>
+          <label htmlFor="programName">Program Name:</label>
           <Input
-            name="projectName"
-            placeholder="Project Name"
-            value={formValues.projectName}
+            name="programName"
+            placeholder="Program Name"
+            value={formValues.programName}
             onChange={handleInputChange}
           />
-          {errors.projectName && <p className="text-red-500">{errors.projectName[0]}</p>}
+          {errors.programName && <p className="text-red-500">{errors.programName[0]}</p>}
         </div>
         <div>
           <label htmlFor="institutionID">Institution:</label>
@@ -72,10 +70,10 @@ const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }
           <label htmlFor="startDate">Start Date:</label>
           <Input
             name="startDate"
-            type="date"
             placeholder="Start Date"
+            type="date"
             value={formValues.startDate}
-            onChange={handleDateChange}
+            onChange={handleDateChange} // Make sure this is correct
           />
           {errors.startDate && <p className="text-red-500">{errors.startDate[0]}</p>}
         </div>
@@ -83,18 +81,18 @@ const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }
           <label htmlFor="endDate">End Date:</label>
           <Input
             name="endDate"
-            type="date"
             placeholder="End Date"
+            type="date"
             value={formValues.endDate}
-            onChange={handleDateChange}
+            onChange={handleDateChange} // Make sure this is correct
           />
           {errors.endDate && <p className="text-red-500">{errors.endDate[0]}</p>}
         </div>
         <div>
-          <label htmlFor="cost">Project Cost:</label>
+          <label htmlFor="cost">Program Cost:</label>
           <Input
             name="cost"
-            placeholder="Cost"
+            placeholder="Program Cost"
             value={formValues.cost}
             onChange={handleInputChange}
           />
@@ -131,29 +129,18 @@ const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }
           {errors.description && <p className="text-red-500">{errors.description[0]}</p>}
         </div>
         <div>
-          <label htmlFor="coordinator">Coordinator Name:</label>
+          <label htmlFor="coordinator">Program Coordinator:</label>
           <Input
             name="coordinator"
-            placeholder="Coordinator's Name"
+            placeholder="Program Coordinator"
             value={formValues.coordinator}
             onChange={handleInputChange}
           />
           {errors.coordinator && <p className="text-red-500">{errors.coordinator[0]}</p>}
-        </div>
-        <div>
-        <label htmlFor="notes">Notes:</label>
-          <textarea
-            name="notes"
-            placeholder="Notes"
-            value={formValues.notes}
-            onChange={handleInputChange}
-            className="w-full p-2 border rounded"
-          />
-          {errors.notes && <p className="text-red-500">{errors.notes[0]}</p>}
         </div>
       </div>
     </form>
   );
 };
 
-export default ProjectForm;
+export default ProgramForm;

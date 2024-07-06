@@ -7,6 +7,7 @@ const FundingTypeForm = ({ formValues, handleInputChange, handleDateChange, erro
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
+          <label htmlFor="fundingID">Funding ID:</label>
           <Input
             name="fundingID"
             placeholder="Funding ID"
@@ -16,6 +17,7 @@ const FundingTypeForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.fundingID && <p className="text-red-500">{errors.fundingID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="fundingName">Funding Name:</label>
           <Input
             name="fundingName"
             placeholder="Funding Name"
@@ -25,6 +27,7 @@ const FundingTypeForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.fundingName && <p className="text-red-500">{errors.fundingName[0]}</p>}
         </div>
         <div>
+          <label htmlFor="notes">Notes:</label>
           <Input
             name="notes"
             placeholder="Notes"

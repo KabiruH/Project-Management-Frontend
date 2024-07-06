@@ -2,32 +2,29 @@ import React from 'react';
 import Input from '../common/Input';
 import styles from '../../styles/modal.module.css';
 
-const StatusForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
+const TrainingTypeForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
   return (
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
-          <label htmlFor="statusID">Status ID:</label>
           <Input
-            name="statusID"
-            placeholder="Status ID"
-            value={formValues.statusID}
+            name="typeID"
+            placeholder="Type ID"
+            value={formValues.typeID}
             onChange={handleInputChange}
           />
-          {errors.statusID && <p className="text-red-500">{errors.statusID[0]}</p>}
+          {errors.typeID && <p className="text-red-500">{errors.typeID[0]}</p>}
         </div>
         <div>
-          <label htmlFor="statusName">Status Name:</label>
           <Input
-            name="statusName"
-            placeholder="Status Name"
-            value={formValues.statusName}
+            name="typeName"
+            placeholder="Type Name"
+            value={formValues.typeName}
             onChange={handleInputChange}
           />
-          {errors.statusName && <p className="text-red-500">{errors.statusName[0]}</p>}
+          {errors.typeName && <p className="text-red-500">{errors.typeName[0]}</p>}
         </div>
         <div>
-          <label htmlFor="notes">Notes:</label>
           <Input
             name="notes"
             placeholder="Notes"
@@ -41,4 +38,4 @@ const StatusForm = ({ formValues, handleInputChange, handleDateChange, errors })
   );
 };
 
-export default StatusForm;
+export default TrainingTypeForm;

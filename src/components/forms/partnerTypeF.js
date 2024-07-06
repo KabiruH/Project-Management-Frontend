@@ -7,24 +7,27 @@ const PartnerTypesForm = ({ formValues, handleInputChange, handleDateChange, err
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
+          <label htmlFor="typeID">Partner Type ID:</label>
           <Input
             name="typeID"
-            placeholder="Partner ID"
+            placeholder="Partner Type ID"
             value={formValues.typeID}
             onChange={handleInputChange}
           />
           {errors.typeID && <p className="text-red-500">{errors.typeID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="typeName">Partner Type Name:</label>
           <Input
             name="typeName"
-            placeholder="Partner Name"
+            placeholder="Partner Type Name"
             value={formValues.typeName}
             onChange={handleInputChange}
           />
           {errors.typeName && <p className="text-red-500">{errors.typeName[0]}</p>}
         </div>
         <div>
+          <label htmlFor="notes">Notes:</label>
           <Input
             name="notes"
             placeholder="Notes"

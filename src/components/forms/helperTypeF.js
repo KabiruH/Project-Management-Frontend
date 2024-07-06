@@ -7,24 +7,27 @@ const HelperTypesForm = ({ formValues, handleInputChange, handleDateChange, erro
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
+          <label htmlFor="typeID">Type ID:</label>
           <Input
             name="typeID"
-            placeholder="Level ID"
+            placeholder="Type ID"
             value={formValues.typeID}
             onChange={handleInputChange}
           />
           {errors.typeID && <p className="text-red-500">{errors.typeID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="typeName">Type Name:</label>
           <Input
             name="typeName"
-            placeholder="Level Name"
+            placeholder="Type Name"
             value={formValues.typeName}
             onChange={handleInputChange}
           />
           {errors.typeName && <p className="text-red-500">{errors.typeName[0]}</p>}
         </div>
         <div>
+          <label htmlFor="notes">Notes:</label>
           <Input
             name="notes"
             placeholder="Notes"

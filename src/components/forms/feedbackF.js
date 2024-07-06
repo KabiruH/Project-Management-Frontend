@@ -7,6 +7,7 @@ const FeedbackForm = ({ formValues, handleInputChange, handleDateChange, errors 
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
+          <label htmlFor="respondentID">Respondent ID:</label>
           <Input
             name="respondentID"
             placeholder="Respondent ID"
@@ -16,6 +17,7 @@ const FeedbackForm = ({ formValues, handleInputChange, handleDateChange, errors 
           {errors.respondentID && <p className="text-red-500">{errors.respondentID[0]}</p>}
         </div>
         <div>
+          <label htmlFor="titleName">Title Name:</label>
           <Input
             name="titleName"
             placeholder="Title Name"
@@ -25,7 +27,8 @@ const FeedbackForm = ({ formValues, handleInputChange, handleDateChange, errors 
           {errors.titleName && <p className="text-red-500">{errors.titleName[0]}</p>}
         </div>
         <div>
-          <textarea
+          <label htmlFor="description">Description:</label>
+          <Input
             name="description"
             placeholder="Description"
             value={formValues.description}
@@ -34,6 +37,7 @@ const FeedbackForm = ({ formValues, handleInputChange, handleDateChange, errors 
           {errors.description && <p className="text-red-500">{errors.description[0]}</p>}
         </div>
         <div>
+          <label htmlFor="respondentType">Respondent Type:</label>
           <Input
             name="respondentType"
             placeholder="Respondent Type"
@@ -42,8 +46,8 @@ const FeedbackForm = ({ formValues, handleInputChange, handleDateChange, errors 
           />
           {errors.respondentType && <p className="text-red-500">{errors.respondentType[0]}</p>}
         </div>
-    
         <div>
+          <label htmlFor="phoneNo">Phone Number:</label>
           <Input
             name="phoneNo"
             placeholder="Phone Number"
@@ -53,6 +57,7 @@ const FeedbackForm = ({ formValues, handleInputChange, handleDateChange, errors 
           {errors.phoneNo && <p className="text-red-500">{errors.phoneNo[0]}</p>}
         </div>
         <div>
+          <label htmlFor="respondentEmail">Email:</label>
           <Input
             name="respondentEmail"
             placeholder="Email"

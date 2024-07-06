@@ -13,9 +13,15 @@ import AddHelper from './pages/helpers/helper';
 import AddHelperTypes from './pages/helpers/helperType';
 import DashboardStatsGrid from './pages/dashboard';
 import Footer from './components/footer';
-import Project from './pages/project/project';
-import ProjectStatus from './pages/project/projectStatus'
-import Trainings from './pages/training';
+import AddDonor from './pages/project/donors';
+import AddProject from './pages/project/project';
+import AddProjectStatus from './pages/project/projectStatus';
+import AddTestimonial from './pages/project/testimonials';
+import AddProgram from './pages/program/program';
+import AddTraining from './pages/training/training';
+import AddTrainingType from './pages/training/trainingType';
+import AddTrainingLevel from './pages/training/trainingLevel';
+import AddTrainingCategory from './pages/training/trainingCategory';
 import AddBudget from './pages/financials/budget';
 import AddFundingType from './pages/financials/fundingtype';
 import AddPartnership from './pages/partnership/partnership';
@@ -59,10 +65,17 @@ function App() {
           <Route path="/helpers/helperType" element={<AddHelperTypes />} />
           <Route path="/partnership/partnership" element={<AddPartnership />} />
           <Route path="/partnership/partnertype" element={<AddPartnerTypes />} />
-          <Route path="/project" element={<Project />} />
+          <Route path="/project/project" element={<AddProject />} />
+          <Route path="/project/projectstatus" element={<AddProjectStatus />} />
+          <Route path="/project/donors" element={<AddDonor />} />
+          <Route path="/project/testimonials" element={<AddTestimonial />} />
+          <Route path="/program/program" element={<AddProgram />} />
           <Route path="/financials/budget" element={<AddBudget />} />
           <Route path="/financials/fundingtype" element={<AddFundingType />} />
-          <Route path="/training" element={<Trainings />} />
+          <Route path="/training/training" element={<AddTraining />} />
+          <Route path="/training/trainingType" element={<AddTrainingType />} />
+          <Route path="/training/trainingLevel" element={<AddTrainingLevel />} />
+          <Route path="/training/trainingCategory" element={<AddTrainingCategory />} />
           <Route path="/research/feedback" element={<AddFeedback />} />
         </Routes>
         

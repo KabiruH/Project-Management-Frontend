@@ -1,4 +1,5 @@
 import './App.css';
+import { AuthProvider } from './hooks/authContext';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/sidebar';
 import CalendarPage from './pages/calendar';
@@ -31,7 +32,7 @@ import Signup from './pages/signup'
 import Home from './pages/homepage';
 import Navbar from './components/navbar';
 import { DarkModeProvider } from './components/darkMode';
-
+import ProtectedRoute from './services/ProtectedRoute';
 const Layout = ({ children }) => (
   <div className="flex">
     <Sidebar />
@@ -43,14 +44,16 @@ const Layout = ({ children }) => (
 
 function App() {
   return (
+    <AuthProvider>
     <DarkModeProvider>
       <BrowserRouter>
-        <Navbar />
+        {/* <Navbar /> */}
+       
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<Signup />} />
-          <Route exact path="/dashboard" element={<DashboardStatsGrid />} />
+          <Route path="/dashboard" element={<ProtectedRoute element={DashboardStatsGrid} />} />
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/institutions/addInstitutions" element={<AddInstitution />} />
           <Route path="/institutions/addCounties" element={<AddCounty />} />
@@ -75,9 +78,12 @@ function App() {
           <Route path="/training/trainingCategory" element={<AddTrainingCategory />} />
           <Route path="/research/feedback" element={<AddFeedback />} />
         </Routes>
-        <Footer />
+        
+
+        {/* <Footer /> */}
       </BrowserRouter>
     </DarkModeProvider>
+    </AuthProvider>
   );
 }
 

@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/sidebar';
 import CalendarPage from './pages/calendar';
 import AddInstitution from './pages/institutions/addInstitutions';
-import AddCounty from './pages/institutions/addCounties';
 import AddStatus from './pages/institutions/institutionStatus';
 import AddStages from './pages/institutions/institutionStages';
 import AddParticipant from './pages/participants/participant';
@@ -53,7 +52,6 @@ function App() {
           <Route exact path="/dashboard" element={<DashboardStatsGrid />} />
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/institutions/addInstitutions" element={<AddInstitution />} />
-          <Route path="/institutions/addCounties" element={<AddCounty />} />
           <Route path='/institutions/institutionStages' element={<AddStages />} />
           <Route path='/institutions/institutionStatus' element={<AddStatus />} />
           <Route path="/participants/participant" element={<AddParticipant />} />

@@ -44,7 +44,7 @@ const getCounty = async () => {
       const response = await apiClient.get('/api/County');
       return response.data;
     } catch (error) {
-      console.error('Error fetching Counties:', error.response.data);
+      console.error('Error fetching Counties:', error.response?.data || error.message);
       throw error;
     }
   };
@@ -52,7 +52,7 @@ const getCounty = async () => {
   const getSubCounty = async (CountyID) => {
     try {
       const response = await apiClient.get(`/api/County/${CountyID}/SubCounties`);
-      return response.data;
+      return response.data.$values; // Extract the $values array
     } catch (error) {
       console.error('Error fetching SubCounties:', error.response?.data || error.message);
       throw error;

@@ -12,7 +12,6 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
   const [loadingStages, setLoadingStages] = useState(true);
   const [loadingStatuses, setLoadingStatuses] = useState(true);
   const [counties, setCounties] = useState([]);
-  const [selectedCounty, setSelectedCounty] = useState('');
   const [subCounties, setSubCounties] = useState([]);
 
 // Fetch stages
@@ -68,6 +67,7 @@ useEffect(() => {
 
 const handleCountyChange = async (event) => {
   const countyID = event.target.value;
+  console.log('Selected County ID:', countyID); // Log the countyID for debugging
   handleInputChange(event); // Update form values with selected county ID
 
   if (countyID) {
@@ -83,6 +83,7 @@ const handleCountyChange = async (event) => {
     setSubCounties([]);
   }
 };
+
 
 
   return (
@@ -152,8 +153,6 @@ const handleCountyChange = async (event) => {
           {errors.statusID && <p className="text-red-500">{errors.statusID[0]}</p>}
         </div>
 
-
-
         <div>
           <label htmlFor="institutionEmail">Institution Email:</label>
           <Input
@@ -175,18 +174,19 @@ const handleCountyChange = async (event) => {
           />
           {errors.institutionContact && <p className="text-red-500">{errors.institutionContact[0]}</p>}
         </div>
-      
-        <div>
+    
+      <div>
         <label htmlFor="county">County:</label>
-        <select id="countyID" 
-        name="countyID"
-        value={formValues.countyID}  
-        onChange={handleInputChange}
-        className="w-full p-2 border border-gray-300 rounded">
-          
+        <select
+          id="countyID"
+          name="countyID"
+          value={formValues.countyID}
+          onChange={handleCountyChange} 
+          className="w-full p-2 border border-gray-300 rounded"
+        >
           <option value="">Select County</option>
           {counties.map((county) => (
-            <option key={county.countyName} value={county.countyName}>
+            <option key={county.countyID} value={county.countyID}>
               {county.countyName}
             </option>
           ))}
@@ -195,26 +195,27 @@ const handleCountyChange = async (event) => {
      
      
       <div>
-      <label htmlFor="subCounty">Sub-County:</label>
-      <select
-        id="subCounty"
-        name="subCounty"
-        value={formValues.subCountyID}
-        onChange={handleInputChange}
-        className="w-full p-2 border border-gray-300 rounded"
-      >
-        <option value="">Select Sub-County</option>
-        {subCounties.length === 0 ? (
-          <option value="">Loading Sub-Counties...</option>
-        ) : (
-          subCounties.map((subCounty) => (
-            <option key={subCounty.subCountyID} value={subCounty.subCountyID}>
-              {subCounty.subCountyName}
-            </option>
-          ))
-        )}
-      </select>
+        <label htmlFor="subCounty">Sub-County:</label>
+        <select
+          id="subCounty"
+          name="subCounty"
+          value={formValues.subCountyID}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+        >
+          <option value="">Select Sub-County</option>
+          {subCounties.length === 0 ? (
+            <option value="">Loading Sub-Counties...</option>
+          ) : (
+            subCounties.map((subCounty) => (
+              <option key={subCounty.SubCountyID} value={subCounty.SubCountyName}>
+                {subCounty.SubCountyName}
+              </option>
+            ))
+          )}
+        </select>
       </div>
+   
      
         <div>
           <label htmlFor="contactPerson">Contact Person:</label>

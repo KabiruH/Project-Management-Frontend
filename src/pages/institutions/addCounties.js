@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { customStyles } from '../../styles/customStyles';
 import CountyForm from '../../components/forms/countiesF';
 import CountyTable from '../../components/tables/countiesT';
 import { addCounty as addCountyService, getCountyById, updateCounty, deleteCounty, getCounties } from '../../services/countyS';
@@ -152,8 +153,8 @@ const AddCounty = () => {
           deleteCounty={deleteCountyHandler}
         />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddCountyModal} contentLabel={editMode ? "Edit County" : "Add County"}>
-        <h2 className="text-xl mb-4">{editMode ? 'Edit County' : 'Add County'}</h2>
+      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddCountyModal} contentLabel={editMode ? "Edit County" : "Add County"}>
+        <h2 className="subtitle2 mb-4">{editMode ? 'Edit County' : 'Add County'}</h2>
         <CountyForm 
           formValues={newCounty} 
           handleInputChange={handleInputChange} 
@@ -161,10 +162,10 @@ const AddCounty = () => {
           errors={errors} 
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingCounty : addNewCounty} className="bg-green-500 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingCounty : addNewCounty} className="bg-primary px-10 text-white p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddCountyModal} className="bg-gray-500 text-white p-2 rounded">
+          <button onClick={closeAddCountyModal} className="outline outline-1 outline-primary px-10 text-primary p-2 rounded">
             Cancel
           </button>
         </div>

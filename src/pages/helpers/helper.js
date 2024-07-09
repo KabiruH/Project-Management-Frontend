@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import {customStyles} from "../../styles/customStyles"
 import HelpersForm from '../../components/forms/helperF';
 import HelpersTable from '../../components/tables/helperT';
 import { addHelper as addHelperService, getHelperById, updateHelper, deleteHelper, getHelper } from '../../services/helperS';
@@ -164,8 +165,8 @@ const AddHelper = () => {
           deleteHelper={deleteHelperHandler}
         />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddHelperModal} contentLabel={editMode ? "Edit Helper" : "Add Helper"}>
-        <h2 className="text-xl mb-4">{editMode ? 'Edit Helper' : 'Add Helper'}</h2>
+      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddHelperModal} contentLabel={editMode ? "Edit Helper" : "Add Helper"}>
+        <h2 className="subtitle2 mb-4">{editMode ? 'Edit Helper' : 'Add Helper'}</h2>
         <HelpersForm
           formValues={newHelper} 
           handleInputChange={handleInputChange} 
@@ -173,10 +174,10 @@ const AddHelper = () => {
           errors={errors} 
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingHelper : addNewHelper} className="bg-green-500 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingHelper : addNewHelper} className="bg-primary text-white px-5 p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddHelperModal} className="bg-gray-500 text-white p-2 rounded">
+          <button onClick={closeAddHelperModal} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
             Cancel
           </button>
         </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { customStyles } from '../../styles/customStyles';
 import PartnershipForm from '../../components/forms/partnershipF';
 import PartnershipTable from '../../components/tables/partnershipT';
 import { addPartnership as addPartnershipService, getPartnershipById, updatePartnership, deletePartnership, getPartnership } from '../../services/partnershipS';
@@ -141,18 +142,18 @@ const AddPartnership = () => {
           deletePartnership={deletePartnershipHandler}
         />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddPartnershipModal} contentLabel={editMode ? "Edit Partnership" : "Add Partnership"}>
-        <h2 className="text-xl mb-4">{editMode ? 'Edit Partnership' : 'Add Partnership'}</h2>
+      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddPartnershipModal} contentLabel={editMode ? "Edit Partnership" : "Add Partnership"}>
+        <h2 className="subtitle2 mb-4">{editMode ? 'Edit Partnership' : 'Add Partnership'}</h2>
         <PartnershipForm 
           formValues={newPartnership} 
           handleInputChange={handleInputChange} 
           errors={errors} 
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingPartnership : addNewPartnership} className="bg-green-500 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingPartnership : addNewPartnership} className="bg-primary px-5 text-white p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddPartnershipModal} className="bg-gray-500 text-white p-2 rounded">
+          <button onClick={closeAddPartnershipModal} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
             Cancel
           </button>
         </div>

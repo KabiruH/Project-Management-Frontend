@@ -20,7 +20,7 @@ const columns = [
 
 const InstitutionTable = ({ institutions, openEditModal, deleteInstitution }) => {
   const renderRowActions = ({ institutionID }) => (
-    <div>
+    <div className='flex gap-2'>
       <button
         onClick={() => openEditModal({ institutionID })}
         className="bg-yellow-500 text-white p-1 rounded mr-2"

@@ -74,7 +74,7 @@ const navigate = useNavigate()
                <div className='grid md:grid-cols-2 gap-2 w-full'>
                 {inputConfig.map((field,index)=><InputContainer error={errors[field.name]?.message} name={field.name} registerFunction={registerFunction} key={index} label={field.label} placeholder={field.placeholder} type={field.type} />)}
                 <Autocomplete registerFunction={registerFunction} options={[{name: "Male"},{name: "Female"}]} label="Gender" name='gender' error={errors.gender?.message}/>
-                <Autocomplete registerFunction={registerFunction} options={[{name: "Admin"},{name: "Staff"}]} label="Role" name='role' error={errors.role?.message}/>
+                <Autocomplete registerFunction={registerFunction} options={[{name: "Helper"},{name: "Participant"}]} label="Role" name='role' error={errors.role?.message}/>
                 <InputContainer error={errors.password?.message} name='password' registerFunction={registerFunction} label='Password' type='password' placeholder='Enter Password' />
                </div>
                <div>

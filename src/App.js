@@ -8,6 +8,7 @@ import AddStages from './pages/institutions/institutionStages';
 import AddParticipant from './pages/participants/participant';
 import AddAwards from './pages/participants/participantAwards'
 import AddLevels from './pages/participants/participantLevels';
+import AddParticipantProject from './pages/participants/participantProjects'
 import AddHelper from './pages/helpers/helper';
 import AddHelperTypes from './pages/helpers/helperType';
 import DashboardStatsGrid from './pages/dashboard';
@@ -58,7 +59,8 @@ function App() {
           <Route path="/participants/participant" element={<AddParticipant />} />
           <Route path="/participants/participantLevels" element={<AddLevels />} />
     <Route path="/participants/awardParticipants" element={<AddAwards />} />
-          <Route path="/helpers/helper" element={<AddHelper />} />
+    <Route path="/participants/participantsProjects" element={<AddParticipantProject />} />
+              <Route path="/helpers/helper" element={<AddHelper />} />
           <Route path="/helpers/helperType" element={<AddHelperTypes />} />
           <Route path="/partnership/partnership" element={<AddPartnership />} />
           <Route path="/partnership/partnertype" element={<AddPartnerTypes />} />

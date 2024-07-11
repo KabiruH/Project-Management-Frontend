@@ -29,7 +29,8 @@ const Sidebar = () => {
       dropdown: [
         { name: 'Participant', path: '/participants/participant' },
         { name: 'Levels', path: '/participants/participantLevels' },
-        { name: 'Award Participants', path: '/participants/awardParticipants' }
+        { name: 'Award Participants', path: '/participants/awardParticipants' },
+        { name: 'Participant Projects', path: '/participants/participantsProjects' }
       ]
     },
     {

@@ -77,27 +77,7 @@ const ProgramForm = ({ formValues, handleInputChange, handleDateChange, errors }
           />
           {errors.startDate && <p className="text-red-500">{errors.startDate[0]}</p>}
         </div>
-        <div>
-          <label htmlFor="endDate">End Date:</label>
-          <Input
-            name="endDate"
-            placeholder="End Date"
-            type="date"
-            value={formValues.endDate}
-            onChange={handleDateChange} // Make sure this is correct
-          />
-          {errors.endDate && <p className="text-red-500">{errors.endDate[0]}</p>}
-        </div>
-        <div>
-          <label htmlFor="cost">Program Cost:</label>
-          <Input
-            name="cost"
-            placeholder="Program Cost"
-            value={formValues.cost}
-            onChange={handleInputChange}
-          />
-          {errors.cost && <p className="text-red-500">{errors.cost[0]}</p>}
-        </div>
+       
         <div>
           <label htmlFor="subCounty">Sub County:</label>
           <Input

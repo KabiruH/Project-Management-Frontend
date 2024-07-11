@@ -6,6 +6,7 @@ import AddInstitution from './pages/institutions/addInstitutions';
 import AddStatus from './pages/institutions/institutionStatus';
 import AddStages from './pages/institutions/institutionStages';
 import AddParticipant from './pages/participants/participant';
+import AddAwards from './pages/participants/participantAwards'
 import AddLevels from './pages/participants/participantLevels';
 import AddHelper from './pages/helpers/helper';
 import AddHelperTypes from './pages/helpers/helperType';
@@ -56,6 +57,7 @@ function App() {
           <Route path='/institutions/institutionStatus' element={<AddStatus />} />
           <Route path="/participants/participant" element={<AddParticipant />} />
           <Route path="/participants/participantLevels" element={<AddLevels />} />
+    <Route path="/participants/awardParticipants" element={<AddAwards />} />
           <Route path="/helpers/helper" element={<AddHelper />} />
           <Route path="/helpers/helperType" element={<AddHelperTypes />} />
           <Route path="/partnership/partnership" element={<AddPartnership />} />

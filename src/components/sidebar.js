@@ -28,7 +28,8 @@ const Sidebar = () => {
       icon: <FaUser />,
       dropdown: [
         { name: 'Participant', path: '/participants/participant' },
-        { name: 'Levels', path: '/participants/participantLevels' }
+        { name: 'Levels', path: '/participants/participantLevels' },
+        { name: 'Award Participants', path: '/participants/awardParticipants' }
       ]
     },
     {

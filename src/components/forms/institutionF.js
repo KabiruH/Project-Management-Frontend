@@ -5,7 +5,7 @@ import { getStages } from '../../services/institutionStageS'
 import { getStatus } from '../../services/institutionStatusS'
 import { getCounty, getSubCounty } from '../../services/countiesS'
 
-const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
+const InstitutionForm = ({ formValues, handleInputChange, errors }) => {
 
   const [stages, setStages] = useState([]);
   const [statuses, setStatuses] = useState([]);
@@ -83,6 +83,27 @@ const handleCountyChange = async (event) => {
     setSubCounties([]);
   }
 };
+
+//End date function
+const handleDateChange = (event) => {
+  const { name, value } = event.target;
+  
+  if (name === 'licenseStartDate') {
+    const startDate = new Date(value);
+    const endDate = new Date(startDate);
+    endDate.setFullYear(startDate.getFullYear() + 1);
+    
+    handleInputChange({
+      target: {
+        name: 'licenseEndDate',
+        value: endDate.toISOString().split('T')[0] // Format as YYYY-MM-DD
+      }
+    });
+  }
+
+  handleInputChange(event);
+};
+
 
 
 

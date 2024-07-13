@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { FaHome, FaCalendarAlt, FaBuilding, FaUser, FaProjectDiagram, FaCogs, FaSignOutAlt } from 'react-icons/fa';
 import { DarkModeContext } from './darkMode';
 
 const Sidebar = () => {
   const [dropdown, setDropdown] = useState(null);
   const { darkMode } = useContext(DarkModeContext);
-
+const navigate = useNavigate()
   const toggleDropdown = (item) => {
     setDropdown(dropdown === item ? null : item);
   };
@@ -19,7 +19,7 @@ const Sidebar = () => {
       icon: <FaBuilding />,
       dropdown: [
         { name: 'Institution', path: '/institutions/addInstitutions' },
-        { name: 'Counties', path: '/institutions/addCounties' },
+      
         { name: 'Status', path: '/institutions/institutionStatus' },
         { name: 'Stages', path: '/institutions/institutionStages' },
       ]
@@ -36,7 +36,7 @@ const Sidebar = () => {
       name: 'Project',
       icon: <FaProjectDiagram />,
       dropdown: [
-        { name: 'Projects', path: '/project' },
+        { name: 'Projects', path: '/project/project' },
         { name: 'Status', path: '/project/projectStatus' },
         { name: 'Testimonials', path: '/project/testimonials' },
         { name: 'Donors', path: '/project/donors' }
@@ -58,7 +58,12 @@ const Sidebar = () => {
     {
       name: 'Training',
       icon: <FaCogs />,
-      dropdown: ['Trainings', 'Categories', 'Levels', 'Training Type']
+      dropdown: [
+        { name: 'Training', path: '/training/training' },
+        { name: 'Training Level', path: '/training/trainingLevel' },
+        { name: 'Training Category', path: '/training/trainingCategory' },
+        { name: 'Training Type', path: '/training/trainingType' }
+      ]
     },
     {
       name: 'Financial',
@@ -79,7 +84,8 @@ const Sidebar = () => {
     {
       name: 'Research',
       icon: <FaCogs />,
-      dropdown: [{ name: 'Feedback', path: '/research/feedback' }]
+      dropdown: [
+        { name: 'Feedback', path: '/research/feedback' }]
     },
     {
       name: 'Reports',
@@ -129,6 +135,10 @@ const Sidebar = () => {
           </li>
         ))}
       </ul>
+      <div onClick={()=>{
+        localStorage.clear()
+        navigate('/signin')
+      }} className='w-full p-5 hover:bg-greys rounded mt-3 hover:text-white cursor-pointer'><span >Logout</span></div>
     </div>
   );
 };

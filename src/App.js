@@ -1,4 +1,5 @@
 import './App.css';
+import { AuthProvider } from './hooks/authContext';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/sidebar';
 import CalendarPage from './pages/calendar';
@@ -10,14 +11,17 @@ import AddParticipant from './pages/participants/participant';
 import AddLevels from './pages/participants/participantLevels';
 import AddHelper from './pages/helpers/helper';
 import AddHelperTypes from './pages/helpers/helperType';
-import AddDonor from './pages/project/donors'
-import AddTestimonial from './pages/project/testimonials'
 import DashboardStatsGrid from './pages/dashboard';
 import Footer from './components/footer';
-import Project from './pages/project/project';
-import ProjectStatus from './pages/project/projectStatus'
+import AddDonor from './pages/project/donors';
+import AddProject from './pages/project/project';
+import AddProjectStatus from './pages/project/projectStatus';
+import AddTestimonial from './pages/project/testimonials';
 import AddProgram from './pages/program/program';
-import Trainings from './pages/training';
+import AddTraining from './pages/training/training';
+import AddTrainingType from './pages/training/trainingType';
+import AddTrainingLevel from './pages/training/trainingLevel';
+import AddTrainingCategory from './pages/training/trainingCategory';
 import AddBudget from './pages/financials/budget';
 import AddFundingType from './pages/financials/fundingtype';
 import AddPartnership from './pages/partnership/partnership';
@@ -28,7 +32,7 @@ import Signup from './pages/signup'
 import Home from './pages/homepage';
 import Navbar from './components/navbar';
 import { DarkModeProvider } from './components/darkMode';
-
+import ProtectedRoute from './services/ProtectedRoute';
 const Layout = ({ children }) => (
   <div className="flex">
     <Sidebar />
@@ -40,14 +44,16 @@ const Layout = ({ children }) => (
 
 function App() {
   return (
+    <AuthProvider>
     <DarkModeProvider>
       <BrowserRouter>
-        <Navbar />
+        {/* <Navbar /> */}
+       
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<Signup />} />
-          <Route exact path="/dashboard" element={<DashboardStatsGrid />} />
+          <Route path="/dashboard" element={<ProtectedRoute element={DashboardStatsGrid} />} />
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/institutions/addInstitutions" element={<AddInstitution />} />
           <Route path="/institutions/addCounties" element={<AddCounty />} />
@@ -59,19 +65,25 @@ function App() {
           <Route path="/helpers/helperType" element={<AddHelperTypes />} />
           <Route path="/partnership/partnership" element={<AddPartnership />} />
           <Route path="/partnership/partnertype" element={<AddPartnerTypes />} />
-          <Route path="/project" element={<Project />} />
-          <Route path="/project/projectstatus" element={<ProjectStatus />} />
+          <Route path="/project/project" element={<AddProject />} />
+          <Route path="/project/projectstatus" element={<AddProjectStatus />} />
           <Route path="/project/donors" element={<AddDonor />} />
           <Route path="/project/testimonials" element={<AddTestimonial />} />
           <Route path="/program/program" element={<AddProgram />} />
           <Route path="/financials/budget" element={<AddBudget />} />
           <Route path="/financials/fundingtype" element={<AddFundingType />} />
-          <Route path="/training" element={<Trainings />} />
+          <Route path="/training/training" element={<AddTraining />} />
+          <Route path="/training/trainingType" element={<AddTrainingType />} />
+          <Route path="/training/trainingLevel" element={<AddTrainingLevel />} />
+          <Route path="/training/trainingCategory" element={<AddTrainingCategory />} />
           <Route path="/research/feedback" element={<AddFeedback />} />
         </Routes>
-        <Footer />
+        
+
+        {/* <Footer /> */}
       </BrowserRouter>
     </DarkModeProvider>
+    </AuthProvider>
   );
 }
 

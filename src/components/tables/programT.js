@@ -6,8 +6,6 @@ const columns = [
   { Header: 'Program Name', accessor: 'programName' },
   { Header: 'Institution', accessor: 'institutionName' },
   { Header: 'Startdate', accessor: 'startDate' },
-  { Header: 'Enddate', accessor: 'endDate' },
-  { Header: 'Cost', accessor: 'cost' },
   { Header: 'Sub-County', accessor: 'subCounty' },
   { Header: 'County', accessor: 'county' },
   { Header: 'Description', accessor: 'description' },

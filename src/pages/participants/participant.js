@@ -7,6 +7,26 @@ import Layout from '../../components/layout';
 
 Modal.setAppElement('#root');
 
+const customStyles = {
+  overlay: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  content: {
+    top: '10%',
+    left: '20%',
+    right: '20%',
+    bottom: '10%',
+    margin: 'auto',
+    padding: '20px',
+    borderRadius: '8px',
+    height: 'auto',
+    backgroundColor: '#fff',
+  },
+};
+
 const AddParticipant = () => {
   const [participants, setParticipants] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -164,8 +184,8 @@ const AddParticipant = () => {
           deleteParticipant={deleteParticipantHandler}
         />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddParticipantModal} contentLabel={editMode ? "Edit Participant" : "Add Participant"}>
-        <h2 className="text-xl mb-4">{editMode ? 'Edit Participant' : 'Add Participant'}</h2>
+      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddParticipantModal} contentLabel={editMode ? "Edit Participant" : "Add Participant"} >
+        <h2 className="subtitle2 mb-4">{editMode ? 'Edit Participant' : 'Add Participant'}</h2>
         <ParticipantForm 
           formValues={newParticipant} 
           handleInputChange={handleInputChange} 
@@ -173,10 +193,10 @@ const AddParticipant = () => {
           errors={errors} 
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingParticipant : addNewParticipant} className="bg-green-500 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingParticipant : addNewParticipant} className="bg-primary px-10 text-white p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddParticipantModal} className="bg-gray-500 text-white p-2 rounded">
+          <button onClick={closeAddParticipantModal} className="outline outline-1 outline-primary text-primary px-10 p-2 rounded">
             Cancel
           </button>
         </div>

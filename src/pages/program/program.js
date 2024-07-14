@@ -16,8 +16,6 @@ const AddProgram = () => {
     programName: '',
     institutionName: '',
     startDate: '',
-    endDate: '',
-    cost: '',
     subCounty: '',
     county: '',
     description: '',
@@ -76,16 +74,14 @@ const AddProgram = () => {
     setEditMode(false);
     setIsModalOpen(true);
     setNewProgram({
-        programID: '',
-        programName: '',
-        institutionName: '',
-        startDate: '',
-        endDate: '',
-        cost: '',
-        subCounty: '',
-        county: '',
-        description: '',
-        coordinator: '',
+      programID: '',
+      programName: '',
+      institutionName: '',
+      startDate: '',
+      subCounty: '',
+      county: '',
+      description: '',
+      coordinator: '',
         
     });
   };

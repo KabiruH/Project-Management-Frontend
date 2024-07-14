@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { customStyles } from '../../styles/customStyles';
 import StagesForm from '../../components/forms/institutionStagesF';
 import StagesTable from '../../components/tables/institutionStagesT';
 import { addStages as addStagesService, getStagesById, updateStages, deleteStages, getStages } from '../../services/institutionStageS';
@@ -145,8 +146,8 @@ const AddStages = () => {
           deleteStage={deleteStageHandler}
         />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddStagesModal} contentLabel={editMode ? "Edit Stage" : "Add Stage"}>
-        <h2 className="text-xl mb-4">{editMode ? 'Edit Stage' : 'Add Stage'}</h2>
+      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddStagesModal} contentLabel={editMode ? "Edit Stage" : "Add Stage"}>
+        <h2 className="subtitle2 mb-4">{editMode ? 'Edit Stage' : 'Add Stage'}</h2>
         <StagesForm 
           formValues={newStage} 
           handleInputChange={handleInputChange} 
@@ -154,10 +155,10 @@ const AddStages = () => {
           errors={errors} 
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingStage : addNewStage} className="bg-green-500 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingStage : addNewStage} className="bg-primary px-5 text-white p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddStagesModal} className="bg-gray-500 text-white p-2 rounded">
+          <button onClick={closeAddStagesModal} className="outline outline-1 outline-primary px-5 text-primary p-2 rounded">
             Cancel
           </button>
         </div>

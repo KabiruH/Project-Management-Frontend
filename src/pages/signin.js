@@ -72,7 +72,7 @@ const Signin = ()=>{
                 <a className='bodyLarge text-primary' href='/forgot-password'>forgot password?</a>
                </div>
                <div>
-                <Button  className="bg-primary text-white w-full">Sign In</Button>
+                <Button className="bg-primary text-white w-full">Sign In</Button>
                </div>
                <div>
                 <p className='flex flex-row gap-2'>

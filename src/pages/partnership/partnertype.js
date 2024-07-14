@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { customStyles } from '../../styles/customStyles';
 import PartnerTypesForm from '../../components/forms/partnerTypeF';
 import PartnerTypesTable from '../../components/tables/partnerTypeT';
 import { addPartnerType as addPartnerTypeService, getPartnerTypeById, updatePartnerType, deletePartnerType, getPartnerType } from '../../services/partnerTypeS';
@@ -146,8 +147,8 @@ const AddPartnerTypes = () => {
           deletePartnerType={deletePartnerTypeHandler}
         />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddPartnerTypesModal} contentLabel={editMode ? "Edit Partner Types" : "Add partnertypes"}>
-        <h2 className="text-xl mb-4">{editMode ? 'Edit Partner Types' : 'Add Partner Types'}</h2>
+      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddPartnerTypesModal} contentLabel={editMode ? "Edit Partner Types" : "Add partnertypes"}>
+        <h2 className="subtitle2 mb-4">{editMode ? 'Edit Partner Types' : 'Add Partner Types'}</h2>
         <PartnerTypesForm 
           formValues={newPartnerTypes} 
           handleInputChange={handleInputChange} 
@@ -155,10 +156,10 @@ const AddPartnerTypes = () => {
           errors={errors} 
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingPartnerTypes : addNewPartnerTypes} className="bg-green-500 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingPartnerTypes : addNewPartnerTypes} className="bg-primary px-5 text-white p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddPartnerTypesModal} className="bg-gray-500 text-white p-2 rounded">
+          <button onClick={closeAddPartnerTypesModal} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
             Cancel
           </button>
         </div>

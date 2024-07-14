@@ -1,7 +1,6 @@
 import './App.css';
 import { AuthProvider } from './hooks/authContext';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Sidebar from './components/sidebar';
 import CalendarPage from './pages/calendar';
 import AddInstitution from './pages/institutions/addInstitutions';
 import AddCounty from './pages/institutions/addCounties';
@@ -12,7 +11,6 @@ import AddLevels from './pages/participants/participantLevels';
 import AddHelper from './pages/helpers/helper';
 import AddHelperTypes from './pages/helpers/helperType';
 import DashboardStatsGrid from './pages/dashboard';
-import Footer from './components/footer';
 import AddDonor from './pages/project/donors';
 import AddProject from './pages/project/project';
 import AddProjectStatus from './pages/project/projectStatus';
@@ -30,57 +28,43 @@ import AddFeedback from './pages/research/feedback';
 import SignIn from './pages/signin';
 import Signup from './pages/signup'
 import Home from './pages/homepage';
-import Navbar from './components/navbar';
 import { DarkModeProvider } from './components/darkMode';
 import ProtectedRoute from './services/ProtectedRoute';
-const Layout = ({ children }) => (
-  <div className="flex">
-    <Sidebar />
-    <div className="flex-grow p-5 bg-gray-100 dark:bg-gray-800 min-h-screen">
-      {children}
-    </div>
-  </div>
-);
 
 function App() {
   return (
     <AuthProvider>
     <DarkModeProvider>
       <BrowserRouter>
-        {/* <Navbar /> */}
-       
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={<ProtectedRoute element={DashboardStatsGrid} />} />
-          <Route path="/calendar" element={<CalendarPage />} />
-          <Route path="/institutions/addInstitutions" element={<AddInstitution />} />
-          <Route path="/institutions/addCounties" element={<AddCounty />} />
-          <Route path='/institutions/institutionStages' element={<AddStages />} />
-          <Route path='/institutions/institutionStatus' element={<AddStatus />} />
-          <Route path="/participants/participant" element={<AddParticipant />} />
-          <Route path="/participants/participantLevels" element={<AddLevels />} />
-          <Route path="/helpers/helper" element={<AddHelper />} />
-          <Route path="/helpers/helperType" element={<AddHelperTypes />} />
-          <Route path="/partnership/partnership" element={<AddPartnership />} />
-          <Route path="/partnership/partnertype" element={<AddPartnerTypes />} />
-          <Route path="/project/project" element={<AddProject />} />
-          <Route path="/project/projectstatus" element={<AddProjectStatus />} />
-          <Route path="/project/donors" element={<AddDonor />} />
-          <Route path="/project/testimonials" element={<AddTestimonial />} />
-          <Route path="/program/program" element={<AddProgram />} />
-          <Route path="/financials/budget" element={<AddBudget />} />
-          <Route path="/financials/fundingtype" element={<AddFundingType />} />
-          <Route path="/training/training" element={<AddTraining />} />
-          <Route path="/training/trainingType" element={<AddTrainingType />} />
-          <Route path="/training/trainingLevel" element={<AddTrainingLevel />} />
-          <Route path="/training/trainingCategory" element={<AddTrainingCategory />} />
-          <Route path="/research/feedback" element={<AddFeedback />} />
+          <Route path="/calendar" element={<ProtectedRoute element={CalendarPage}/>} />
+          <Route path="/institutions/addInstitutions" element={<ProtectedRoute element={AddInstitution} />} />
+          <Route path="/institutions/addCounties" element={<ProtectedRoute element={AddCounty} />} />
+          <Route path='/institutions/institutionStages' element={<ProtectedRoute element={AddStages} />} />
+          <Route path='/institutions/institutionStatus' element={<ProtectedRoute element={AddStatus} />} />
+          <Route path="/participants/participant" element={<ProtectedRoute element={AddParticipant} />} />
+          <Route path="/participants/participantLevels" element={<ProtectedRoute element={AddLevels} />} />
+          <Route path="/helpers/helper" element={<ProtectedRoute element={AddHelper} />} />
+          <Route path="/helpers/helperType" element={<ProtectedRoute element={AddHelperTypes} />} />
+          <Route path="/partnership/partnership" element={<ProtectedRoute element={AddPartnership} />} />
+          <Route path="/partnership/partnertype" element={<ProtectedRoute element={AddPartnerTypes} />} />
+          <Route path="/project/project" element={<ProtectedRoute element={AddProject} />} />
+          <Route path="/project/projectstatus" element={<ProtectedRoute element={AddProjectStatus} />} />
+          <Route path="/project/donors" element={<ProtectedRoute element={AddDonor} />} />
+          <Route path="/project/testimonials" element={<ProtectedRoute element={AddTestimonial} />} />
+          <Route path="/program/program" element={<ProtectedRoute element={AddProgram} />} />
+          <Route path="/financials/budget" element={<ProtectedRoute element={AddBudget} />} />
+          <Route path="/financials/fundingtype" element={<ProtectedRoute element={AddFundingType} />} />
+          <Route path="/training/training" element={<ProtectedRoute element={AddTraining} />} />
+          <Route path="/training/trainingType" element={<ProtectedRoute element={AddTrainingType} />} />
+          <Route path="/training/trainingLevel" element={<ProtectedRoute element={AddTrainingLevel} />} />
+          <Route path="/training/trainingCategory" element={<ProtectedRoute element={AddTrainingCategory} />} />
+          <Route path="/research/feedback" element={<ProtectedRoute element={AddFeedback} />} />
         </Routes>
-        
-
-        {/* <Footer /> */}
       </BrowserRouter>
     </DarkModeProvider>
     </AuthProvider>

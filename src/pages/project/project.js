@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import { customStyles } from '../../styles/customStyles';
 import Layout from '../../components/layout';
 import ProjectForm from '../../components/forms/projectForm';
 import ProjectTable from '../../components/tables/projectTable';
@@ -173,8 +174,8 @@ const AddProject = () => {
           deleteProject={deleteProjectHandler}
         />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddProjectModal} contentLabel={editMode ? "Edit Project" : "Add Project"}>
-        <h2 className="text-xl mb-4">{editMode ? 'Edit Project' : 'Add Project'}</h2>
+      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddProjectModal} contentLabel={editMode ? "Edit Project" : "Add Project"}>
+        <h2 className="subtitle2 mb-4">{editMode ? 'Edit Project' : 'Add Project'}</h2>
         <ProjectForm
           formValues={newProject}
           handleInputChange={handleInputChange}
@@ -182,10 +183,10 @@ const AddProject = () => {
           errors={errors}
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingProject : addNewProject} className="bg-green-500 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingProject : addNewProject} className="bg-primary text-white px-5 p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddProjectModal} className="bg-gray-500 text-white p-2 rounded">
+          <button onClick={closeAddProjectModal} className="outline outline-1 outline-primary px-5 text-primary p-2 rounded">
             Cancel
           </button>
         </div>

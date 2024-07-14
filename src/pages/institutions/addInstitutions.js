@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Modal from 'react-modal';
+import {customStyles} from "../../styles/customStyles"
 import InstitutionForm from '../../components/forms/institutionF';
 import InstitutionTable from '../../components/tables/institutionT';
 import { addInstitution as addInstitutionService, getInstitutionById, updateInstitution, deleteInstitution, getInstitutions } from '../../services/institutionS';
 import Layout from '../../components/layout';
-
-Modal.setAppElement('#root');
+import Modal from 'react-modal';
 
 const AddInstitution = () => {
   const [institutions, setInstitutions] = useState([]);
@@ -113,13 +112,13 @@ const AddInstitution = () => {
       console.error(`Error fetching institution with ID ${institution.institutionID}:`, error.response.data);
     }
   };
-  
+
   const updateExistingInstitution = async () => {
     try {
       const institutionPayload = { ...newInstitution };
-  
+
       console.log('Updated Institution Payload:', institutionPayload);
-  
+
       const updatedInstitution = await updateInstitution(selectedInstitutionId, institutionPayload);
       setInstitutions((prev) => prev.map(inst => (inst.institutionID === selectedInstitutionId ? updatedInstitution : inst)));
       setIsModalOpen(false);
@@ -158,7 +157,7 @@ const AddInstitution = () => {
       <h1 className="text-2xl font-bold mb-4">Institutions</h1>
       <div className="p-4">
         <button
-          onClick={openAddInstitutionModal}
+          onClick={()=>setIsModalOpen(true)}
           className="bg-blue-500 text-white p-2 rounded mb-4"
         >
           Add Institution
@@ -169,8 +168,9 @@ const AddInstitution = () => {
           deleteInstitution={deleteInstitutionHandler}
         />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddInstitutionModal} contentLabel={editMode ? "Edit Institution" : "Add Institution"}>
-        <h2 className="text-xl mb-4">{editMode ? 'Edit Institution' : 'Add Institution'}</h2>
+  
+      <Modal isOpen={isModalOpen} onRequestClose={closeAddInstitutionModal} contentLabel={editMode ? "Edit Institution" : "Add Institution"} style={customStyles}>
+        <h2 className="subtitle1 mb-4">{editMode ? 'Edit Institution' : 'Add Institution'}</h2>
         <InstitutionForm 
           formValues={newInstitution} 
           handleInputChange={handleInputChange} 
@@ -178,14 +178,14 @@ const AddInstitution = () => {
           errors={errors} 
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingInstitution : addNewInstitution} className="bg-green-500 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingInstitution : addNewInstitution} className="bg-primary px-5 text-white p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddInstitutionModal} className="bg-gray-500 text-white p-2 rounded">
+          <button onClick={closeAddInstitutionModal} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
             Cancel
           </button>
         </div>
-      </Modal>
+      </Modal> 
     </Layout>
   );
 };

@@ -1,17 +1,17 @@
 import './App.css';
+import { AuthProvider } from './hooks/authContext';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Sidebar from './components/sidebar';
 import CalendarPage from './pages/calendar';
 import AddInstitution from './pages/institutions/addInstitutions';
-import AddCounty from './pages/institutions/addCounties';
-import AddStatus from './pages/institutions/institutionstatus';
-import AddStages from './pages/institutions/institutionstages';
+import AddStatus from './pages/institutions/institutionStatus';
+import AddStages from './pages/institutions/institutionStages';
 import AddParticipant from './pages/participants/participant';
+import AddAwards from './pages/participants/participantAwards'
 import AddLevels from './pages/participants/participantLevels';
+import AddParticipantProject from './pages/participants/participantProjects'
 import AddHelper from './pages/helpers/helper';
 import AddHelperTypes from './pages/helpers/helperType';
 import DashboardStatsGrid from './pages/dashboard';
-import Footer from './components/footer';
 import AddDonor from './pages/project/donors';
 import AddProject from './pages/project/project';
 import AddProjectStatus from './pages/project/projectStatus';
@@ -29,23 +29,14 @@ import AddFeedback from './pages/research/feedback';
 import SignIn from './pages/signin';
 import Signup from './pages/signup'
 import Home from './pages/homepage';
-import Navbar from './components/navbar';
 import { DarkModeProvider } from './components/darkMode';
-
-const Layout = ({ children }) => (
-  <div className="flex">
-    <Sidebar />
-    <div className="flex-grow p-5 bg-gray-100 dark:bg-gray-800 min-h-screen">
-      {children}
-    </div>
-  </div>
-);
+import ProtectedRoute from './services/ProtectedRoute';
 
 function App() {
   return (
+    <AuthProvider>
     <DarkModeProvider>
       <BrowserRouter>
-        <Navbar />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/signin" element={<SignIn />} />
@@ -53,12 +44,13 @@ function App() {
           <Route exact path="/dashboard" element={<DashboardStatsGrid />} />
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/institutions/addInstitutions" element={<AddInstitution />} />
-          <Route path="/institutions/addCounties" element={<AddCounty />} />
           <Route path='/institutions/institutionStages' element={<AddStages />} />
           <Route path='/institutions/institutionStatus' element={<AddStatus />} />
           <Route path="/participants/participant" element={<AddParticipant />} />
           <Route path="/participants/participantLevels" element={<AddLevels />} />
-          <Route path="/helpers/helper" element={<AddHelper />} />
+    <Route path="/participants/awardParticipants" element={<AddAwards />} />
+    <Route path="/participants/participantsProjects" element={<AddParticipantProject />} />
+              <Route path="/helpers/helper" element={<AddHelper />} />
           <Route path="/helpers/helperType" element={<AddHelperTypes />} />
           <Route path="/partnership/partnership" element={<AddPartnership />} />
           <Route path="/partnership/partnertype" element={<AddPartnerTypes />} />
@@ -75,9 +67,9 @@ function App() {
           <Route path="/training/trainingCategory" element={<AddTrainingCategory />} />
           <Route path="/research/feedback" element={<AddFeedback />} />
         </Routes>
-        <Footer />
       </BrowserRouter>
     </DarkModeProvider>
+    </AuthProvider>
   );
 }
 

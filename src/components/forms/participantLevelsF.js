@@ -27,6 +27,16 @@ const LevelsForm = ({ formValues, handleInputChange, handleDateChange, errors })
           {errors.levelName && <p className="text-red-500">{errors.levelName[0]}</p>}
         </div>
         <div>
+          <label htmlFor="duration">Duration:</label>
+          <Input
+            name="duration"
+            placeholder="Duration"
+            value={formValues.duration}
+            onChange={handleInputChange}
+          />
+          {errors.notes && <p className="text-red-500">{errors.notes[0]}</p>}
+        </div>
+        <div>
           <label htmlFor="notes">Notes:</label>
           <Input
             name="notes"

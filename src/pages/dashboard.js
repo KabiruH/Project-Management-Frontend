@@ -1,11 +1,12 @@
 import React from "react";
 import Layout from '../components/layout'
+
 import { IoBagHandle, IoPieChart, IoPeople, IoCart } from "react-icons/io5";
 
 export default function DashboardStatsGrid() {
   return (
     <Layout>
-    <div className="flex gap-4 w-full ">
+    <div className="flex gap-4 ">
       <BoxWrapper>
         <div className="rounded-full h-12 w-12 flex items-center justify-center bg-sky-500">
           <IoBagHandle className="text-2xl text-white" />

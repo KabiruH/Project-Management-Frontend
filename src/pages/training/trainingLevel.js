@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import  {customStyles} from "../../styles/customStyles"
+
 import TrainingLevelForm from '../../components/forms/trainingLevelF';
 import TrainingLevelTable from '../../components/tables/trainingLevelT';
 import { addTrainingLevel as addTrainingLevelService, getTrainingLevelById, updateTrainingLevel, deleteTrainingLevel, getTrainingLevel } from '../../services/trainingLevelS';
@@ -146,8 +148,8 @@ const AddTrainingLevel = () => {
           deleteTrainingLevel={deleteTrainingLevelHandler}
         />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddTrainingLevelModal} contentLabel={editMode ? "Edit TrainingLevel" : "Add trainingLevel"}>
-        <h2 className="text-xl mb-4">{editMode ? 'Edit TrainingLevel' : 'Add TrainingLevel'}</h2>
+      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddTrainingLevelModal} contentLabel={editMode ? "Edit TrainingLevel" : "Add trainingLevel"}>
+        <h2 className="subtitle2 mb-4">{editMode ? 'Edit TrainingLevel' : 'Add TrainingLevel'}</h2>
         <TrainingLevelForm 
           formValues={newTrainingLevel} 
           handleInputChange={handleInputChange} 
@@ -155,10 +157,10 @@ const AddTrainingLevel = () => {
           errors={errors} 
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingTrainingLevel : addNewTrainingLevel} className="bg-green-500 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingTrainingLevel : addNewTrainingLevel} className="bg-primary -px-5 text-white p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddTrainingLevelModal} className="bg-gray-500 text-white p-2 rounded">
+          <button onClick={closeAddTrainingLevelModal} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
             Cancel
           </button>
         </div>

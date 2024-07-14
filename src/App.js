@@ -1,6 +1,6 @@
 import './App.css';
+import { AuthProvider } from './hooks/authContext';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Sidebar from './components/sidebar';
 import CalendarPage from './pages/calendar';
 import AddInstitution from './pages/institutions/addInstitutions';
 import AddStatus from './pages/institutions/institutionStatus';
@@ -12,7 +12,6 @@ import AddParticipantProject from './pages/participants/participantProjects'
 import AddHelper from './pages/helpers/helper';
 import AddHelperTypes from './pages/helpers/helperType';
 import DashboardStatsGrid from './pages/dashboard';
-import Footer from './components/footer';
 import AddDonor from './pages/project/donors';
 import AddProject from './pages/project/project';
 import AddProjectStatus from './pages/project/projectStatus';
@@ -30,23 +29,14 @@ import AddFeedback from './pages/research/feedback';
 import SignIn from './pages/signin';
 import Signup from './pages/signup'
 import Home from './pages/homepage';
-import Navbar from './components/navbar';
 import { DarkModeProvider } from './components/darkMode';
-
-const Layout = ({ children }) => (
-  <div className="flex">
-    <Sidebar />
-    <div className="flex-grow p-5 bg-gray-100 dark:bg-gray-800 min-h-screen">
-      {children}
-    </div>
-  </div>
-);
+import ProtectedRoute from './services/ProtectedRoute';
 
 function App() {
   return (
+    <AuthProvider>
     <DarkModeProvider>
       <BrowserRouter>
-        <Navbar />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/signin" element={<SignIn />} />
@@ -77,9 +67,9 @@ function App() {
           <Route path="/training/trainingCategory" element={<AddTrainingCategory />} />
           <Route path="/research/feedback" element={<AddFeedback />} />
         </Routes>
-        <Footer />
       </BrowserRouter>
     </DarkModeProvider>
+    </AuthProvider>
   );
 }
 

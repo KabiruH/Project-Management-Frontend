@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import  {customStyles} from "../../styles/customStyles"
+
 import TrainingCategoryForm from '../../components/forms/trainingCategoryF';
 import TrainingCategoryTable from '../../components/tables/trainingCategoryT';
 import { addTrainingCategory as addTrainingCategoryService, getTrainingCategoryById, updateTrainingCategory, deleteTrainingCategory, getTrainingCategory } from '../../services/trainingCategoryS';
@@ -145,8 +147,8 @@ const AddTrainingCategory = () => {
           deleteTrainingCategory={deleteTrainingCategoryHandler}
         />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddTrainingCategoryModal} contentLabel={editMode ? "Edit Category Types" : "Add trainingCategory"}>
-        <h2 className="text-xl mb-4">{editMode ? 'Edit Category Types' : 'Add Category Types'}</h2>
+      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddTrainingCategoryModal} contentLabel={editMode ? "Edit Category Types" : "Add trainingCategory"}>
+        <h2 className="subtitle2 mb-4">{editMode ? 'Edit Category Types' : 'Add Category Types'}</h2>
         <TrainingCategoryForm 
           formValues={newTrainingCategory} 
           handleInputChange={handleInputChange} 
@@ -154,10 +156,10 @@ const AddTrainingCategory = () => {
           errors={errors} 
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingTrainingCategory : addNewTrainingCategory} className="bg-green-500 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingTrainingCategory : addNewTrainingCategory} className="bg-primary px-5 text-white p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddTrainingCategoryModal} className="bg-gray-500 text-white p-2 rounded">
+          <button onClick={closeAddTrainingCategoryModal} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
             Cancel
           </button>
         </div>

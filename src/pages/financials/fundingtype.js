@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { customStyles } from '../../styles/customStyles';
 import FundingTypeForm from '../../components/forms/fundingTypeF';
 import FundingTypeTable from '../../components/tables/fundingTypeT';
 import { addFundingType as addFundingTypeService, getFundingTypeById, updateFundingType, deleteFundingType, getFundingType } from '../../services/fundingTypeS';
@@ -146,8 +147,8 @@ const AddFundingType = () => {
           deleteFundingType={deleteFundingTypeHandler}
         />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddFundingTypeModal} contentLabel={editMode ? "Edit FundingType" : "Add fundingtype"}>
-        <h2 className="text-xl mb-4">{editMode ? 'Edit FundingType' : 'Add FundingType'}</h2>
+      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddFundingTypeModal} contentLabel={editMode ? "Edit FundingType" : "Add fundingtype"}>
+        <h2 className="subtitle2 mb-4">{editMode ? 'Edit FundingType' : 'Add FundingType'}</h2>
         <FundingTypeForm 
           formValues={newFundingType} 
           handleInputChange={handleInputChange} 
@@ -155,10 +156,10 @@ const AddFundingType = () => {
           errors={errors} 
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingFundingType : addNewFundingType} className="bg-green-500 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingFundingType : addNewFundingType} className="bg-primary px-5 text-white p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddFundingTypeModal} className="bg-gray-500 text-white p-2 rounded">
+          <button onClick={closeAddFundingTypeModal} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
             Cancel
           </button>
         </div>

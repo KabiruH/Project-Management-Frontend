@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { customStyles } from '../../styles/customStyles';
 import BudgetForm from '../../components/forms/budgetF';
 import BudgetTable from '../../components/tables/budgetT';
 import { addBudget as addBudgetService, getBudgetById, updateBudget, deleteBudget, getBudgets } from '../../services/budgetS';
@@ -161,8 +162,8 @@ const AddBudget = () => {
           deleteBudget={deleteBudgetHandler}
         />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddBudgetModal} contentLabel={editMode ? "Edit Budget" : "Add Budget"}>
-        <h2 className="text-xl mb-4">{editMode ? 'Edit Budget' : 'Add Budget'}</h2>
+      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddBudgetModal} contentLabel={editMode ? "Edit Budget" : "Add Budget"}>
+        <h2 className="subtitle2 mb-4">{editMode ? 'Edit Budget' : 'Add Budget'}</h2>
         <BudgetForm 
           formValues={newBudget} 
           handleInputChange={handleInputChange} 
@@ -170,10 +171,10 @@ const AddBudget = () => {
           errors={errors} 
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingBudget : addNewBudget} className="bg-green-500 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingBudget : addNewBudget} className="bg-primary px-5 text-white p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddBudgetModal} className="bg-gray-500 text-white p-2 rounded">
+          <button onClick={closeAddBudgetModal} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
             Cancel
           </button>
         </div>

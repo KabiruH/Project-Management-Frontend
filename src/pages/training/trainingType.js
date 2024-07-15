@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import  {customStyles} from "../../styles/customStyles"
+
 import TrainingTypeForm from '../../components/forms/trainingTypeF';
 import TrainingTypeTable from '../../components/tables/trainingTypeT';
 import { addTrainingType as addTrainingTypeService, getTrainingTypeById, updateTrainingType, deleteTrainingType, getTrainingType } from '../../services/trainingTypeS';
@@ -146,7 +148,7 @@ const AddTrainingType = () => {
           deleteTrainingType={deleteTrainingTypeHandler}
         />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddTrainingTypesModal} contentLabel={editMode ? "Edit Training Types" : "Add trainingtype"}>
+      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddTrainingTypesModal} contentLabel={editMode ? "Edit Training Types" : "Add trainingtype"}>
         <h2 className="text-xl mb-4">{editMode ? 'Edit Training Types' : 'Add Training Types'}</h2>
         <TrainingTypeForm 
           formValues={newTrainingTypes} 
@@ -155,10 +157,10 @@ const AddTrainingType = () => {
           errors={errors} 
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingTrainingTypes : addNewTrainingTypes} className="bg-green-500 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingTrainingTypes : addNewTrainingTypes} className="bg-primary px-5 text-white p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddTrainingTypesModal} className="bg-gray-500 text-white p-2 rounded">
+          <button onClick={closeAddTrainingTypesModal} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
             Cancel
           </button>
         </div>

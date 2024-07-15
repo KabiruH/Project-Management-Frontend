@@ -55,7 +55,7 @@ const CalendarPage = () => {
 
   return (
     <Layout>
-    <div className="calendar-page p-5 h-screen flex flex-col items-center bg-gray-50">
+    <div className="calendar-page p-5 h-full flex flex-col items-center">
       <h1 className="text-2xl mb-4">Calendar</h1>
       <div className="w-full flex justify-center">
         <Calendar

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { customStyles } from '../../styles/customStyles';
 import LevelsForm from '../../components/forms/participantLevelsF';
 import LevelsTable from '../../components/tables/participantLevelT';
 import { addLevels as addLevelsService, getLevelsById, updateLevels, deleteLevels, getLevels } from '../../services/participantLevelsS';
@@ -149,8 +150,8 @@ const AddLevels = () => {
           deleteLevels={deleteLevelsHandler}
         />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddLevelsModal} contentLabel={editMode ? "Edit Levels" : "Add levels"}>
-        <h2 className="text-xl mb-4">{editMode ? 'Edit Levels' : 'Add Levels'}</h2>
+      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddLevelsModal} contentLabel={editMode ? "Edit Levels" : "Add levels"}>
+        <h2 className="subtitle2 mb-4">{editMode ? 'Edit Levels' : 'Add Levels'}</h2>
         <LevelsForm 
           formValues={newLevels} 
           handleInputChange={handleInputChange} 
@@ -158,10 +159,10 @@ const AddLevels = () => {
           errors={errors} 
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingLevels : addNewLevels} className="bg-green-500 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingLevels : addNewLevels} className="bg-primary px-5 text-white p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddLevelsModal} className="bg-gray-500 text-white p-2 rounded">
+          <button onClick={closeAddLevelsModal} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
             Cancel
           </button>
         </div>

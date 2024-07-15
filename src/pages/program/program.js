@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { customStyles } from '../../styles/customStyles';
 import ProgramForm from '../../components/forms/programF';
 import ProgramTable from '../../components/tables/programT';
 import { addPrograms as addProgramService, getProgramsById, updatePrograms, deletePrograms, getPrograms } from '../../services/programS';
@@ -158,8 +159,8 @@ const AddProgram = () => {
           deletePrograms={deleteProgramsHandler}
         />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddProgramModal} contentLabel={editMode ? "Edit Program" : "Add Program"}>
-        <h2 className="text-xl mb-4">{editMode ? 'Edit Program' : 'Add Program'}</h2>
+      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddProgramModal} contentLabel={editMode ? "Edit Program" : "Add Program"}>
+        <h2 className="subtitle2 mb-4">{editMode ? 'Edit Program' : 'Add Program'}</h2>
         <ProgramForm 
           formValues={newProgram} 
           handleInputChange={handleInputChange} 
@@ -167,10 +168,10 @@ const AddProgram = () => {
           errors={errors} 
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingProgram : addNewProgram} className="bg-green-500 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingProgram : addNewProgram} className="bg-primary px-5 text-white p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddProgramModal} className="bg-gray-500 text-white p-2 rounded">
+          <button onClick={closeAddProgramModal} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
             Cancel
           </button>
         </div>

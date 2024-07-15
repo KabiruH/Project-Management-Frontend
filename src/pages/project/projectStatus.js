@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import {customStyles} from "../../styles/customStyles"
 import ProjectStatusForm from '../../components/forms/projectStatusF';
 import ProjectStatusTable from '../../components/tables/projectStatusT';
 import { addProjectStatus, getProjectStatusById, updateProjectStatus, deleteProjectStatus, getProjectStatuses } from '../../services/projectStatusS';
@@ -141,18 +142,18 @@ const AddProjectStatus = () => {
           deleteStatus={deleteProjectStatusHandler}
         />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddProjectStatusModal} contentLabel={editMode ? "Edit Project Status" : "Add Project Status"}>
-        <h2 className="text-xl mb-4">{editMode ? 'Edit Project Status' : 'Add Project Status'}</h2>
+      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddProjectStatusModal} contentLabel={editMode ? "Edit Project Status" : "Add Project Status"}>
+        <h2 className="subtitle2 mb-4">{editMode ? 'Edit Project Status' : 'Add Project Status'}</h2>
         <ProjectStatusForm
           formValues={newProjectStatus}
           handleInputChange={handleInputChange}
           errors={errors}
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingProjectStatus : addNewProjectStatus} className="bg-green-500 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingProjectStatus : addNewProjectStatus} className="bg-primary px-5 text-white p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddProjectStatusModal} className="bg-gray-500 text-white p-2 rounded">
+          <button onClick={closeAddProjectStatusModal} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
             Cancel
           </button>
         </div>

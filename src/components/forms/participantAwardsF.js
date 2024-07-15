@@ -4,9 +4,7 @@ import styles from '../../styles/modal.module.css';
 import { getParticipantById } from '../../services/participantS';
 
 const AwardsForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
-    const [studentName, setStudentName] = useState('');
-  const [awardLevel, setAwardLevel] = useState('');
-
+   
   const handleAdminInputChange  = async (e) => {
     const { value } = e.target;
     handleInputChange(e); // Update the adminNo field value
@@ -14,9 +12,9 @@ const AwardsForm = ({ formValues, handleInputChange, handleDateChange, errors })
       try {
         const participant = await getParticipantById(value);
         if (participant) {
-          setStudentName({ target: { name: 'name', value: participant.name } });
+          handleInputChange({ target: { name: 'name', value: participant.name } });
           handleInputChange({ target: { name: 'institutionName', value: participant.institutionName } });
-          setAwardLevel({ target: { name: 'awardName', value: participant.awardLevel } });
+          handleInputChange({ target: { name: 'levelName', value: participant.levelName } });
         }
       } catch (error) {
         console.error('Error fetching participant data:', error);
@@ -48,15 +46,15 @@ const AwardsForm = ({ formValues, handleInputChange, handleDateChange, errors })
   {errors.adminNo && <p className="text-red-500">{errors.adminNo[0]}</p>}
 </div>
         <div>
-          <label htmlFor="studentName">Student Name:</label>
+          <label htmlFor="name">Student Name:</label>
           <Input
-            name="studentName"
+            name="name"
             placeholder="Student Name"
-            value={formValues.studentName}
+            value={formValues.name}
             onChange={handleInputChange}
             disabled 
           />
-          {errors.studentName && <p className="text-red-500">{errors.name[0]}</p>}
+          {errors.studentName && <p className="text-red-500">{errors.studentName[0]}</p>}
         </div>
         <div>
           <label htmlFor="institutionID">Institution:</label>
@@ -71,15 +69,15 @@ const AwardsForm = ({ formValues, handleInputChange, handleDateChange, errors })
         </div>
 
         <div>
-          <label htmlFor="awardLevel">Award Level:</label>
+          <label htmlFor="levelName">Award Level:</label>
           <Input
-            name="awardLevel"
+            name="levelName"
             placeholder="Award Level"
-            value={formValues.awardLevel}
+            value={formValues.levelName}
             onChange={handleInputChange}
             disabled 
           />
-          {errors.awardName && <p className="text-red-500">{errors.awardName[0]}</p>}
+          {errors.levelName && <p className="text-red-500">{errors.levelName[0]}</p>}
         </div>
         
         <div>

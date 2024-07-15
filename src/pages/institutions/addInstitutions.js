@@ -18,7 +18,7 @@ const AddInstitution = () => {
     institutionEmail: '',
     institutionContact: '',
     subCounty: '',
-    countyID: '',
+    countyName: '',
     contactPerson: '',
     contactNumber: '',
     licenseStartDate: '',
@@ -35,6 +35,7 @@ const AddInstitution = () => {
       try {
         const fetchedInstitutions = await getInstitutions();
         setInstitutions(fetchedInstitutions);
+        console.log(fetchedInstitutions)
       } catch (error) {
         console.error('Error fetching institutions:', error.response.data);
       }
@@ -86,7 +87,7 @@ const AddInstitution = () => {
       institutionEmail: '',
       institutionContact: '',
       subCounty: '',
-      countyID: '',
+      countyName: '',
       contactPerson: '',
       contactNumber: '',
       licenseStartDate: '',

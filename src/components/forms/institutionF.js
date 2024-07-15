@@ -58,6 +58,7 @@ useEffect(() => {
     try {
       const countyData = await getCounty();
       setCounties(countyData);
+      // console.log(countyData)
     } catch (error) {
       console.error('Error fetching counties:', error);
     }
@@ -65,16 +66,27 @@ useEffect(() => {
   fetchCounties();
 }, []);
 
+const getCountyNameById = (countyID) => {
+  const county = counties.find(c => c.countyID === countyID);
+  return county ? county.countyName : 'Unknown';
+};
+
+
 const handleCountyChange = async (event) => {
   const countyID = event.target.value;
+  const countyName = counties.find(c => c.countyID === countyID)?.countyName || '';
   console.log('Selected County ID:', countyID); // Log the countyID for debugging
-  handleInputChange(event); // Update form values with selected county ID
-
+  
+  // Update form values with selected county ID and county name
+  handleInputChange({ target: { name: 'countyID', value: countyID } });
+  handleInputChange({ target: { name: 'countyName', value: countyName } });
+  
+  
   if (countyID) {
     try {
       const subCountyData = await getSubCounty(countyID);
       setSubCounties(subCountyData);
-      console.log('Sub-counties fetched:', subCountyData);
+      // console.log('Sub-counties fetched:', subCountyData);
     } catch (error) {
       console.error('Error fetching sub-counties:', error);
       setSubCounties([]); // Clear sub-counties in case of an error
@@ -196,23 +208,23 @@ const handleDateChange = (event) => {
           {errors.institutionContact && <p className="text-red-500">{errors.institutionContact[0]}</p>}
         </div>
     
-      <div>
-        <label htmlFor="county">County:</label>
-        <select
-          id="countyID"
-          name="countyID"
-          value={formValues.countyID}
-          onChange={handleCountyChange} 
-          className="w-full p-2 border border-gray-300 rounded"
-        >
-          <option value="">Select County</option>
-          {counties.map((county) => (
-            <option key={county.countyID} value={county.countyID}>
-              {county.countyName}
-            </option>
-          ))}
-        </select>
-      </div>
+        <div>
+          <label htmlFor="county">County:</label>
+          <select
+            id="countyName"
+            name="countyName"
+            value={formValues.countyID} // Ensure this is countyID, not countyName
+            onChange={handleCountyChange}
+            className="w-full p-2 border border-gray-300 rounded"
+          >
+            <option value="">Select County</option>
+            {counties.map((county) => (
+              <option key={county.countyName} value={county.countyID}>
+                {county.countyName}
+              </option>
+            ))}
+          </select>
+        </div>
      
      
       <div>

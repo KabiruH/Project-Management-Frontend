@@ -4,7 +4,7 @@ import Table from '../common/Table';
 const columns = [
   { Header: 'AwardID', accessor: 'awardID' },
   { Header: 'AdminNo', accessor: 'adminNo' },
-  { Header: 'Student Name', accessor: 'studentName' },
+  { Header: 'Name', accessor: 'name' },
   { Header: 'Institution Name', accessor: 'institutionName' },
   { Header: 'Level Name', accessor: 'levelName' },
   { Header: 'Start Date', accessor: 'startDate' },

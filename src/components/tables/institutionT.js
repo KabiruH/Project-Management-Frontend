@@ -9,7 +9,7 @@ const columns = [
   { Header: 'Email', accessor: 'institutionEmail' },
   { Header: 'Contact', accessor: 'institutionContact' },
   { Header: 'Sub-County', accessor: 'subCounty' },
-  { Header: 'County', accessor: 'countyID' },
+  { Header: 'County Name', accessor: 'countyName' },
   { Header: 'Contact Person', accessor: 'contactPerson' },
   { Header: 'Contact Number', accessor: 'contactNumber' },
   { Header: 'License Startdate', accessor: 'licenseStartDate' },

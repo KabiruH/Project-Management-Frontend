@@ -14,7 +14,7 @@ const AddAwards = () => {
 
         awardID: '',
         adminNo: '',
-        studentName: '',
+        name: '',
         institutionName: '',
         levelName: '',
         startDate: '',
@@ -61,7 +61,7 @@ const AddAwards = () => {
             const awardsPayload = {
                 awardID: String(newAwards.awardID), // Ensure awardID is a string
                 adminNo: newAwards.adminNo,
-                studentName: newAwards.studentName,
+                name: newAwards.name,
                 institutionName: newAwards.institutionName,
                 levelName: newAwards.levelName,
                 startDate: newAwards.startDate,
@@ -88,7 +88,7 @@ const AddAwards = () => {
         setnewAwards({
             awardID: '',
             adminNo: '',
-            studentName: '',
+            name: '',
             institutionName: '',
             levelName: '',
             startDate: '',

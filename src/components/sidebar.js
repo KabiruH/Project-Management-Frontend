@@ -41,7 +41,7 @@ const Sidebar = ({isOpen, onClose}) => {
       dropdown: [
         { name: 'Participant', path: '/participants/participant' },
         { name: 'Levels', path: '/participants/participantLevels' },
-        { name: 'Award Participants', path: '/participants/awardParticipants' },
+        { name: 'Participants Award', path: '/participants/awardParticipants' },
         { name: 'Participant Projects', path: '/participants/participantsProjects' }
       ]
     },
@@ -50,7 +50,6 @@ const Sidebar = ({isOpen, onClose}) => {
       path: '',
       icon: <FaProjectDiagram />,
       dropdown: [
-        { name: 'Projects', path: '/project/project' },
         { name: 'Projects', path: '/project/project' },
         { name: 'Status', path: '/project/projectStatus' },
         { name: 'Testimonials', path: '/project/testimonials' },

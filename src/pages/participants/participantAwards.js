@@ -11,10 +11,11 @@ const AddAwards = () => {
     const [awards, setAwards] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newAwards, setnewAwards] = useState({
+        
 
         awardID: '',
         adminNo: '',
-        name: '',
+        studentName: '',
         institutionName: '',
         levelName: '',
         startDate: '',
@@ -61,7 +62,7 @@ const AddAwards = () => {
             const awardsPayload = {
                 awardID: String(newAwards.awardID), // Ensure awardID is a string
                 adminNo: newAwards.adminNo,
-                name: newAwards.name,
+                studentName: newAwards.studentName,
                 institutionName: newAwards.institutionName,
                 levelName: newAwards.levelName,
                 startDate: newAwards.startDate,
@@ -88,7 +89,7 @@ const AddAwards = () => {
         setnewAwards({
             awardID: '',
             adminNo: '',
-            name: '',
+            studentName: '',
             institutionName: '',
             levelName: '',
             startDate: '',

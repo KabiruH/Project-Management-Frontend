@@ -3,6 +3,7 @@ import Input from '../common/Input';
 import styles from '../../styles/modal.module.css';
 import { getInstitutions } from '../../services/institutionS'
 import { getLevels } from '../../services/participantLevelsS'
+import { getCounty, getSubCounty } from '../../services/countiesS'
 
 const ParticipantForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
 
@@ -10,6 +11,8 @@ const ParticipantForm = ({ formValues, handleInputChange, handleDateChange, erro
   const [loading, setLoading] = useState(true);
   const [levels, setLevels] = useState([]);
   const [loadingLevels, setLoadingLevels] = useState(false);
+  const [counties, setCounties] = useState([]);
+  const [subCounties, setSubCounties] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +34,6 @@ const ParticipantForm = ({ formValues, handleInputChange, handleDateChange, erro
       try {
         const fetchedLevels = await getLevels();
         setLevels(fetchedLevels);
-        console.log(fetchedLevels); // Log fetched levels to ensure data structure
       } catch (error) {
         console.error('Error fetching award levels:', error);
       } finally {
@@ -41,6 +43,47 @@ const ParticipantForm = ({ formValues, handleInputChange, handleDateChange, erro
     fetchLevels();
   }, []);
 
+  //Fetch counties and subcounties
+useEffect(() => {
+  // Fetch counties when component mounts
+  const fetchCounties = async () => {
+    try {
+      const countyData = await getCounty();
+      setCounties(countyData);
+      // console.log(countyData)
+    } catch (error) {
+      console.error('Error fetching counties:', error);
+    }
+  };
+  fetchCounties();
+}, []);
+
+
+
+const handleCountyChange = async (event) => {
+  const county = event.target.value;
+  const countyName = counties.find(c => c.county === county)?.county || '';
+  console.log('Selected County ID:', county); // Log the countyID for debugging
+  
+  // Update form values with selected county ID and county name
+  if (county && counties.find(c => c.county === county)) {
+    handleInputChange({ target: { name: 'county', value: county } });
+  }
+  
+  
+  if (county) {
+    try {
+      const subCountyData = await getSubCounty(county);
+      setSubCounties(subCountyData);
+      // console.log('Sub-counties fetched:', subCountyData);
+    } catch (error) {
+      console.error('Error fetching sub-counties:', error);
+      setSubCounties([]); // Clear sub-counties in case of an error
+    }
+  } else {
+    setSubCounties([]);
+  }
+};
 
   return (
     <form className={styles.form}>
@@ -131,28 +174,47 @@ const ParticipantForm = ({ formValues, handleInputChange, handleDateChange, erro
           )}
           {errors.institutionID && <p className="text-red-500">{errors.institutionID[0]}</p>}
         </div>
+       
+        <div>
+        <label htmlFor="county">County:</label>
+        <select
+  id="county"
+  name="countyID"
+  value={formValues.countyID}
+  onChange={handleCountyChange}
+  className="w-full p-2 border border-gray-300 rounded"
+>
+  <option value="">Select County</option>
+  {counties.map((county) => (
+    <option key={county.countyID} value={county.countyID}>
+      {county.countyName}
+    </option>
+  ))}
+</select>
+        {errors.county && <p className="text-red-500">{errors.county[0]}</p>}
+      </div>
 
         <div>
-          <label htmlFor="subCounty">Sub County:</label>
-          <Input
-            name="subCounty"
-            placeholder="Sub County"
-            value={formValues.subCounty}
-            onChange={handleInputChange}
-          />
-          {errors.subCounty && <p className="text-red-500">{errors.subCounty[0]}</p>}
-        </div>
-        <div>
-          <label htmlFor="county">County:</label>
-          <Input
-            name="county"
-            placeholder="County"
-            value={formValues.county}
-            onChange={handleInputChange}
-          />
-          {errors.county && <p className="text-red-500">{errors.county[0]}</p>}
-        </div>
-
+        <label htmlFor="subCounty">Sub-County:</label>
+        <select
+          id="subCounty"
+          name="subCounty"
+          value={formValues.subCountyID}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+        >
+          <option value="">Select Sub-County</option>
+          {subCounties.length === 0 ? (
+            <option value="">Loading Sub-Counties...</option>
+          ) : (
+            subCounties.map((subCounty) => (
+              <option key={subCounty.SubCountyID} value={subCounty.SubCountyName}>
+                {subCounty.SubCountyName}
+              </option>
+            ))
+          )}
+        </select>
+      </div>
 
         <div>
           <label htmlFor="awardLevel">Award Level:</label>

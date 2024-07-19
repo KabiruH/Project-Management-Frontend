@@ -110,7 +110,7 @@ const Sidebar = ({isOpen, onClose}) => {
       name: 'Reports',
       path: '',
       icon: <TbFileReport />,
-      dropdown: [{name: 'Participants'}, 'Institutions', 'Financial Reports']
+      dropdown: [{name: 'Users',path: '/reports/users'}]
     },
     {
       name: 'Users',

@@ -154,7 +154,8 @@ const AddInstitution = () => {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-bold mb-4">Institutions</h1>
+<div className=''>
+<h1 className="text-2xl font-bold mb-4">Institutions</h1>
       <div className="p-4">
         <button
           onClick={()=>setIsModalOpen(true)}
@@ -162,15 +163,17 @@ const AddInstitution = () => {
         >
           Add Institution
         </button>
+     
         <InstitutionTable
           institutions={institutions}
           openEditModal={openEditInstitutionModal}
           deleteInstitution={deleteInstitutionHandler}
         />
       </div>
+
   
       <Modal isOpen={isModalOpen} onRequestClose={closeAddInstitutionModal} contentLabel={editMode ? "Edit Institution" : "Add Institution"} style={customStyles}>
-        <h2 className="subtitle1 mb-4">{editMode ? 'Edit Institution' : 'Add Institution'}</h2>
+        <h2 className="subtitle1 mb-4">{editMode ? 'Edit Institution' : 'Add  '}</h2>
         <InstitutionForm 
           formValues={newInstitution} 
           handleInputChange={handleInputChange} 
@@ -186,6 +189,7 @@ const AddInstitution = () => {
           </button>
         </div>
       </Modal> 
+</div>
     </Layout>
   );
 };

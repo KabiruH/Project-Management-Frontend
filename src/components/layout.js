@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div className="relative max-width-screen h-full">
+    <div className="relative max-width-screen pr-3 h-full">
       <div className="w-full md:hidden py-3 pl-4 sticky top-0 z-[100] bg-white mb-1">
         <IoMenu
           type="button"

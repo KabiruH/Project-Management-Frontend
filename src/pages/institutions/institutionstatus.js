@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { FaPlus } from "react-icons/fa6";
+
 import { customStyles } from '../../styles/customStyles';
 import StatusForm from '../../components/forms/institutionStatusF';
 import StatusTable from '../../components/tables/institutionStatusT';
@@ -137,9 +139,9 @@ const AddStatus = () => {
       <div className="p-4">
         <button
           onClick={openAddStatusModal}
-          className="bg-blue-500 text-white p-2 rounded mb-4"
+          className="bg-blue-500 text-white p-2 rounded mb-4 ml-auto  flex justify-center items-center gap-2"
         >
-          Add status
+           <span>status</span><FaPlus/>
         </button>
         <StatusTable
           status={status}

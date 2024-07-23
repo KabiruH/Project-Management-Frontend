@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react';
 import Input from '../common/Input';
 import styles from '../../styles/modal.module.css';
 import { getParticipantById } from '../../services/participantS';
-import { getProjects } from '../../services/projectService'
+import { getProjects } from '../../services/projectService';
 
 const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, errors }) => {
-  const [projects, setProjects] = useState([]);
+  const [allProjects, setAllProjects] = useState([]);
+  const [filteredProjects, setFilteredProjects] = useState([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const fetchedProjects = await getProjects();
-        setProjects(fetchedProjects);
-        console.log(fetchedProjects)
+        setAllProjects(fetchedProjects);
       } catch (error) {
         console.error('Error fetching projects:', error);
       } finally {
@@ -40,6 +40,9 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
             institutionName: participant.institutionName,
             projects: participant.projects || [],
           }));
+          // Filter projects based on the participant's institution
+          const institutionProjects = allProjects.filter(project => project.institutionName === participant.institutionName);
+          setFilteredProjects(institutionProjects);
         }
       } catch (error) {
         console.error('Error fetching participant details:', error);
@@ -105,11 +108,11 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
             <select
               name="projects"
               multiple
-              value={formValues.projectName}
+              value={formValues.projects}
               onChange={handleProjectSelectChange}
               className="w-full p-2 border border-gray-300 rounded"
             >
-              {projects.map((project) => (
+              {filteredProjects.map((project) => (
                 <option key={project.projectID} value={project.projectID}>
                   {project.projectName}
                 </option>

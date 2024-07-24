@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {customStyles} from "../../styles/customStyles"
+import { FaPlus } from "react-icons/fa6";
+
 import InstitutionForm from '../../components/forms/institutionF';
 import InstitutionTable from '../../components/tables/institutionT';
 import { addInstitution as addInstitutionService, getInstitutionById, updateInstitution, deleteInstitution, getInstitutions } from '../../services/institutionS';
@@ -154,23 +156,27 @@ const AddInstitution = () => {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-bold mb-4">Institutions</h1>
+<div className=''>
+<h1 className="text-2xl font-[600] ml-3 mb-4">Institutions</h1>
       <div className="p-4">
         <button
           onClick={()=>setIsModalOpen(true)}
-          className="bg-blue-500 text-white p-2 rounded mb-4"
+          className="bg-blue-500 ml-auto text-white p-2 flex justify-center items-center gap-2 rounded mb-4"
         >
-          Add Institution
+           <span>Institution</span>
+           <FaPlus /> 
         </button>
+     
         <InstitutionTable
           institutions={institutions}
           openEditModal={openEditInstitutionModal}
           deleteInstitution={deleteInstitutionHandler}
         />
       </div>
+
   
       <Modal isOpen={isModalOpen} onRequestClose={closeAddInstitutionModal} contentLabel={editMode ? "Edit Institution" : "Add Institution"} style={customStyles}>
-        <h2 className="subtitle1 mb-4">{editMode ? 'Edit Institution' : 'Add Institution'}</h2>
+        <h2 className="subtitle1 mb-4">{editMode ? 'Edit Institution' : 'Add  '}</h2>
         <InstitutionForm 
           formValues={newInstitution} 
           handleInputChange={handleInputChange} 
@@ -186,6 +192,7 @@ const AddInstitution = () => {
           </button>
         </div>
       </Modal> 
+</div>
     </Layout>
   );
 };

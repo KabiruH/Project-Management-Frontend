@@ -15,7 +15,7 @@ import { FaUsers } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 
 const Sidebar = ({isOpen, onClose}) => {
-  const [dropdown, setDropdown] = useState({});
+  const [dropdown, setDropdown] = useState({ name: 'Dashboard', path: '/dashboard', icon: <FaHome /> });
   const [logoutModal,setLogoutModal] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
@@ -112,7 +112,7 @@ const Sidebar = ({isOpen, onClose}) => {
       name: 'Reports',
       path: '',
       icon: <TbFileReport />,
-      dropdown: [{name: 'Participants'}, 'Institutions', 'Financial Reports']
+      dropdown: [{name: 'Users',path: '/reports/users'}]
     },
     {
       name: 'Users',
@@ -165,7 +165,7 @@ console.log(localItem,dropdown)
        return setDropdown(item)
       } } className='ml-auto' /> : '' }
     </button>
-    {dropdown.name == item.name || localItem == item.name ? <div className='w-full'>{
+    {dropdown.name == item.name || localItem == item.name ? <div className='w-[90%]'>{
       <ul>
         {item.dropdown?.map((d,i)=>{
           return(<li key={i} className={(location.pathname == d.path) ? 'body1 text-main' :"body1 text-greys mr-3"  }>

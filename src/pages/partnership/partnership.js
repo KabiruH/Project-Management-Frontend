@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { FaPlus } from "react-icons/fa6";
+
 import { customStyles } from '../../styles/customStyles';
 import PartnershipForm from '../../components/forms/partnershipF';
 import PartnershipTable from '../../components/tables/partnershipT';
@@ -132,9 +134,9 @@ const AddPartnership = () => {
       <div className="p-4">
         <button
           onClick={openAddPartnershipModal}
-          className="bg-blue-500 text-white p-2 rounded mb-4"
+          className="bg-blue-500 text-white p-2 rounded mb-4 flex justify-center items-center ml-auto gap-2"
         >
-          Add Partnership
+             <span>Partnership</span> <FaPlus /> 
         </button>
         <PartnershipTable
           partnerships={partnerships}

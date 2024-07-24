@@ -7,8 +7,7 @@ import { GiReceiveMoney } from "react-icons/gi";
 import { FaLayerGroup } from "react-icons/fa";
 import { GiArchiveResearch } from "react-icons/gi";
 import { TbFileReport } from "react-icons/tb";
-import { customStyles } from '../styles/customStyles';
-import Modal from "react-modal"
+
 import { FaUsers } from "react-icons/fa";
 
 
@@ -188,26 +187,8 @@ console.log(localItem,dropdown)
       })}
 
       </ul>
-      <div onClick={()=>setLogoutModal(true)} className="w-full flex justify-center items-center p-2 mt-3 rounded cursor-pointer bg-primary  hover:text-white transition-colors duration-300"><span className='font-semibold text-white' >Logout</span></div>
     </div>
-    <Modal style={customStyles} isOpen={logoutModal} onRequestClose={()=>setLogoutModal(false)} contentLabel='Logout'>
-       <div className='flex justify-center items-center flex-col h-full'>
-       <h2 className="subtitle2 mb-4">Goodbye!! </h2>
-       Are you sure you want to Logout?
-        <div className="flex justify-end mt-4">
-          <button onClick={()=>{
-            localStorage.clear()
-            setLogoutModal(false)
-            navigate('/signin')
-          }} className="bg-primary px-5 text-white p-2 rounded mr-2">
-           Yes
-          </button>
-          <button onClick={()=>setLogoutModal(false)} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
-            No
-          </button>
-        </div>
-       </div>
-      </Modal>
+   
     </>
   );
 };

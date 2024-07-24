@@ -29,7 +29,6 @@ const Sidebar = ({isOpen, onClose}) => {
       path: '',
       dropdown: [
         { name: 'Institution', path: '/institutions/addInstitutions' },
-      
         { name: 'Status', path: '/institutions/institutionStatus' },
         { name: 'Stages', path: '/institutions/institutionStages' },
       ]
@@ -40,7 +39,9 @@ const Sidebar = ({isOpen, onClose}) => {
       icon: <FaUser />,
       dropdown: [
         { name: 'Participant', path: '/participants/participant' },
-        { name: 'Levels', path: '/participants/participantLevels' }
+        { name: 'Levels', path: '/participants/participantLevels' },
+        { name: 'Award Participants', path: '/participants/awardParticipants' },
+        { name: 'Participant Projects', path: '/participants/participantsProjects' }
       ]
     },
     {
@@ -48,6 +49,7 @@ const Sidebar = ({isOpen, onClose}) => {
       path: '',
       icon: <FaProjectDiagram />,
       dropdown: [
+        { name: 'Projects', path: '/project/project' },
         { name: 'Projects', path: '/project/project' },
         { name: 'Status', path: '/project/projectStatus' },
         { name: 'Testimonials', path: '/project/testimonials' },

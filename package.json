@@ -14,6 +14,8 @@
     "@mui/material": "^5.15.20",
     "@progress/telerik-jquery-report-viewer": "^22.24.709",
     "@progress/telerik-react-report-viewer": "^22.24.709",
+
+    "@mui/lab": "^5.0.0-alpha.171",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -76,5 +78,6 @@
     "plugins": [
       "@babel/plugin-proposal-private-property-in-object"
     ]
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

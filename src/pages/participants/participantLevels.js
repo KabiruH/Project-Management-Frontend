@@ -16,6 +16,7 @@ const AddLevels = () => {
   const [newLevels, setNewLevels] = useState({
     levelID: '',
     levelName: '',
+    duration: '',
     notes: '',
   });
   const [errors, setErrors] = useState({});
@@ -56,6 +57,7 @@ const AddLevels = () => {
       const levelsPayload = {
         levelID: String(newLevels.levelID), // Ensure LevelsID is a string
         levelName: newLevels.levelName,
+        duration: newLevels.duration,
         notes: newLevels.notes,
       };
   
@@ -77,6 +79,7 @@ const AddLevels = () => {
     setNewLevels({
       levelID: '',
       levelName: '',
+      duration: '',
       notes: '',
     });
   };

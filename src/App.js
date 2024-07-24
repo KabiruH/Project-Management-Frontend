@@ -45,7 +45,7 @@ function App() {
           <Route path="/dashboard" element={<ProtectedRoute element={DashboardStatsGrid} />} />
           <Route path="/calendar" element={<ProtectedRoute element={CalendarPage}/>} />
           <Route path="/institutions/addInstitutions" element={<ProtectedRoute element={AddInstitution} />} />
-          <Route path="/institutions/addCounties" element={<ProtectedRoute element={AddCounty} />} />
+          {/* <Route path="/institutions/addCounties" element={<ProtectedRoute element={AddCounty} />} /> */}
           <Route path='/institutions/institutionStages' element={<ProtectedRoute element={AddStages} />} />
           <Route path='/institutions/institutionStatus' element={<ProtectedRoute element={AddStatus} />} />
           <Route path="/participants/participant" element={<ProtectedRoute element={AddParticipant} />} />

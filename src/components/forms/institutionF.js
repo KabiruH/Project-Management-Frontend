@@ -3,15 +3,18 @@ import Input from '../common/Input';
 import styles from '../../styles/modal.module.css'; // Correct import for CSS modules
 import { getStages } from '../../services/institutionStageS'
 import { getStatus } from '../../services/institutionStatusS'
+import { getCounty, getSubCounty } from '../../services/countiesS'
 
-const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
+const InstitutionForm = ({ formValues, handleInputChange, errors }) => {
 
   const [stages, setStages] = useState([]);
   const [statuses, setStatuses] = useState([]);
   const [loadingStages, setLoadingStages] = useState(true);
   const [loadingStatuses, setLoadingStatuses] = useState(true);
+  const [counties, setCounties] = useState([]);
+  const [subCounties, setSubCounties] = useState([]);
 
-
+// Fetch stages
   useEffect(() => {
     const fetchStages = async () => {
       setLoadingStages(true); // Set loading to true initially
@@ -29,13 +32,15 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
 
   }, []);
 
+  
+  //Fetch status
   useEffect(() => {
     const fetchStatuses = async () => {
       setLoadingStatuses(true);
       try {
         const fetchedStatuses = await getStatus();
         setStatuses(fetchedStatuses);
-        console.log(fetchedStatuses)
+        // console.log(fetchedStatuses)
       } catch (error) {
         error('Error fetching Institution Statuses:', error);
       } finally {
@@ -45,6 +50,60 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
 
     fetchStatuses();
   }, []);
+
+//Fetch counties and subcounties
+useEffect(() => {
+  // Fetch counties when component mounts
+  const fetchCounties = async () => {
+    try {
+      const countyData = await getCounty();
+      setCounties(countyData);
+    } catch (error) {
+      console.error('Error fetching counties:', error);
+    }
+  };
+  fetchCounties();
+}, []);
+
+const handleCountyChange = async (event) => {
+  const countyID = event.target.value;
+  console.log('Selected County ID:', countyID); // Log the countyID for debugging
+  handleInputChange(event); // Update form values with selected county ID
+
+  if (countyID) {
+    try {
+      const subCountyData = await getSubCounty(countyID);
+      setSubCounties(subCountyData);
+      console.log('Sub-counties fetched:', subCountyData);
+    } catch (error) {
+      console.error('Error fetching sub-counties:', error);
+      setSubCounties([]); // Clear sub-counties in case of an error
+    }
+  } else {
+    setSubCounties([]);
+  }
+};
+
+//End date function
+const handleDateChange = (event) => {
+  const { name, value } = event.target;
+  
+  if (name === 'licenseStartDate') {
+    const startDate = new Date(value);
+    const endDate = new Date(startDate);
+    endDate.setFullYear(startDate.getFullYear() + 1);
+    
+    handleInputChange({
+      target: {
+        name: 'licenseEndDate',
+        value: endDate.toISOString().split('T')[0] // Format as YYYY-MM-DD
+      }
+    });
+  }
+
+  handleInputChange(event);
+};
+
 
 
 
@@ -92,6 +151,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           )}
           {errors.stageID && <p className="text-red-500">{errors.stageID[0]}</p>}
         </div>
+       
         <div>
           <label htmlFor="statusID">Status:</label>
           {loadingStatuses ? (
@@ -114,8 +174,6 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           {errors.statusID && <p className="text-red-500">{errors.statusID[0]}</p>}
         </div>
 
-
-
         <div>
           <label htmlFor="institutionEmail">Institution Email:</label>
           <Input
@@ -126,6 +184,7 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           />
           {errors.institutionEmail && <p className="text-red-500">{errors.institutionEmail[0]}</p>}
         </div>
+      
         <div>
           <label htmlFor="institutionContact">Institution Contact:</label>
           <Input
@@ -136,26 +195,49 @@ const InstitutionForm = ({ formValues, handleInputChange, handleDateChange, erro
           />
           {errors.institutionContact && <p className="text-red-500">{errors.institutionContact[0]}</p>}
         </div>
-        <div>
-          <label htmlFor="subCounty">Sub County:</label>
-          <Input
-            name="subCounty"
-            placeholder="Sub County"
-            value={formValues.subCounty}
-            onChange={handleInputChange}
-          />
-          {errors.subCounty && <p className="text-red-500">{errors.subCounty[0]}</p>}
-        </div>
-        <div>
-          <label htmlFor="countyID">County ID:</label>
-          <Input
-            name="countyID"
-            placeholder="County ID"
-            value={formValues.countyID}
-            onChange={handleInputChange}
-          />
-          {errors.countyID && <p className="text-red-500">{errors.countyID[0]}</p>}
-        </div>
+    
+      <div>
+        <label htmlFor="county">County:</label>
+        <select
+          id="countyID"
+          name="countyID"
+          value={formValues.countyID}
+          onChange={handleCountyChange} 
+          className="w-full p-2 border border-gray-300 rounded"
+        >
+          <option value="">Select County</option>
+          {counties.map((county) => (
+            <option key={county.countyID} value={county.countyID}>
+              {county.countyName}
+            </option>
+          ))}
+        </select>
+      </div>
+     
+     
+      <div>
+        <label htmlFor="subCounty">Sub-County:</label>
+        <select
+          id="subCounty"
+          name="subCounty"
+          value={formValues.subCountyID}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+        >
+          <option value="">Select Sub-County</option>
+          {subCounties.length === 0 ? (
+            <option value="">Loading Sub-Counties...</option>
+          ) : (
+            subCounties.map((subCounty) => (
+              <option key={subCounty.SubCountyID} value={subCounty.SubCountyName}>
+                {subCounty.SubCountyName}
+              </option>
+            ))
+          )}
+        </select>
+      </div>
+   
+     
         <div>
           <label htmlFor="contactPerson">Contact Person:</label>
           <Input

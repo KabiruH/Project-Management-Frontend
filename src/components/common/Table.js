@@ -1,6 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Table = ({ columns, data, renderRowActions }) => {
+  if (!columns || !data) {
+    console.error("Table component received undefined or null props for columns or data.");
+    return <div>Error: Table data is missing.</div>;
+  }
+
   return (
     <div className="overflow-x-auto">
    <table className="min-w-full bg-white text-black shadow-lg rounded-lg overflow-hidden">
@@ -26,6 +32,15 @@ const Table = ({ columns, data, renderRowActions }) => {
 
     </div>
   );
+};
+
+Table.propTypes = {
+  columns: PropTypes.arrayOf(PropTypes.shape({
+    accessor: PropTypes.string.isRequired,
+    Header: PropTypes.string.isRequired,
+  })).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  renderRowActions: PropTypes.func,
 };
 
 export default Table;

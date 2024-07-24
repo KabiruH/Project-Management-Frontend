@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { FaPlus } from "react-icons/fa6";
-
 import { customStyles } from '../../styles/customStyles';
 import StagesForm from '../../components/forms/institutionStagesF';
 import StagesTable from '../../components/tables/institutionStagesT';

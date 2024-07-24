@@ -4,6 +4,7 @@ import Table from '../common/Table';
 const columns = [
   { Header: 'Level ID', accessor: 'levelID' },
   { Header: 'Level Name', accessor: 'levelName' },
+  { Header: 'Duration', accessor: 'duration' },
   { Header: 'Notes', accessor: 'notes' },
 ];
 

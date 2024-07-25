@@ -1,0 +1,25 @@
+.report-list {
+    margin: 20px;
+  }
+  
+  .report-list h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .report-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .report-list li {
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+  }
+  
+  .report-list li:hover {
+    background-color: #f0f0f0;
+  }
+  

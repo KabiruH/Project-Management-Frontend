@@ -1,0 +1,17 @@
+.report-viewer {
+    margin: 20px;
+  }
+  
+  .report-actions {
+    margin-bottom: 20px;
+  }
+  
+  .report-actions button {
+    margin-right: 10px;
+  }
+  
+  .report-content {
+    border: 1px solid #ccc;
+    padding: 20px;
+  }
+  

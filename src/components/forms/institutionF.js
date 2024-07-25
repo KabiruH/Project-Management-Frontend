@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Input from '../common/Input';
-import styles from '../../styles/modal.module.css'; // Correct import for CSS modules
+import styles from '../../styles/modal.module.css';
 import { getStages } from '../../services/institutionStageS'
 import { getStatus } from '../../services/institutionStatusS'
 import { getCounty, getSubCounty } from '../../services/countiesS'
@@ -58,6 +58,7 @@ useEffect(() => {
     try {
       const countyData = await getCounty();
       setCounties(countyData);
+      // console.log(countyData)
     } catch (error) {
       console.error('Error fetching counties:', error);
     }
@@ -65,16 +66,21 @@ useEffect(() => {
   fetchCounties();
 }, []);
 
-const handleCountyChange = async (event) => {
-  const countyID = event.target.value;
-  console.log('Selected County ID:', countyID); // Log the countyID for debugging
-  handleInputChange(event); // Update form values with selected county ID
 
-  if (countyID) {
+const handleCountyChange = async (event) => {
+  const countyName = event.target.value;
+  console.log('Selected County ID:', countyName); // Log the countyID for debugging
+  
+  // Update form values with selected county ID and county name
+  handleInputChange({ target: { name: 'county', value: countyName } });
+
+  
+  
+  if (countyName) {
     try {
-      const subCountyData = await getSubCounty(countyID);
+      const subCountyData = await getSubCounty(countyName);
       setSubCounties(subCountyData);
-      console.log('Sub-counties fetched:', subCountyData);
+      // console.log('Sub-counties fetched:', subCountyData);
     } catch (error) {
       console.error('Error fetching sub-counties:', error);
       setSubCounties([]); // Clear sub-counties in case of an error
@@ -103,8 +109,6 @@ const handleDateChange = (event) => {
 
   handleInputChange(event);
 };
-
-
 
 
   return (
@@ -196,23 +200,23 @@ const handleDateChange = (event) => {
           {errors.institutionContact && <p className="text-red-500">{errors.institutionContact[0]}</p>}
         </div>
     
-      <div>
-        <label htmlFor="county">County:</label>
-        <select
-          id="countyID"
-          name="countyID"
-          value={formValues.countyID}
-          onChange={handleCountyChange} 
-          className="w-full p-2 border border-gray-300 rounded"
-        >
-          <option value="">Select County</option>
-          {counties.map((county) => (
-            <option key={county.countyID} value={county.countyID}>
-              {county.countyName}
-            </option>
-          ))}
-        </select>
-      </div>
+        <div>
+          <label htmlFor="county">County:</label>
+          <select
+            id="county"
+            name="countyName"
+            value={formValues.countyName} // Ensure this is countyID, not countyName
+            onChange={handleCountyChange}
+            className="w-full p-2 border border-gray-300 rounded"
+          >
+            <option value="">Select County</option>
+            {counties.map((county) => (
+  <option key={county.countyID} value={county.countyID}>
+    {county.countyID === formValues.countyName ? county.countyName : county.countyName}
+  </option>
+))}
+          </select>
+        </div>
      
      
       <div>

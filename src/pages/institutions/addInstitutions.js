@@ -18,8 +18,8 @@ const AddInstitution = () => {
     statusID: '',
     institutionEmail: '',
     institutionContact: '',
-    subCounty: '',
     countyID: '',
+    subCounty: '',
     contactPerson: '',
     contactNumber: '',
     licenseStartDate: '',
@@ -36,6 +36,7 @@ const AddInstitution = () => {
       try {
         const fetchedInstitutions = await getInstitutions();
         setInstitutions(fetchedInstitutions);
+        console.log(fetchedInstitutions)
       } catch (error) {
         console.error('Error fetching institutions:', error.response.data);
       }
@@ -86,8 +87,8 @@ const AddInstitution = () => {
       statusID: '',
       institutionEmail: '',
       institutionContact: '',
-      subCounty: '',
       countyID: '',
+      subCounty: '',
       contactPerson: '',
       contactNumber: '',
       licenseStartDate: '',
@@ -160,8 +161,10 @@ const AddInstitution = () => {
 <h1 className="text-2xl font-[600] ml-3 mb-4">Institutions</h1>
       <div className="p-4">
         <button
+
           onClick={()=>setIsModalOpen(true)}
           className="bg-blue-500 ml-auto text-white p-2 flex justify-center items-center gap-2 rounded mb-4"
+
         >
            <span>Institution</span>
            <FaPlus /> 

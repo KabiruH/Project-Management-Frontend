@@ -40,7 +40,7 @@ const Sidebar = ({isOpen, onClose}) => {
       dropdown: [
         { name: 'Participant', path: '/participants/participant' },
         { name: 'Levels', path: '/participants/participantLevels' },
-        { name: 'Award Participants', path: '/participants/awardParticipants' },
+        { name: 'Participants Award', path: '/participants/awardParticipants' },
         { name: 'Participant Projects', path: '/participants/participantsProjects' }
       ]
     },
@@ -49,7 +49,6 @@ const Sidebar = ({isOpen, onClose}) => {
       path: '',
       icon: <FaProjectDiagram />,
       dropdown: [
-        { name: 'Projects', path: '/project/project' },
         { name: 'Projects', path: '/project/project' },
         { name: 'Status', path: '/project/projectStatus' },
         { name: 'Testimonials', path: '/project/testimonials' },
@@ -164,10 +163,12 @@ console.log(localItem,dropdown)
        return setDropdown(item)
       } } className='ml-auto' /> : '' }
     </button>
+
     {dropdown.name == item.name || localItem == item.name ? <div className='w-[90%]'>{
+
       <ul>
         {item.dropdown?.map((d,i)=>{
-          return(<li key={i} className={(location.pathname == d.path) ? 'body1 text-main' :"body1 text-greys mr-3"  }>
+          return(<li key={i} className={(location.pathname === d.path) ? 'body1 text-main' :"body1 text-greys mr-3"  }>
              <button
       onClick={() => {  
         setDropdown(item)

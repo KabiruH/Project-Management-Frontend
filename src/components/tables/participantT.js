@@ -10,7 +10,7 @@ const columns = [
   { Header: 'Email', accessor: 'email' },
   { Header: 'Institution Name', accessor: 'institutionName' },
   { Header: 'Sub-County', accessor: 'subCounty' },
-  { Header: 'County', accessor: 'county' },
+  { Header: 'County', accessor: (row) => row.county?.county || 'N/A' },
   { Header: 'Award Level', accessor: 'awardLevel' },
   { Header: 'Award Leader', accessor: 'awardLeader' },
 ];

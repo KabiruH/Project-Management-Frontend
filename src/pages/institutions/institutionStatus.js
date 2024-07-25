@@ -146,6 +146,7 @@ const AddStatus = () => {
         >
            <span>status</span><FaPlus/>
 
+
         </button>
         <StatusTable
           status={status}

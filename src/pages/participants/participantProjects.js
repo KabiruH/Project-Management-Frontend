@@ -51,18 +51,33 @@ const AddParticipantProject = () => {
   const addNewParticipantProject = async () => {
     try {
       const participantPayload = { ...newParticipantProject };
-
+  
       console.log('New ParticipantProjectPayload:', participantPayload);
       const addedParticipantProject = await addParticipantProjects(participantPayload);
       setParticipantProjects((prev) => [...prev, addedParticipantProject]);
       setIsModalOpen(false);
       setErrors({});
     } catch (error) {
-      console.error('Error adding participant:', error.response.data);
-      setErrors(error.response.data.errors || {});
-      alert(`Failed to add participant: ${error.response.data.title}\nDetails: ${JSON.stringify(error.response.data.errors, null, 2)}`);
+      console.error('Error adding participant:', error);
+  
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error('Error response data:', error.response.data);
+        setErrors(error.response.data.errors || {});
+        alert(`Failed to add participant: ${error.response.data.title}\nDetails: ${JSON.stringify(error.response.data.errors, null, 2)}`);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error('Error request data:', error.request);
+        alert('Failed to add participant: No response received from the server.');
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error('Error message:', error.message);
+        alert(`Failed to add participant: ${error.message}`);
+      }
     }
   };
+  
 
   const openAddParticipantModal = () => {
     setEditMode(false);
@@ -94,19 +109,34 @@ const AddParticipantProject = () => {
   const updateExistingParticipantProject = async () => {
     try {
       const participantPayload = { ...newParticipantProject };
-
+  
       console.log('Updated ParticipantProjectPayload:', participantPayload);
-
+  
       const updatedParticipantProject = await updateParticipantProject(selectedParticipantId, participantPayload);
-      setParticipantProjects((prev) => prev.map(inst => (inst.participantID === selectedParticipantId ? updatedParticipantProject : inst)));
+      setParticipantProjects((prev) =>
+        prev.map((proj) =>
+          proj.participantID === selectedParticipantId ? updatedParticipantProject : proj
+        )
+      );
       setIsModalOpen(false);
       setErrors({});
     } catch (error) {
-      console.error(`Error updating ParticipantProject with ID ${selectedParticipantId}:`, error.response.data);
-      setErrors(error.response.data.errors || {});
-      alert(`Failed to update participant: ${error.response.data.title}\nDetails: ${JSON.stringify(error.response.data.errors, null, 2)}`);
+      console.error(`Error updating ParticipantProject with ID ${selectedParticipantId}:`, error);
+  
+      if (error.response) {
+        console.error('Error response data:', error.response.data);
+        setErrors(error.response.data.errors || {});
+        alert(`Failed to update participant: ${error.response.data.title}\nDetails: ${JSON.stringify(error.response.data.errors, null, 2)}`);
+      } else if (error.request) {
+        console.error('Error request data:', error.request);
+        alert('Failed to update participant: No response received from the server.');
+      } else {
+        console.error('Error message:', error.message);
+        alert(`Failed to update participant: ${error.message}`);
+      }
     }
   };
+  
 
   const deleteExistingParticipantProject = async (participantID) => {
     try {

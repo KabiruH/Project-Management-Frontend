@@ -3,6 +3,9 @@ import Input from '../common/Input';
 import styles from '../../styles/modal.module.css'; // Correct import for CSS modules
 
 const BudgetForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
+
+
+  
   return (
     <form className={styles.form}>
       <div className="space-y-4">

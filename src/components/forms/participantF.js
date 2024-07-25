@@ -50,7 +50,7 @@ useEffect(() => {
     try {
       const countyData = await getCounty();
       setCounties(countyData);
-      // console.log(countyData)
+      console.log(countyData)
     } catch (error) {
       console.error('Error fetching counties:', error);
     }
@@ -66,16 +66,14 @@ const handleCountyChange = async (event) => {
   console.log('Selected County ID:', county); // Log the countyID for debugging
   
   // Update form values with selected county ID and county name
-  if (county && counties.find(c => c.county === county)) {
-    handleInputChange({ target: { name: 'county', value: county } });
-  }
-  
-  
+  handleInputChange({ target: { name: 'county', value: county } });
+  handleInputChange({ target: { name: 'countyID', value: county } });
+
   if (county) {
     try {
       const subCountyData = await getSubCounty(county);
       setSubCounties(subCountyData);
-      // console.log('Sub-counties fetched:', subCountyData);
+      console.log('Sub-counties fetched:', subCountyData);
     } catch (error) {
       console.error('Error fetching sub-counties:', error);
       setSubCounties([]); // Clear sub-counties in case of an error
@@ -179,7 +177,7 @@ const handleCountyChange = async (event) => {
         <label htmlFor="county">County:</label>
         <select
   id="county"
-  name="countyID"
+  name="county"
   value={formValues.countyID}
   onChange={handleCountyChange}
   className="w-full p-2 border border-gray-300 rounded"

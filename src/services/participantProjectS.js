@@ -2,7 +2,7 @@ import apiClient from './apiClient';
 
 const addParticipantProjects = async (ParticipantProjectData) => {
   try {
-    const response = await apiClient.post('/api/ParticipantProject', ParticipantProjectData);
+    const response = await apiClient.post('/api/ParticipantProjects', ParticipantProjectData);
     return response.data;
   } catch (error) {
     console.error('Error in addParticipantProjects:', error.response.data);
@@ -12,7 +12,7 @@ const addParticipantProjects = async (ParticipantProjectData) => {
 
 const getParticipantProjectById = async (participantID) => {
   try {
-    const response = await apiClient.get(`/api/ParticipantProject/${participantID}`);
+    const response = await apiClient.get(`/api/ParticipantProjects/${participantID}`);
     return response.data;
   } catch (error) {
     console.error(`Error fetching ParticipantProjects with ID ${participantID}:`, error.response.data);
@@ -22,7 +22,7 @@ const getParticipantProjectById = async (participantID) => {
 
 const updateParticipantProject = async (participantID, updatedData) => {
   try {
-    const response = await apiClient.put(`/api/ParticipantProject/${participantID}`, updatedData);
+    const response = await apiClient.put(`/api/ParticipantProjects/${participantID}`, updatedData);
     return response.data;
   } catch (error) {
     console.error(`Error updating ParticipantProject with ID ${participantID}:`, error.response.data);
@@ -32,7 +32,7 @@ const updateParticipantProject = async (participantID, updatedData) => {
 
 const deleteParticipantProject = async (participantID) => {
   try {
-    await apiClient.delete(`/api/ParticipantProject/${participantID}`);
+    await apiClient.delete(`/api/ParticipantProjects/${participantID}`);
   } catch (error) {
     console.error(`Error deleting ParticipantProjects with ID ${participantID}:`, error.response.data);
     throw error;

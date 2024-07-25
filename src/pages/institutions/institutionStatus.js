@@ -139,9 +139,9 @@ const AddStatus = () => {
         <button
           onClick={openAddStatusModal}
 
-          className="bg-blue-500 text-white p-2 rounded mb-4 ml-auto  flex justify-center items-center gap-2"
+          className="bg-blue-500 text-white p-2 rounded mb-4 mr-auto  flex justify-center items-center gap-2"
         >
-           <span>status</span><FaPlus/>
+           <FaPlus/><span>status</span>
 
         </button>
         <StatusTable

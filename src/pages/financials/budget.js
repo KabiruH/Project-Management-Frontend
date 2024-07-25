@@ -154,9 +154,9 @@ const AddBudget = () => {
       <div className="p-4">
         <button
           onClick={openAddBudgetModal}
-          className="bg-blue-500 text-white p-2 rounded mb-4 flex justify-center items-center ml-auto gap-2"
+          className="bg-blue-500 text-white p-2 rounded mb-4 flex justify-center items-center mr-auto gap-2"
         >
-          <span>Budget</span> <FaPlus />  
+        <FaPlus />  <span>Budget</span>   
         </button>
         <BudgetTable
           budget={budget}

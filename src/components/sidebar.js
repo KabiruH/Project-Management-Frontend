@@ -24,11 +24,11 @@ const Sidebar = ({isOpen, onClose}) => {
     { name: 'Dashboard', path: '/dashboard', icon: <FaHome /> },
     { name: 'Calendar', path: '/calendar', icon: <FaCalendarAlt /> },
     {
-      name: 'Institutions',
+      name: 'Award Centers',
       icon: <FaBuilding />,
       path: '',
       dropdown: [
-        { name: 'Institution', path: '/institutions/addInstitutions' },
+        { name: 'Award Center', path: '/institutions/addInstitutions' },
         { name: 'Status', path: '/institutions/institutionStatus' },
         { name: 'Stages', path: '/institutions/institutionStages' },
       ]
@@ -49,7 +49,6 @@ const Sidebar = ({isOpen, onClose}) => {
       path: '',
       icon: <FaProjectDiagram />,
       dropdown: [
-        { name: 'Projects', path: '/project/project' },
         { name: 'Projects', path: '/project/project' },
         { name: 'Status', path: '/project/projectStatus' },
         { name: 'Testimonials', path: '/project/testimonials' },
@@ -114,10 +113,9 @@ const Sidebar = ({isOpen, onClose}) => {
       dropdown: [{name: 'Users',path: '/reports/users'}]
     },
     {
-      name: 'Users',
-      path: '',
+      name: 'Manage User',
+      path: '/',
       icon: <FaUsers />,
-      dropdown: ['User', 'User Type']
     },
   ];
   const localItem = localStorage.getItem('item')
@@ -154,7 +152,7 @@ console.log(localItem,dropdown)
       className={`w-full  p-2 flex items-center `}
     >
       <span className={location.pathname == item.path ? "mr-2 text-primary" : 'mr-2'  }>{item.icon}</span>
-      <span className={location.pathname == item.path ? 'body1 text-secondary font-[500]' :"body1 text-greys mr-3"  }>{item.name}</span>
+      <span className={location.pathname == item.path ? ' text-primary font-[700]' :"body1  font-[700] mr-3 text-secondary"  }>{item.name}</span>
       {item.path == '' ? <IoChevronDownOutline onClick={()=>{
         if(dropdown.name == item.name){
           localStorage.removeItem('item')
@@ -176,7 +174,7 @@ console.log(localItem,dropdown)
       className={`w-full ml-6  p-2 flex items-center `}
     >
      
-      <span className={location.pathname == d.path ? 'body1 text-main flex items-center gap-3' :"body1 text-greys mr-3"  }><span>{ location.pathname == d.path ? item.icon : ''}</span>   {d.name}</span>
+      <span className={location.pathname == d.path ? ' text-primary font-[700] flex items-center gap-3' :"body1 text-main mr-3"  }><span>{ location.pathname == d.path ? item.icon : ''}</span>   {d.name}</span>
      
     </button>
           </li>)

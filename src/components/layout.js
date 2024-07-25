@@ -28,16 +28,14 @@ const Layout = ({ children }) => {
           onClick={toggleSidebar}
         />
       </div>
-      <div className="w-full min-h-[100vh] grid grid-cols-1 md:grid-cols-[20%_auto] md:p-2 md:gap-3 bg-bgGrey">
+      <div className="w-full min-h-[100vh] grid grid-cols-1 md:grid-cols-[16%_auto] md:p-2 md:gap-3 bg-bgGrey">
         <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
           <div className='p-3 bg-white rounded grow overflow-auto'>
           <div className='w-full p-4 flex justify-end mb-6 '>
            <div className='rounded-[32px] flex gap-3 px-3 py-2 bg-white '>
-            <input placeholder='search ' className='rounded-[30px] outline outline-none focus:outline-none bg-bgColor px-2 my-1' />
-            <IoSettingsSharp className='text-primary cursor-pointer my-auto' onClick={()=>setBreadcrum(prev => !prev)} />
-            <div className='rounded-full min-h-8 min-w-8 bg-bgColor'>
-              <img className='w-10 h-10 rounded-full' src='/person.jpg' />
-            </div>
+            <input placeholder='search ' className='rounded-[30px] h-10 outline outline-none focus:outline-none bg-bgColor px-2 my-1' />
+            <IoSettingsSharp className='text-primary text-3xl cursor-pointer my-auto' onClick={()=>setBreadcrum(prev => !prev)} />
+            
            </div>
         {breadcrum && (  <div class="absolute top-[150px] md:top-16 right-20 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                 <div class="py-1" role="none">

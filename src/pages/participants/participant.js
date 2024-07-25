@@ -138,7 +138,8 @@ const AddParticipant = () => {
       console.log('Updated Participant Payload:', participantPayload);
   
       const updatedParticipant = await updateParticipant(selectedParticipantId, participantPayload);
-      setParticipants((prev) => prev.map(inst => (inst.adminNumber === selectedParticipantId ? updatedParticipant : inst)));
+      const newParticipants = await getParticipant()
+      setParticipants(newParticipants);
       setIsModalOpen(false);
       setErrors({});
     } catch (error) {
@@ -176,9 +177,9 @@ const AddParticipant = () => {
       <div className="p-4">
         <button
           onClick={openAddParticipantModal}
-          className="bg-blue-500 text-white p-2 rounded mb-4 flex justify-center items-center ml-auto gap-2"
+          className="bg-blue-500 text-white p-2 rounded mb-4 flex justify-center items-center mr-auto gap-2"
         >
-           <span>Participant</span> <FaPlus /> 
+           <FaPlus /> <span>Participant</span> 
         </button>
         <ParticipantTable
           participants={participants}

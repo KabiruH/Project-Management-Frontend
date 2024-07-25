@@ -2,21 +2,22 @@ import React, { useState, useEffect } from 'react';
 import Input from '../common/Input';
 import styles from '../../styles/modal.module.css';
 import { getParticipantById } from '../../services/participantS';
+import { getLevels } from '../../services/participantLevelsS';
 
 const AwardsForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
-    const [studentName, setStudentName] = useState('');
-  const [awardLevel, setAwardLevel] = useState('');
+  const [levels, setLevels] = useState([]);
+  const [loadingLevels, setLoadingLevels] = useState(false);
 
-  const handleAdminInputChange  = async (e) => {
+  const handleAdminInputChange = async (e) => {
     const { value } = e.target;
     handleInputChange(e); // Update the adminNo field value
     if (value) {
       try {
         const participant = await getParticipantById(value);
         if (participant) {
-          setStudentName({ target: { name: 'name', value: participant.name } });
+          handleInputChange({ target: { name: 'studentName', value: participant.name } });
           handleInputChange({ target: { name: 'institutionName', value: participant.institutionName } });
-          setAwardLevel({ target: { name: 'awardName', value: participant.awardLevel } });
+          handleInputChange({ target: { name: 'awardLevel', value: participant.levelName } });
         }
       } catch (error) {
         console.error('Error fetching participant data:', error);
@@ -24,7 +25,54 @@ const AwardsForm = ({ formValues, handleInputChange, handleDateChange, errors })
     }
   };
 
-    return (
+  // Fetch award levels
+  useEffect(() => {
+    const fetchLevels = async () => {
+      setLoadingLevels(true); // Set loading to true initially
+      try {
+        const fetchedLevels = await getLevels();
+        setLevels(fetchedLevels);
+        console.log(fetchedLevels); // Log fetched levels to ensure data structure
+      } catch (error) {
+        // console.error('Error fetching award levels:', error);
+      } finally {
+        setLoadingLevels(false); // Set loading to false after fetching
+      }
+    };
+    fetchLevels();
+  }, []);
+
+  const calculateEndDate = (startDate, levelName) => {
+    let monthsToAdd = 0;
+    switch (levelName) {
+      case 'Bronze':
+        monthsToAdd = 6;
+        break;
+      case 'Silver':
+        monthsToAdd = 12;
+        break;
+      case 'Gold':
+        monthsToAdd = 18;
+        break;
+      default:
+        monthsToAdd = 0;
+    }
+    if (startDate && monthsToAdd) {
+      const date = new Date(startDate);
+      date.setMonth(date.getMonth() + monthsToAdd);
+      return date.toISOString().split('T')[0]; // Format date to YYYY-MM-DD
+    }
+    return '';
+  };
+
+  useEffect(() => {
+    if (formValues.startDate && formValues.levelName) {
+      const endDate = calculateEndDate(formValues.startDate, formValues.levelName);
+      handleInputChange({ target: { name: 'endDate', value: endDate } });
+    }
+  }, [formValues.startDate, formValues.levelName]);
+
+  return (
     <form className={styles.form}>
       <div className="space-y-4">
         <div>
@@ -38,15 +86,15 @@ const AwardsForm = ({ formValues, handleInputChange, handleDateChange, errors })
           {errors.awardID && <p className="text-red-500">{errors.awardID[0]}</p>}
         </div>
         <div>
-  <label htmlFor="adminNo">AdminNo:</label>
-  <Input
-    name="adminNo"
-    placeholder="AdminNo"
-    value={formValues.adminNo}
-    onChange={handleAdminInputChange}
-  />
-  {errors.adminNo && <p className="text-red-500">{errors.adminNo[0]}</p>}
-</div>
+          <label htmlFor="adminNo">AdminNo:</label>
+          <Input
+            name="adminNo"
+            placeholder="AdminNo"
+            value={formValues.adminNo}
+            onChange={handleAdminInputChange}
+          />
+          {errors.adminNo && <p className="text-red-500">{errors.adminNo[0]}</p>}
+        </div>
         <div>
           <label htmlFor="studentName">Student Name:</label>
           <Input
@@ -54,9 +102,9 @@ const AwardsForm = ({ formValues, handleInputChange, handleDateChange, errors })
             placeholder="Student Name"
             value={formValues.studentName}
             onChange={handleInputChange}
-            disabled 
+            
           />
-          {errors.studentName && <p className="text-red-500">{errors.name[0]}</p>}
+          {errors.studentName && <p className="text-red-500">{errors.studentName[0]}</p>}
         </div>
         <div>
           <label htmlFor="institutionID">Institution:</label>
@@ -65,23 +113,31 @@ const AwardsForm = ({ formValues, handleInputChange, handleDateChange, errors })
             placeholder="Institution Name"
             value={formValues.institutionName}
             onChange={handleInputChange}
-            disabled 
+            disabled
           />
           {errors.institutionName && <p className="text-red-500">{errors.institutionName[0]}</p>}
         </div>
-
         <div>
           <label htmlFor="awardLevel">Award Level:</label>
-          <Input
-            name="awardLevel"
-            placeholder="Award Level"
-            value={formValues.awardLevel}
-            onChange={handleInputChange}
-            disabled 
-          />
-          {errors.awardName && <p className="text-red-500">{errors.awardName[0]}</p>}
+          {loadingLevels ? (
+            <p>Loading award levels...</p>
+          ) : (
+            <select
+              name="levelName"
+              value={formValues.levelName}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            >
+              <option value="">Select Award Level</option>
+              {levels.map((level) => (
+                <option key={level.levelName} value={level.levelName}>
+                  {level.levelName}
+                </option>
+              ))}
+            </select>
+          )}
+          {errors.awardLevel && <p className="text-red-500">{errors.awardLevel[0]}</p>}
         </div>
-        
         <div>
           <label htmlFor="startDate">Start Date:</label>
           <Input

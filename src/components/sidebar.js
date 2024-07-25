@@ -7,15 +7,14 @@ import { GiReceiveMoney } from "react-icons/gi";
 import { FaLayerGroup } from "react-icons/fa";
 import { GiArchiveResearch } from "react-icons/gi";
 import { TbFileReport } from "react-icons/tb";
-import { customStyles } from '../styles/customStyles';
-import Modal from "react-modal"
+
 import { FaUsers } from "react-icons/fa";
 
 
 import { IoClose } from "react-icons/io5";
 
 const Sidebar = ({isOpen, onClose}) => {
-  const [dropdown, setDropdown] = useState({});
+  const [dropdown, setDropdown] = useState({ name: 'Dashboard', path: '/dashboard', icon: <FaHome /> });
   const [logoutModal,setLogoutModal] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
@@ -41,7 +40,7 @@ const Sidebar = ({isOpen, onClose}) => {
       dropdown: [
         { name: 'Participant', path: '/participants/participant' },
         { name: 'Levels', path: '/participants/participantLevels' },
-        { name: 'Award Participants', path: '/participants/awardParticipants' },
+        { name: 'Participants Award', path: '/participants/awardParticipants' },
         { name: 'Participant Projects', path: '/participants/participantsProjects' }
       ]
     },
@@ -50,7 +49,6 @@ const Sidebar = ({isOpen, onClose}) => {
       path: '',
       icon: <FaProjectDiagram />,
       dropdown: [
-        { name: 'Projects', path: '/project/project' },
         { name: 'Projects', path: '/project/project' },
         { name: 'Status', path: '/project/projectStatus' },
         { name: 'Testimonials', path: '/project/testimonials' },
@@ -112,7 +110,7 @@ const Sidebar = ({isOpen, onClose}) => {
       name: 'Reports',
       path: '',
       icon: <TbFileReport />,
-      dropdown: [{name: 'Participants'}, 'Institutions', 'Financial Reports']
+      dropdown: [{name: 'Users',path: '/reports/users'}]
     },
     {
       name: 'Users',
@@ -165,10 +163,12 @@ console.log(localItem,dropdown)
        return setDropdown(item)
       } } className='ml-auto' /> : '' }
     </button>
-    {dropdown.name == item.name || localItem == item.name ? <div className='w-full'>{
+
+    {dropdown.name == item.name || localItem == item.name ? <div className='w-[90%]'>{
+
       <ul>
         {item.dropdown?.map((d,i)=>{
-          return(<li key={i} className={(location.pathname == d.path) ? 'body1 text-main' :"body1 text-greys mr-3"  }>
+          return(<li key={i} className={(location.pathname === d.path) ? 'body1 text-main' :"body1 text-greys mr-3"  }>
              <button
       onClick={() => {  
         setDropdown(item)
@@ -190,26 +190,8 @@ console.log(localItem,dropdown)
       })}
 
       </ul>
-      <div onClick={()=>setLogoutModal(true)} className="w-full flex justify-center items-center p-2 mt-3 rounded cursor-pointer bg-primary  hover:text-white transition-colors duration-300"><span className='font-semibold text-white' >Logout</span></div>
     </div>
-    <Modal style={customStyles} isOpen={logoutModal} onRequestClose={()=>setLogoutModal(false)} contentLabel='Logout'>
-       <div className='flex justify-center items-center flex-col h-full'>
-       <h2 className="subtitle2 mb-4">Goodbye!! </h2>
-       Are you sure you want to Logout?
-        <div className="flex justify-end mt-4">
-          <button onClick={()=>{
-            localStorage.clear()
-            setLogoutModal(false)
-            navigate('/signin')
-          }} className="bg-primary px-5 text-white p-2 rounded mr-2">
-           Yes
-          </button>
-          <button onClick={()=>setLogoutModal(false)} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
-            No
-          </button>
-        </div>
-       </div>
-      </Modal>
+   
     </>
   );
 };

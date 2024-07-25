@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { FaPlus } from "react-icons/fa6";
+
 import { customStyles } from '../../styles/customStyles';
 import FundingTypeForm from '../../components/forms/fundingTypeF';
 import FundingTypeTable from '../../components/tables/fundingTypeT';
@@ -137,9 +139,9 @@ const AddFundingType = () => {
       <div className="p-4">
         <button
           onClick={openAddFundingTypeModal}
-          className="bg-blue-500 text-white p-2 rounded mb-4"
+          className="bg-blue-500 text-white p-2 rounded mb-4 flex justify-center items-center ml-auto gap-2"
         >
-          Add FundingType
+           <span>Funding Type</span> <FaPlus />   
         </button>
         <FundingTypeTable
           fundingtype={fundingtype}

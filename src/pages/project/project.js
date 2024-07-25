@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import { FaPlus } from "react-icons/fa6";
+
 import { customStyles } from '../../styles/customStyles';
 import Layout from '../../components/layout';
 import ProjectForm from '../../components/forms/projectForm';
@@ -164,9 +166,9 @@ const AddProject = () => {
       <div className="p-4">
         <button
           onClick={openAddProjectModal}
-          className="bg-blue-500 text-white p-2 rounded mb-4"
+          className="bg-blue-500 text-white p-2 rounded mb-4  flex justify-center items-center ml-auto gap-2"
         >
-          Add Project
+           <span>Project</span><FaPlus /> 
         </button>
         <ProjectTable
           projects={projects}

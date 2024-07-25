@@ -23,6 +23,16 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
     fetchProjects();
   }, []);
 
+  useEffect(() => {
+    if (formValues.institutionName) {
+      // Filter projects based on the participant's institution
+      const institutionProjects = allProjects.filter(
+        (project) => project.institutionName === formValues.institutionName
+      );
+      setFilteredProjects(institutionProjects);
+    }
+  }, [formValues.institutionName, allProjects]);
+
   const handleAdminInputChange = async (e) => {
     const { value } = e.target;
     setFormValues((prevValues) => ({
@@ -40,8 +50,9 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
             institutionName: participant.institutionName,
             projects: participant.projects || [],
           }));
-          // Filter projects based on the participant's institution
-          const institutionProjects = allProjects.filter(project => project.institutionName === participant.institutionName);
+          const institutionProjects = allProjects.filter(
+            (project) => project.institutionName === participant.institutionName
+          );
           setFilteredProjects(institutionProjects);
         }
       } catch (error) {
@@ -65,6 +76,13 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
       projects: selectedOptions,
     }));
   };
+  
+  const handleRemoveProject = (projectId) => {
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      projects: prevValues.projects.filter((id) => id !== projectId),
+    }));
+  };
 
   return (
     <form className={styles.form}>
@@ -79,6 +97,7 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
           />
           {errors.participantID && <p className="text-red-500">{errors.participantID[0]}</p>}
         </div>
+
         <div>
           <label htmlFor="participantName">Name:</label>
           <Input
@@ -89,6 +108,7 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
           />
           {errors.participantName && <p className="text-red-500">{errors.participantName[0]}</p>}
         </div>
+
         <div>
           <label htmlFor="institutionID">Institution:</label>
           <Input
@@ -105,23 +125,42 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
           {loadingProjects ? (
             <p>Loading projects...</p>
           ) : (
-            <select
-              name="projects"
-              multiple
-              value={formValues.projects}
-              onChange={handleProjectSelectChange}
-              className="w-full p-2 border border-gray-300 rounded"
-            >
-              {filteredProjects.map((project) => (
-                <option key={project.projectID} value={project.projectID}>
-                  {project.projectName}
-                </option>
-              ))}
-            </select>
+            <>
+
+<select
+  name="projects"
+  multiple
+  value={formValues.projects || []}
+  onChange={handleProjectSelectChange}
+  className="w-full p-2 border border-gray-300 rounded"
+>
+  {filteredProjects.map((project) => (
+    <option key={project.projectID} value={project.projectID}>
+      {project.projectName}
+    </option>
+  ))}
+</select>
+
+            </>
           )}
           {errors.projects && <p className="text-red-500">{errors.projects[0]}</p>}
         </div>
       </div>
+      {formValues.projects?.length > 0 && (
+        <div className="selected-projects">
+          {formValues.projects.map((projectId) => {
+            const project = allProjects.find((proj) => proj.projectID === projectId);
+            return (
+              <div key={projectId} className="selected-project">
+                <span>{project?.projectName}</span>
+                <button type="button" onClick={() => handleRemoveProject(projectId)}>
+                  ×
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </form>
   );
 };

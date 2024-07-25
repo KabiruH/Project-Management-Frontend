@@ -10,9 +10,9 @@ Modal.setAppElement('#root');
 const AddParticipantProject = () => {
   const [participantProjects, setParticipantProjects] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newParticipantProject, setnewParticipantProject] = useState({ 
+  const [newParticipantProject, setnewParticipantProject] = useState({
     participantID: '',
-    participantName: '',
+    name: '',
     institutionName: '',
     projectID: '',
   });
@@ -51,7 +51,7 @@ const AddParticipantProject = () => {
   const addNewParticipantProject = async () => {
     try {
       const participantPayload = { ...newParticipantProject };
-  
+
       console.log('New ParticipantProjectPayload:', participantPayload);
       const addedParticipantProject = await addParticipantProjects(participantPayload);
       setParticipantProjects((prev) => [...prev, addedParticipantProject]);
@@ -59,7 +59,7 @@ const AddParticipantProject = () => {
       setErrors({});
     } catch (error) {
       console.error('Error adding participant:', error);
-  
+
       if (error.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
@@ -77,14 +77,14 @@ const AddParticipantProject = () => {
       }
     }
   };
-  
+
 
   const openAddParticipantModal = () => {
     setEditMode(false);
     setIsModalOpen(true);
     setnewParticipantProject({
       participantID: '',
-      participantName: '',
+      name: '',
       institutionName: '',
       projectID: '',
     });
@@ -105,13 +105,13 @@ const AddParticipantProject = () => {
       console.error(`Error fetching ParticipantProject with ID ${participant.participantID}:`, error.response.data);
     }
   };
-  
+
   const updateExistingParticipantProject = async () => {
     try {
       const participantPayload = { ...newParticipantProject };
-  
+
       console.log('Updated ParticipantProjectPayload:', participantPayload);
-  
+
       const updatedParticipantProject = await updateParticipantProject(selectedParticipantId, participantPayload);
       setParticipantProjects((prev) =>
         prev.map((proj) =>
@@ -122,7 +122,7 @@ const AddParticipantProject = () => {
       setErrors({});
     } catch (error) {
       console.error(`Error updating ParticipantProject with ID ${selectedParticipantId}:`, error);
-  
+
       if (error.response) {
         console.error('Error response data:', error.response.data);
         setErrors(error.response.data.errors || {});
@@ -136,7 +136,7 @@ const AddParticipantProject = () => {
       }
     }
   };
-  
+
 
   const deleteExistingParticipantProject = async (participantID) => {
     try {
@@ -178,12 +178,12 @@ const AddParticipantProject = () => {
       </div>
       <Modal isOpen={isModalOpen} onRequestClose={closeAddParticipantModal} contentLabel={editMode ? "Edit Participant" : "Add Participant"}>
         <h2 className="text-xl mb-4">{editMode ? 'Edit Participant' : 'Add Participant'}</h2>
-        <ParticipantProjectForm 
-          formValues={newParticipantProject} 
-          setFormValues={setnewParticipantProject} 
-          handleInputChange={handleInputChange} 
-          handleDateChange={handleDateChange} 
-          errors={errors} 
+        <ParticipantProjectForm
+          formValues={newParticipantProject}
+          setFormValues={setnewParticipantProject}
+          handleInputChange={handleInputChange}
+          handleDateChange={handleDateChange}
+          errors={errors}
         />
         <div className="flex justify-end mt-4">
           <button onClick={editMode ? updateExistingParticipantProject : addNewParticipantProject} className="bg-green-500 text-white p-2 rounded mr-2">

@@ -71,7 +71,7 @@ const InstitutionForm = ({ formValues, handleInputChange, errors }) => {
     const county = event.target.value;
     const countyName = counties.find(c => c.county === county)?.county || '';
     console.log('Selected County ID:', county); // Log the countyID for debugging
-    
+
     // Update form values with selected county ID and county name
     handleInputChange({ target: { name: 'county', value: county } });
     handleInputChange({ target: { name: 'countyID', value: county } });
@@ -201,23 +201,23 @@ const InstitutionForm = ({ formValues, handleInputChange, errors }) => {
         </div>
 
         <div>
-        <label htmlFor="county">County:</label>
-        <select
-  id="county"
-  name="county"
-  value={formValues.countyID}
-  onChange={handleCountyChange}
-  className="w-full p-2 border border-gray-300 rounded"
->
-  <option value="">Select County</option>
-  {counties.map((county) => (
-    <option key={county.countyID} value={county.countyID}>
-      {county.countyName}
-    </option>
-  ))}
-</select>
-        {errors.county && <p className="text-red-500">{errors.county[0]}</p>}
-      </div>
+          <label htmlFor="county">County:</label>
+          <select
+            id="county"
+            name="county"
+            value={formValues.countyID}
+            onChange={handleCountyChange}
+            className="w-full p-2 border border-gray-300 rounded"
+          >
+            <option value="">Select County</option>
+            {counties.map((county) => (
+              <option key={county.countyID} value={county.countyID}>
+                {county.countyName}
+              </option>
+            ))}
+          </select>
+          {errors.county && <p className="text-red-500">{errors.county[0]}</p>}
+        </div>
 
 
         <div>

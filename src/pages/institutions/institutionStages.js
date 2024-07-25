@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+
 import { FaPlus } from "react-icons/fa6";
+
 import { customStyles } from '../../styles/customStyles';
 import StagesForm from '../../components/forms/institutionStagesF';
 import StagesTable from '../../components/tables/institutionStagesT';
@@ -137,9 +139,11 @@ const AddStages = () => {
       <div className="p-4">
         <button
           onClick={openAddStagesModal}
+
           className="bg-blue-500 text-white p-2 rounded mb-4  mr-auto flex justify-center items-center gap-2"
         >
             <FaPlus/> <span>Stage</span>
+
         </button>
         <StagesTable
           stages={stages}

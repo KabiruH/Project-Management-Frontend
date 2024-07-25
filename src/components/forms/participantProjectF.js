@@ -76,7 +76,7 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
       projects: selectedOptions,
     }));
   };
-  
+
   const handleRemoveProject = (projectId) => {
     setFormValues((prevValues) => ({
       ...prevValues,
@@ -120,6 +120,7 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
           />
           {errors.institutionName && <p className="text-red-500">{errors.institutionName[0]}</p>}
         </div>
+       
         <div>
           <label htmlFor="projects">Projects:</label>
           {loadingProjects ? (
@@ -127,19 +128,19 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
           ) : (
             <>
 
-<select
-  name="projects"
-  multiple
-  value={formValues.projects || []}
-  onChange={handleProjectSelectChange}
-  className="w-full p-2 border border-gray-300 rounded"
->
-  {filteredProjects.map((project) => (
-    <option key={project.projectID} value={project.projectID}>
-      {project.projectName}
-    </option>
-  ))}
-</select>
+              <select
+                name="projects"
+                multiple
+                value={formValues.projects || []}
+                onChange={handleProjectSelectChange}
+                className="w-full p-2 border border-gray-300 rounded"
+              >
+                {filteredProjects.map((project) => (
+                  <option key={project.projectID} value={project.projectID}>
+                    {project.projectName}
+                  </option>
+                ))}
+              </select>
 
             </>
           )}

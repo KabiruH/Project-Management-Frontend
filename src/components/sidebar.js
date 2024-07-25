@@ -109,13 +109,14 @@ const Sidebar = ({isOpen, onClose}) => {
     {
       name: 'Reports',
       path: '',
-      icon: <TbFileReport />,
-      dropdown: [{name: 'Users',path: '/reports/users'}]
+      icon: <TbFileReport />
+      
     },
     {
       name: 'Manage User',
-      path: '/',
+      path: '#',
       icon: <FaUsers />,
+      dropdown: [{name: 'Users',path: '/reports/users'}]
     },
   ];
   const localItem = localStorage.getItem('item')

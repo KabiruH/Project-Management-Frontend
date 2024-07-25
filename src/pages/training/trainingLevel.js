@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import  {customStyles} from "../../styles/customStyles"
+import { FaPlus } from "react-icons/fa6";
 
 import TrainingLevelForm from '../../components/forms/trainingLevelF';
 import TrainingLevelTable from '../../components/tables/trainingLevelT';
@@ -138,9 +139,9 @@ const AddTrainingLevel = () => {
       <div className="p-4">
         <button
           onClick={openAddTrainingLevelModal}
-          className="bg-blue-500 text-white p-2 rounded mb-4"
+          className="bg-blue-500 text-white p-2 rounded mb-4 flex justify-center items-center mr-auto gap-2"
         >
-          Add TrainingLevel
+            <FaPlus /><span>TrainingLevel</span>    
         </button>
         <TrainingLevelTable
           traininglevels={traininglevels}

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { FaPlus } from "react-icons/fa6";
+
 import { customStyles } from '../../styles/customStyles';
 import FeedbackForm from '../../components/forms/feedbackF';
 import FeedbackTable from '../../components/tables/feedbackT';
@@ -143,9 +145,9 @@ const AddFeedback = () => {
       <div className="p-4">
         <button
           onClick={openAddFeedbackModal}
-          className="bg-blue-500 text-white p-2 rounded mb-4"
+          className="bg-blue-500 text-white p-2 rounded mb-4 flex justify-center items-center mr-auto gap-2"
         >
-          Add Feedback
+          <FaPlus /> <span>Feedback</span>  
         </button>
         <FeedbackTable
           feedback={feedback}

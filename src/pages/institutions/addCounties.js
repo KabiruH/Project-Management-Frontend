@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { FaPlus } from "react-icons/fa6";
 import { customStyles } from '../../styles/customStyles';
 import CountyForm from '../../components/forms/countiesF';
 import CountyTable from '../../components/tables/countiesT';
@@ -143,9 +144,9 @@ const AddCounty = () => {
       <div className="p-4">
         <button
           onClick={openAddCountyModal}
-          className="bg-blue-500 text-white p-2 rounded mb-4"
+          className="bg-blue-500 text-white p-2 rounded mb-4  mr-auto flex justify-center items-center gap-2 "
         >
-          Add County
+          <FaPlus/> <span>County</span>
         </button>
         <CountyTable
           counties={counties}

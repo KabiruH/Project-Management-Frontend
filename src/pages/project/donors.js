@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { FaPlus } from "react-icons/fa6";
+
 import {customStyles} from '../../styles/customStyles'
 import DonorForm from '../../components/forms/donorsF';
 import DonorTable from '../../components/tables/donorsT';
@@ -130,9 +132,9 @@ const AddDonor = () => {
             <div className="p-4">
                 <button
                     onClick={openAddDonorModal}
-                    className="bg-blue-500 text-white p-2 rounded mb-4"
+                    className="bg-blue-500 text-white p-2 rounded mb-4 flex justify-center items-center mr-auto gap-2"
                 >
-                    Add Donor
+                    <FaPlus /> <span>Donor</span>  
                 </button>
                 <DonorTable
                     Donors={Donors}

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { FaPlus } from "react-icons/fa6";
+
 import ParticipantForm from '../../components/forms/participantF';
 import ParticipantTable from '../../components/tables/participantT';
 import { addParticipant as addParticipantService, getParticipantById, updateParticipant, deleteParticipant, getParticipant } from '../../services/participantS';
@@ -136,7 +138,8 @@ const AddParticipant = () => {
       console.log('Updated Participant Payload:', participantPayload);
   
       const updatedParticipant = await updateParticipant(selectedParticipantId, participantPayload);
-      setParticipants((prev) => prev.map(inst => (inst.adminNumber === selectedParticipantId ? updatedParticipant : inst)));
+      const newParticipants = await getParticipant()
+      setParticipants(newParticipants);
       setIsModalOpen(false);
       setErrors({});
     } catch (error) {
@@ -174,9 +177,9 @@ const AddParticipant = () => {
       <div className="p-4">
         <button
           onClick={openAddParticipantModal}
-          className="bg-blue-500 text-white p-2 rounded mb-4"
+          className="bg-blue-500 text-white p-2 rounded mb-4 flex justify-center items-center mr-auto gap-2"
         >
-          Add Participant
+           <FaPlus /> <span>Participant</span> 
         </button>
         <ParticipantTable
           participants={participants}

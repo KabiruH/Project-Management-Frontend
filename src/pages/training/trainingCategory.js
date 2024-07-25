@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import  {customStyles} from "../../styles/customStyles"
+import { FaPlus } from "react-icons/fa6";
 
 import TrainingCategoryForm from '../../components/forms/trainingCategoryF';
 import TrainingCategoryTable from '../../components/tables/trainingCategoryT';
@@ -137,9 +138,9 @@ const AddTrainingCategory = () => {
       <div className="p-4">
         <button
           onClick={openAddTrainingCategoryModal}
-          className="bg-blue-500 text-white p-2 rounded mb-4"
+          className="bg-blue-500 text-white p-2 rounded mb-4 flex justify-center items-center mr-auto gap-2"
         >
-          Add Category Types
+           <FaPlus /> <span> Category Types</span>    
         </button>
         <TrainingCategoryTable
           trainingcategory={trainingcategory}

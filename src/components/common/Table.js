@@ -22,7 +22,7 @@ const Table = ({ columns, data, renderRowActions }) => {
     {data.map((item, index) => (
       <tr key={index} className="border-b border-gray-200 hover:bg-gray-100">
         {columns.map((col) => (
-          <td key={col.accessor} className="px-6 py-3 border-b border-gray-200">{item[col.accessor]}</td>
+          <td key={col.accessor} className="px-6 py-3 border-b text-[17px] font-[600] text-black border-gray-200">{item[col.accessor]}</td>
         ))}
         {renderRowActions && <td className="px-6 py-3 border-b border-gray-200">{renderRowActions(item)}</td>}
       </tr>

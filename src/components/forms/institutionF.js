@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Input from '../common/Input';
-import styles from '../../styles/modal.module.css'; // Correct import for CSS modules
+import styles from '../../styles/modal.module.css';
 import { getStages } from '../../services/institutionStageS'
 import { getStatus } from '../../services/institutionStatusS'
 import { getCounty, getSubCounty } from '../../services/countiesS'
@@ -66,25 +66,19 @@ useEffect(() => {
   fetchCounties();
 }, []);
 
-const getCountyNameById = (countyID) => {
-  const county = counties.find(c => c.countyID === countyID);
-  return county ? county.countyName : 'Unknown';
-};
-
 
 const handleCountyChange = async (event) => {
-  const countyID = event.target.value;
-  const countyName = counties.find(c => c.countyID === countyID)?.countyName || '';
-  console.log('Selected County ID:', countyID); // Log the countyID for debugging
+  const countyName = event.target.value;
+  console.log('Selected County ID:', countyName); // Log the countyID for debugging
   
   // Update form values with selected county ID and county name
-  handleInputChange({ target: { name: 'countyID', value: countyID } });
-  handleInputChange({ target: { name: 'countyName', value: countyName } });
+  handleInputChange({ target: { name: 'county', value: countyName } });
+
   
   
-  if (countyID) {
+  if (countyName) {
     try {
-      const subCountyData = await getSubCounty(countyID);
+      const subCountyData = await getSubCounty(countyName);
       setSubCounties(subCountyData);
       // console.log('Sub-counties fetched:', subCountyData);
     } catch (error) {
@@ -115,8 +109,6 @@ const handleDateChange = (event) => {
 
   handleInputChange(event);
 };
-
-
 
 
   return (
@@ -211,18 +203,18 @@ const handleDateChange = (event) => {
         <div>
           <label htmlFor="county">County:</label>
           <select
-            id="countyName"
+            id="county"
             name="countyName"
-            value={formValues.countyID} // Ensure this is countyID, not countyName
+            value={formValues.countyName} // Ensure this is countyID, not countyName
             onChange={handleCountyChange}
             className="w-full p-2 border border-gray-300 rounded"
           >
             <option value="">Select County</option>
             {counties.map((county) => (
-              <option key={county.countyName} value={county.countyID}>
-                {county.countyName}
-              </option>
-            ))}
+  <option key={county.countyID} value={county.countyID}>
+    {county.countyID === formValues.countyName ? county.countyName : county.countyName}
+  </option>
+))}
           </select>
         </div>
      

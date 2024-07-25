@@ -16,7 +16,7 @@ const AddInstitution = () => {
     statusID: '',
     institutionEmail: '',
     institutionContact: '',
-    countyName: '',
+    countyID: '',
     subCounty: '',
     contactPerson: '',
     contactNumber: '',
@@ -85,7 +85,7 @@ const AddInstitution = () => {
       statusID: '',
       institutionEmail: '',
       institutionContact: '',
-      countyName: '',
+      countyID: '',
       subCounty: '',
       contactPerson: '',
       contactNumber: '',
@@ -158,7 +158,7 @@ const AddInstitution = () => {
       <h1 className="text-2xl font-bold mb-4">Institutions</h1>
       <div className="p-4">
         <button
-          onClick={()=>setIsModalOpen(true)}
+          onClick={openAddInstitutionModal}
           className="bg-blue-500 text-white p-2 rounded mb-4"
         >
           Add Institution

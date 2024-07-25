@@ -8,7 +8,7 @@ const columns = [
   { Header: 'Status', accessor: 'statusID' },
   { Header: 'Email', accessor: 'institutionEmail' },
   { Header: 'Contact', accessor: 'institutionContact' },
-  { Header: 'County Name', accessor: 'countyName' },
+  { Header: 'County', accessor: 'countyID'  },
   { Header: 'Sub-County', accessor: 'subCounty' },
   { Header: 'Contact Person', accessor: 'contactPerson' },
   { Header: 'Contact Number', accessor: 'contactNumber' },
@@ -42,6 +42,7 @@ const InstitutionTable = ({ institutions, openEditModal, deleteInstitution }) =>
       columns={columns}
       data={institutions}
       renderRowActions={renderRowActions}
+      keyField="institutionID" // Ensure you have a unique key for each row
     />
   );
 };

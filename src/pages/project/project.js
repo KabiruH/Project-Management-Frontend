@@ -166,9 +166,9 @@ const AddProject = () => {
       <div className="p-4">
         <button
           onClick={openAddProjectModal}
-          className="bg-blue-500 text-white p-2 rounded mb-4  flex justify-center items-center ml-auto gap-2"
+          className="bg-blue-500 text-white p-2 rounded mb-4  flex justify-center items-center mr-auto gap-2"
         >
-           <span>Project</span><FaPlus /> 
+           <FaPlus /> <span>Project</span>
         </button>
         <ProjectTable
           projects={projects}

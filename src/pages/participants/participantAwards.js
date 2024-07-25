@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { FaPlus } from "react-icons/fa6";
+
 import AwardsForm from '../../components/forms/participantAwardsF';
 import AwardsTable from '../../components/tables/participantsAwardT';
 import { addawardsService, getAwardsById, updateAwards, deleteAwards, getAwards } from '../../services/participantAwardS';
 import Layout from '../../components/layout';
-
+import {customStyles} from "../../styles/customStyles"
 Modal.setAppElement('#root');
 
 const AddAwards = () => {
@@ -157,9 +159,9 @@ const AddAwards = () => {
             <div className="p-4">
                 <button
                     onClick={openAddawardsModal}
-                    className="bg-blue-500 text-white p-2 rounded mb-4"
+                    className="bg-blue-500 text-white p-2 rounded mb-4 flex justify-center items-center mr-auto gap-2"
                 >
-                    Add awards
+                    <FaPlus />    <span>Awards</span>
                 </button>
               
                     <AwardsTable
@@ -169,7 +171,7 @@ const AddAwards = () => {
                     />
               
             </div>
-            <Modal isOpen={isModalOpen} onRequestClose={closeAddawardsModal} contentLabel={editMode ? "Edit awards" : "Add awards"}>
+            <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddawardsModal} contentLabel={editMode ? "Edit awards" : "Add awards"}>
                 <h2 className="text-xl mb-4">{editMode ? 'Edit awards' : 'Add awards'}</h2>
                 <AwardsForm
                     formValues={newAwards}
@@ -178,10 +180,10 @@ const AddAwards = () => {
                     errors={errors}
                 />
                 <div className="flex justify-end mt-4">
-                    <button onClick={editMode ? updateExistingawards : addnewAwards} className="bg-green-500 text-white p-2 rounded mr-2">
+                    <button onClick={editMode ? updateExistingawards : addnewAwards} className="bg-primary px-5 text-white p-2 rounded mr-2">
                         {editMode ? 'Update' : 'Save'}
                     </button>
-                    <button onClick={closeAddawardsModal} className="bg-gray-500 text-white p-2 rounded">
+                    <button onClick={closeAddawardsModal} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
                         Cancel
                     </button>
                 </div>

@@ -16,7 +16,7 @@ export const fetchParticipantData = async () => {
 };
 
 // Headers configuration for the institution report
-export const reportHeaders = [
+export const participantHeaders = [
     { Header: 'Admin Number', accessor: 'adminNumber' },
     { Header: 'Name', accessor: 'name' },
     { Header: 'Date of Birth', accessor: 'dob' },

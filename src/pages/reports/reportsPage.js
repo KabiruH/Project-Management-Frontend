@@ -5,6 +5,9 @@ import { formatExcelReport } from '../../utils/excelFormatting';
 import { fetchInstitutionData } from '../../services/reportsServices/reportInstitutionsS';
 import { fetchProjectData } from '../../services/reportsServices/reportProjectsS';
 import { fetchParticipantData } from '../../services/reportsServices/reportParticipantsS';
+import { institutionHeaders } from '../../services/reportsServices/reportInstitutionsS';
+import { projectHeaders } from '../../services/reportsServices/reportProjectsS';
+import { participantHeaders } from '../../services/reportsServices/reportParticipantsS';
 
 const ReportsPage = () => {
   const [selectedReport, setSelectedReport] = useState('');
@@ -29,7 +32,7 @@ const ReportsPage = () => {
               data = [];
           }
           if (data) {
-            console.log(`Fetched data for ${selectedReport}:`, data); // Logging fetched data
+            console.log(`Fetched data for ${selectedReport}:`, data);
             setReportData(data);
           }
         } catch (error) {
@@ -39,6 +42,19 @@ const ReportsPage = () => {
       fetchData();
     }
   }, [selectedReport]);
+
+  const getReportHeaders = () => {
+    switch (selectedReport) {
+      case 'Award Centers':
+        return institutionHeaders;
+      case 'Participants':
+        return participantHeaders;
+      case 'Projects':
+        return projectHeaders;
+      default:
+        return [];
+    }
+  };
 
   const handleExport = (format) => {
     if (!selectedReport) {
@@ -51,10 +67,11 @@ const ReportsPage = () => {
       return;
     }
 
+    const headers = getReportHeaders();
     if (format === 'PDF') {
-      formatPDFReport(selectedReport, reportData);
+      formatPDFReport(selectedReport, reportData, headers);
     } else if (format === 'Excel') {
-      formatExcelReport(selectedReport, reportData);
+      formatExcelReport(selectedReport, reportData, headers);
     }
   };
 
@@ -87,22 +104,22 @@ const ReportsPage = () => {
                 <img
                   src={`${process.env.PUBLIC_URL}/assets/checked.png`}
                   alt="Checkmark"
-                  className={`w-6 h-6 ${selectedReport === 'Participants Report' ? 'block' : 'hidden'} mr-3`}
+                  className={`w-6 h-6 ${selectedReport === 'Participants' ? 'block' : 'hidden'} mr-3`}
                 />
-                <span className={`font-semibold ${selectedReport === 'Participants Report' ? 'text-blue-600' : 'text-gray-800'}`}>Participants Report</span>
+                <span className={`font-semibold ${selectedReport === 'Participants' ? 'text-blue-600' : 'text-gray-800'}`}>Participants Report</span>
               </button>
             </li>
             <li>
               <button
-                onClick={() => setSelectedReport('Projects Report')}
-                className={`w-full text-left p-2 flex items-center ${selectedReport === 'Projects Report' ? 'bg-gray-200' : 'bg-white'} hover:bg-gray-100`}
+                onClick={() => setSelectedReport('Projects')}
+                className={`w-full text-left p-2 flex items-center ${selectedReport === 'Projects' ? 'bg-gray-200' : 'bg-white'} hover:bg-gray-100`}
               >
                 <img
                   src={`${process.env.PUBLIC_URL}/assets/checked.png`}
                   alt="Checkmark"
-                  className={`w-6 h-6 ${selectedReport === 'Projects Report' ? 'block' : 'hidden'} mr-3`}
+                  className={`w-6 h-6 ${selectedReport === 'Projects' ? 'block' : 'hidden'} mr-3`}
                 />
-                <span className={`font-semibold ${selectedReport === 'Projects Report' ? 'text-blue-600' : 'text-gray-800'}`}>Projects Report</span>
+                <span className={`font-semibold ${selectedReport === 'Projects' ? 'text-blue-600' : 'text-gray-800'}`}>Projects Report</span>
               </button>
             </li>
           </ul>

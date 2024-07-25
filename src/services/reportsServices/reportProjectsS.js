@@ -16,7 +16,7 @@ export const fetchProjectData = async () => {
 };
 
 // Headers configuration for the projects report
-export const reportHeaders = [
+export const projectHeaders = [
     { Header: 'ID', accessor: 'projectID' },
     { Header: 'Name', accessor: 'projectName' },
     { Header: 'Institution', accessor: 'institutionName' },

@@ -3,9 +3,9 @@ import Table from '../common/Table';
 
 const columns = [
   { Header: 'Participant ID', accessor: 'participantID' },
-  { Header: 'Participant Name', accessor: 'ParticipantName' },
+  { Header: 'Participant Name', accessor: 'participantName' },
   { Header: 'Institution Name', accessor: 'institutionName' },
-  { Header: 'projectID', accessor: 'projectID' },
+  { Header: 'Project', accessor: 'projectID' },
 
 ];
 

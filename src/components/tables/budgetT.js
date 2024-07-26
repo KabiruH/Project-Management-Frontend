@@ -13,9 +13,6 @@ const columns = [
   { Header: 'County', accessor: 'county' },
   { Header: 'Sub-County', accessor: 'subCounty' },
 
-  
-  
- 
 ];
 
 const BudgetTable = ({ budget, openEditModal, deleteBudget }) => {

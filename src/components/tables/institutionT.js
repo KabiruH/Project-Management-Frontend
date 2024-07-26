@@ -8,7 +8,7 @@ const columns = [
   { Header: 'Status', accessor: 'statusID' },
   { Header: 'Email', accessor: 'institutionEmail' },
   { Header: 'Contact', accessor: 'institutionContact' },
-  { Header: 'County', accessor: 'countyID'  },
+  { Header: 'County', accessor: 'county'  },
   { Header: 'Sub-County', accessor: 'subCounty' },
   { Header: 'Contact Person', accessor: 'contactPerson' },
   { Header: 'Contact Number', accessor: 'contactNumber' },

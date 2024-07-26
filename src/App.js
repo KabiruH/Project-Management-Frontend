@@ -31,6 +31,10 @@ import ReportsPage from './pages/reports/reportsPage';
 import SignIn from './pages/signin';
 import Signup from './pages/signup'
 import Home from './pages/homepage';
+
+import UsersReport from './pages/Reports/UsersReport';
+import Users from "./pages/users"
+
 import { DarkModeProvider } from './components/darkMode';
 import ProtectedRoute from './services/ProtectedRoute';
 
@@ -66,8 +70,14 @@ function App() {
           <Route path="/training/trainingType" element={<ProtectedRoute element={AddTrainingType} />} />
           <Route path="/training/trainingLevel" element={<ProtectedRoute element={AddTrainingLevel} />} />
           <Route path="/training/trainingCategory" element={<ProtectedRoute element={AddTrainingCategory} />} />
+
  
          <Route path="/reports/reportsPage" element={<ProtectedRoute element={ReportsPage} />} />
+
+          
+         <Route path="/reports/users" element={<ProtectedRoute element={UsersReport} />} />
+          <Route path="/users" element={<ProtectedRoute element={Users} />} />
+
 
           <Route path="/research/feedback" element={<ProtectedRoute element={AddFeedback} />} />
 

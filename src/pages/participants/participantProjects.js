@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { FaPlus } from "react-icons/fa6";
+
+import { customStyles } from '../../styles/customStyles';
 import ParticipantProjectForm from '../../components/forms/participantProjectF';
 import ParticipantProjectTable from '../../components/tables/participantProjectT';
 import { addParticipantProjects, getParticipantProjectById, updateParticipantProject, deleteParticipantProject, getParticipantProject } from '../../services/participantProjectS';
@@ -10,9 +13,9 @@ Modal.setAppElement('#root');
 const AddParticipantProject = () => {
   const [participantProjects, setParticipantProjects] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newParticipantProject, setnewParticipantProject] = useState({ 
+  const [newParticipantProject, setnewParticipantProject] = useState({
     participantID: '',
-    participantName: '',
+    name: '',
     institutionName: '',
     projectID: '',
   });
@@ -58,18 +61,33 @@ const AddParticipantProject = () => {
       setIsModalOpen(false);
       setErrors({});
     } catch (error) {
-      console.error('Error adding participant:', error.response.data);
-      setErrors(error.response.data.errors || {});
-      alert(`Failed to add participant: ${error.response.data.title}\nDetails: ${JSON.stringify(error.response.data.errors, null, 2)}`);
+      console.error('Error adding participant:', error);
+
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error('Error response data:', error.response.data);
+        setErrors(error.response.data.errors || {});
+        alert(`Failed to add participant: ${error.response.data.title}\nDetails: ${JSON.stringify(error.response.data.errors, null, 2)}`);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error('Error request data:', error.request);
+        alert('Failed to add participant: No response received from the server.');
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error('Error message:', error.message);
+        alert(`Failed to add participant: ${error.message}`);
+      }
     }
   };
+
 
   const openAddParticipantModal = () => {
     setEditMode(false);
     setIsModalOpen(true);
     setnewParticipantProject({
       participantID: '',
-      participantName: '',
+      name: '',
       institutionName: '',
       projectID: '',
     });
@@ -90,7 +108,7 @@ const AddParticipantProject = () => {
       console.error(`Error fetching ParticipantProject with ID ${participant.participantID}:`, error.response.data);
     }
   };
-  
+
   const updateExistingParticipantProject = async () => {
     try {
       const participantPayload = { ...newParticipantProject };
@@ -98,15 +116,30 @@ const AddParticipantProject = () => {
       console.log('Updated ParticipantProjectPayload:', participantPayload);
 
       const updatedParticipantProject = await updateParticipantProject(selectedParticipantId, participantPayload);
-      setParticipantProjects((prev) => prev.map(inst => (inst.participantID === selectedParticipantId ? updatedParticipantProject : inst)));
+      setParticipantProjects((prev) =>
+        prev.map((proj) =>
+          proj.participantID === selectedParticipantId ? updatedParticipantProject : proj
+        )
+      );
       setIsModalOpen(false);
       setErrors({});
     } catch (error) {
-      console.error(`Error updating ParticipantProject with ID ${selectedParticipantId}:`, error.response.data);
-      setErrors(error.response.data.errors || {});
-      alert(`Failed to update participant: ${error.response.data.title}\nDetails: ${JSON.stringify(error.response.data.errors, null, 2)}`);
+      console.error(`Error updating ParticipantProject with ID ${selectedParticipantId}:`, error);
+
+      if (error.response) {
+        console.error('Error response data:', error.response.data);
+        setErrors(error.response.data.errors || {});
+        alert(`Failed to update participant: ${error.response.data.title}\nDetails: ${JSON.stringify(error.response.data.errors, null, 2)}`);
+      } else if (error.request) {
+        console.error('Error request data:', error.request);
+        alert('Failed to update participant: No response received from the server.');
+      } else {
+        console.error('Error message:', error.message);
+        alert(`Failed to update participant: ${error.message}`);
+      }
     }
   };
+
 
   const deleteExistingParticipantProject = async (participantID) => {
     try {
@@ -136,9 +169,9 @@ const AddParticipantProject = () => {
       <div className="p-4">
         <button
           onClick={openAddParticipantModal}
-          className="bg-blue-500 text-white p-2 rounded mb-4"
+          className="bg-blue-500 text-white p-2 rounded mb-4 flex justify-center items-center mr-auto gap-2"
         >
-          Add Participant
+          <FaPlus />    <span>Participant</span> 
         </button>
         <ParticipantProjectTable
           participantProjects={participantProjects}
@@ -146,20 +179,20 @@ const AddParticipantProject = () => {
           deleteParticipant={deleteParticipantHandler}
         />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddParticipantModal} contentLabel={editMode ? "Edit Participant" : "Add Participant"}>
+      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddParticipantModal} contentLabel={editMode ? "Edit Participant" : "Add Participant"}>
         <h2 className="text-xl mb-4">{editMode ? 'Edit Participant' : 'Add Participant'}</h2>
-        <ParticipantProjectForm 
-          formValues={newParticipantProject} 
-          setFormValues={setnewParticipantProject} 
-          handleInputChange={handleInputChange} 
-          handleDateChange={handleDateChange} 
-          errors={errors} 
+        <ParticipantProjectForm
+          formValues={newParticipantProject}
+          setFormValues={setnewParticipantProject}
+          handleInputChange={handleInputChange}
+          handleDateChange={handleDateChange}
+          errors={errors}
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingParticipantProject : addNewParticipantProject} className="bg-green-500 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingParticipantProject: addNewParticipantProject} className="bg-primary px-5 text-white p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddParticipantModal} className="bg-gray-500 text-white p-2 rounded">
+          <button onClick={closeAddParticipantModal} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
             Cancel
           </button>
         </div>

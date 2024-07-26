@@ -5,14 +5,19 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, BarElement, Filler, Cate
 // Register components to ChartJS
 ChartJS.register(ArcElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale, LineElement, PointElement, Filler);
 
-const ChartComponent = () => {
+const ChartComponent = (participants) => {
   // Data for the Bar chart
+
+ 
+  const bronzeParticipants = participants.participants?.filter(participant => participant.awardLevel == "Bronze") || [];
+  const silverParticipants = participants.participants?.filter(participant => participant.awardLevel == "Silver") || [];
+  const goldParticipants = participants.participants?.filter(participant => participant.awardLevel === "Gold") || [];
   const barData = {
     labels: ["Bronze", "Silver", "Gold"],
     datasets: [
       {
         label: 'Highest Participants per Award Level',
-        data: [12, 10, 5],
+        data: [bronzeParticipants.length, silverParticipants.length, goldParticipants.length],
         backgroundColor: [
           'rgba(205, 127, 50, 0.2)', // Bronze color
           'rgba(192, 192, 192, 0.2)', // Silver color
@@ -27,6 +32,7 @@ const ChartComponent = () => {
       }
     ]
   };
+ 
 
   // Data for the Line chart
   const lineData = {

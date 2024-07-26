@@ -27,7 +27,6 @@ import AddPartnership from './pages/partnership/partnership';
 import AddPartnerTypes from './pages/partnership/partnertype';
 import AddFeedback from './pages/research/feedback';
 import ReportsPage from './pages/reports/reportsPage';
-
 import SignIn from './pages/signin';
 import Signup from './pages/signup'
 import Home from './pages/homepage';

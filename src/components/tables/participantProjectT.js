@@ -5,10 +5,9 @@ const columns = [
   { Header: 'Participant ID', accessor: 'participantID' },
   { Header: 'Participant Name', accessor: 'participantName' },
   { Header: 'Institution Name', accessor: 'institutionName' },
-  { Header: 'ProjectID', accessor: 'projectID' },
   {
     Header: 'Projects',
-    accessor: 'projects', 
+    accessor: 'Projects', 
     Cell: ({ value }) => value.join(', ') // Join project names with comma
   },
 ];

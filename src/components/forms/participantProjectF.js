@@ -48,7 +48,6 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
             ...prevValues,
             participantName: participant.name,
             institutionName: participant.institutionName,
-            ProjectID: participant.projectID,
             projects: participant.ProjectID || [], // Ensure this uses project IDs
           }));
           const institutionProjects = allProjects.filter(
@@ -78,10 +77,10 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
     }));
   };
 
-  const handleRemoveProject = (projectName) => {
+  const handleRemoveProject = (projectId) => {
     setFormValues((prevValues) => ({
       ...prevValues,
-      projects: prevValues.projects.filter((name) => name !== projectName),
+      projects: prevValues.projects.filter((id) => id !== projectId),
     }));
   };
 
@@ -121,19 +120,7 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
           />
           {errors.institutionName && <p className="text-red-500">{errors.institutionName[0]}</p>}
         </div>
-
-        <div>
-          <label htmlFor="ProjectID">ProjectID:</label>
-          <Input
-            name="ProjectID"
-            placeholder="ProjectID"
-            value={formValues.ProjectID}
-            onChange={handleInputChange}
-            disabled
-          />
-          {errors.ProjectID && <p className="text-red-500">{errors.ProjectID[0]}</p>}
-        </div>
-
+       
         <div>
           <label htmlFor="projects">Projects:</label>
           {loadingProjects ? (
@@ -147,7 +134,7 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
               className="w-full p-2 border border-gray-300 rounded"
             >
               {filteredProjects.map((project) => (
-                <option key={project.projectID} value={project.projectID}>
+                <option key={project.projectID} value={project.projectName}>
                   {project.projectName}
                 </option>
               ))}
@@ -157,16 +144,16 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
         </div>
       </div>
       {formValues.projects?.length > 0 && (
-        <div className="selected-projects">
-          {formValues.projects.map((projectId) => {
-            const project = allProjects.find((proj) => proj.projectID === projectId);
-            return (
-              <div key={projectId} className="selected-project">
-                <span>{project ? project.projectName : 'Unknown Project'}</span>
-                <button type="button" onClick={() => handleRemoveProject(projectId)}>
-                  ×
-                </button>
-              </div>
+         <div className="selected-projects">
+         {formValues.projects.map((projectName) => {
+          //  const project = allProjects.find((proj) => proj.projectID === projectId);
+           return (
+             <div key={projectName} className="selected-project">
+               <span>{projectName || 'Unknown Project'}</span>
+               <button type="button" onClick={() => handleRemoveProject(projectName)}>
+                 ×
+               </button>
+             </div>
             );
           })}
         </div>

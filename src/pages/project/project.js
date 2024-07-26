@@ -128,7 +128,10 @@ const AddProject = () => {
       console.log('Updated Project Payload:', projectPayload);
 
       const updatedProject = await updateProject(selectedProjectId, projectPayload);
-      setProjects((prev) => prev.map(proj => (proj.projectID === selectedProjectId ? updatedProject : proj)));
+      
+      const updatedProjecta = await getProjects()
+      setNewProject(updatedProjecta)
+      
       setIsModalOpen(false);
       setErrors({});
     } catch (error) {

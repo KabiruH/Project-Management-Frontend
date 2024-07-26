@@ -26,10 +26,12 @@ import AddFundingType from './pages/financials/fundingtype';
 import AddPartnership from './pages/partnership/partnership';
 import AddPartnerTypes from './pages/partnership/partnertype';
 import AddFeedback from './pages/research/feedback';
+import ReportsPage from './pages/reports/reportsPage';
 import SignIn from './pages/signin';
 import Signup from './pages/signup'
 import Home from './pages/homepage';
-import UsersReport from './pages/Reports/UsersReport';
+import Users from "./pages/users"
+
 import { DarkModeProvider } from './components/darkMode';
 import ProtectedRoute from './services/ProtectedRoute';
 
@@ -45,7 +47,7 @@ function App() {
           <Route path="/dashboard" element={<ProtectedRoute element={DashboardStatsGrid} />} />
           <Route path="/calendar" element={<ProtectedRoute element={CalendarPage}/>} />
           <Route path="/institutions/addInstitutions" element={<ProtectedRoute element={AddInstitution} />} />
-          {/* <Route path="/institutions/addCounties" element={<ProtectedRoute element={AddCounty} />} /> */}
+      
           <Route path='/institutions/institutionStages' element={<ProtectedRoute element={AddStages} />} />
           <Route path='/institutions/institutionStatus' element={<ProtectedRoute element={AddStatus} />} />
           <Route path="/participants/participant" element={<ProtectedRoute element={AddParticipant} />} />
@@ -65,10 +67,15 @@ function App() {
           <Route path="/training/trainingType" element={<ProtectedRoute element={AddTrainingType} />} />
           <Route path="/training/trainingLevel" element={<ProtectedRoute element={AddTrainingLevel} />} />
           <Route path="/training/trainingCategory" element={<ProtectedRoute element={AddTrainingCategory} />} />
-          {/* reports */}
-          <Route path="/reports/users" element={<ProtectedRoute element={UsersReport} />} />
 
-          {/* reports end */}
+ 
+         <Route path="/reports/reportsPage" element={<ProtectedRoute element={ReportsPage} />} />
+
+          
+      
+          <Route path="/users" element={<ProtectedRoute element={Users} />} />
+
+
           <Route path="/research/feedback" element={<ProtectedRoute element={AddFeedback} />} />
 
           <Route exact path="/dashboard" element={<DashboardStatsGrid />} />

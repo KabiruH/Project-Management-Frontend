@@ -37,9 +37,12 @@ const Signin = ()=>{
       const onSubmit = async(data) => {
       
         try {
+          const now = Date.now();
+          const expiryTime = now + 1440 * 60 * 1000;
           const response = await apiClient.post('api/User/Login', data)
           const OurData = response.data
             localStorage.setItem('token',OurData.token) 
+            localStorage.setItem('tokenExpiry', expiryTime);
             navigate('/dashboard')
         } catch (error) {
           setLoginError(true)

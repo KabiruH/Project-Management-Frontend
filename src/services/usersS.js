@@ -41,7 +41,7 @@ const deleteUsers = async (Username) => {
 
 const getUsers = async () => {
   try {
-    const response = await apiClient.get('/api/Users');
+    const response = await apiClient.get('/api/User');
     return response.data;
   } catch (error) {
     console.error('Error fetching Users:', error.response.data);

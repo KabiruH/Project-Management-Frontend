@@ -2,25 +2,27 @@ import React from 'react';
 import Table from '../common/Table';
 
 const columns = [
-  { Header: 'Partner ID', accessor: 'partnerID' },
-  { Header: 'Partner Name', accessor: 'partnerName' },
-  { Header: 'Email', accessor: 'partnerEmail' },
+  { Header: 'Full Names', accessor: 'name' },
+  { Header: 'Username', accessor: 'username' },
+  { Header: 'Role', accessor: 'roleID' },
+  { Header: 'Gender', accessor: 'gender' },
+  { Header: 'Email', accessor: 'email' },
+  { Header: 'Id Number', accessor: 'idNo' },
   { Header: 'Phone Number', accessor: 'phoneNo' },
-  { Header: 'Partner Type', accessor: 'partnerType' },
 ];
 
-const PartnershipTable = ({ partnerships, openEditModal, deleteParticipant }) => {
-  const renderRowActions = ({ partnerID }) => (
+const UserTable = ({ Users, openEditModal, deleteUser }) => {
+  const renderRowActions = ({ username }) => (
     <div>
       <button
-        onClick={() => openEditModal({ partnerID })}
+        onClick={() => openEditModal({ username })}
         className="bg-yellow-500 text-white p-1 rounded mr-2"
       >
         Edit
       </button>
       
       <button
-        onClick={() => deleteParticipant(partnerID)}
+        onClick={() => deleteUser(username)}
         className="bg-red-500 text-white p-1 rounded"
       >
         Delete
@@ -31,10 +33,10 @@ const PartnershipTable = ({ partnerships, openEditModal, deleteParticipant }) =>
   return (
     <Table
       columns={columns}
-      data={partnerships}
+      data={Users}
       renderRowActions={renderRowActions}
     />
   );
 };
 
-export default PartnershipTable;
+export default UserTable;

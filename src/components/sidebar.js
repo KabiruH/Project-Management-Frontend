@@ -114,9 +114,8 @@ const Sidebar = ({isOpen, onClose}) => {
     },
     {
       name: 'Manage User',
-      path: '#',
+      path: '/users',
       icon: <FaUsers />,
-      dropdown: [{name: 'Users',path: '/reports/users'}]
     },
   ];
   const localItem = localStorage.getItem('item')

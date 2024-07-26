@@ -2,160 +2,164 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { FaPlus } from "react-icons/fa6";
 
-import { customStyles } from '../../styles/customStyles';
-import PartnershipForm from '../../components/forms/partnershipF';
-import PartnershipTable from '../../components/tables/partnershipT';
-import { addPartnership as addPartnershipService, getPartnershipById, updatePartnership, deletePartnership, getPartnership } from '../../services/partnershipS';
-import Layout from '../../components/layout';
+import { customStyles } from '../styles/customStyles';
+import UserForm from '../components/forms/usersF';
+import UserTable from '../components/tables/usersT';
+import { addUsers as addUsersService, getUsersById, updateUsers, deleteUsers, getUsers } from '../services/usersS';
+import Layout from '../components/layout';
 
 Modal.setAppElement('#root');
 
-const AddPartnership = () => {
-  const [partnerships, setPartnerships] = useState([]);
+const AddUser = () => {
+  const [Users, setUsers] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newPartnership, setNewPartnership] = useState({ 
-      partnerID: '',
-      partnerName: '',
-      partnerEmail: '',
-      phoneNo: '',
-      partnerType: '',
+  const [newUser, setNewUser] = useState({ 
+      username: '',
+      name: '',
+      roleID: '',
+      gender: '',
+      idNo: '',
+      PhoneNo: '',
+      email: '',
   });
   const [errors, setErrors] = useState({});
   const [editMode, setEditMode] = useState(false);
-  const [selectedPartnershipId, setSelectedPartnershipId] = useState(null);
+  const [selectedUserId, setSelectedUserId] = useState(null);
 
   useEffect(() => {
-    const fetchPartnerships = async () => {
+    const fetchUsers = async () => {
       try {
-        const fetchedPartnerships = await getPartnership();
-        setPartnerships(fetchedPartnerships);
+        const fetchedUsers = await getUsers();
+        setUsers(fetchedUsers);
       } catch (error) {
-        console.error('Error fetching partnerships:', error.response.data);
+        console.error('Error fetching Users:', error.response.data);
       }
     };
 
-    fetchPartnerships();
+    fetchUsers();
   }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewPartnership((prev) => ({
+    setNewUser((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  const addNewPartnership = async () => {
+  const addNewUser = async () => {
     try {
-      const partnershipPayload = { ...newPartnership };
+      const UserPayload = { ...newUser };
 
-      console.log('New Partnership Payload:', partnershipPayload);
-      const addedPartnership = await addPartnershipService(partnershipPayload);
-      setPartnerships((prev) => [...prev, addedPartnership]);
+      console.log('New User Payload:', UserPayload);
+      const addedUser = await addUsersService(UserPayload);
+      setUsers((prev) => [...prev, addedUser]);
       setIsModalOpen(false);
       setErrors({});
     } catch (error) {
-      console.error('Error adding partnership:', error.response.data);
+      console.error('Error adding User:', error.response.data);
       setErrors(error.response.data.errors || {});
-      alert(`Failed to add partnership: ${error.response.data.title}\nDetails: ${JSON.stringify(error.response.data.errors, null, 2)}`);
+      alert(`Failed to add User: ${error.response.data.title}\nDetails: ${JSON.stringify(error.response.data.errors, null, 2)}`);
     }
   };
 
-  const openAddPartnershipModal = () => {
+  const openAddUserModal = () => {
     setEditMode(false);
     setIsModalOpen(true);
-    setNewPartnership({
-      partnerID: '',
-      partnerName: '',
-      partnerEmail: '',
-      phoneNo: '',
-      partnerType: '',
+    setNewUser({
+      username: '',
+      name: '',
+      roleID: '',
+      gender: '',
+      idNo: '',
+      PhoneNo: '',
+      email: '',
     });
   };
 
-  const openEditPartnershipModal = async (partnership) => {
+  const openEditUserModal = async (User) => {
     try {
-      console.log('Fetching partnership with ID:', partnership.partnerID);
-      const fetchedPartnership = await getPartnershipById(partnership.partnerID);
-      console.log('Fetched Partnership:', fetchedPartnership); // Log the fetched partnership
+      console.log('Fetching User with ID:', User.username);
+      const fetchedUser = await getUsersById(User.username);
+      console.log('Fetched User:', fetchedUser); // Log the fetched User
       setEditMode(true);
       setIsModalOpen(true);
-      setSelectedPartnershipId(partnership.partnerID);
-      setNewPartnership({
-        ...fetchedPartnership,
+      setSelectedUserId(User.username);
+      setNewUser({
+        ...fetchedUser,
       });
     } catch (error) {
-      console.error(`Error fetching partnership with ID ${partnership.partnerID}:`, error.response.data);
+      console.error(`Error fetching User with ID ${User.username}:`, error.response.data);
     }
   };
 
-  const updateExistingPartnership = async () => {
+  const updateExistingUser = async () => {
     try {
-      const partnershipPayload = { ...newPartnership };
+      const UserPayload = { ...newUser };
 
-      console.log('Updated Partnership Payload:', partnershipPayload);
+      console.log('Updated User Payload:', UserPayload);
 
-      const updatedPartnership = await updatePartnership(selectedPartnershipId, partnershipPayload);
-      setPartnerships((prev) => prev.map(inst => (inst.partnerID === selectedPartnershipId ? updatedPartnership : inst)));
+      const updatedUser = await updateUsers(selectedUserId, UserPayload);
+      setUsers((prev) => prev.map(inst => (inst.userID === selectedUserId ? updatedUser : inst)));
       setIsModalOpen(false);
       setErrors({});
     } catch (error) {
-      console.error(`Error updating partnership with ID ${selectedPartnershipId}:`, error.response.data);
+      console.error(`Error updating User with ID ${selectedUserId}:`, error.response.data);
       setErrors(error.response.data.errors || {});
-      alert(`Failed to update partnership: ${error.response.data.title}\nDetails: ${JSON.stringify(error.response.data.errors, null, 2)}`);
+      alert(`Failed to update User: ${error.response.data.title}\nDetails: ${JSON.stringify(error.response.data.errors, null, 2)}`);
     }
   };
 
-  const deleteExistingPartnership = async (partnerID) => {
+  const deleteExistingUser = async (username) => {
     try {
-      await deletePartnership(partnerID);
-      setPartnerships((prev) => prev.filter(inst => inst.partnerID !== partnerID));
+      await deleteUsers(username);
+      setUsers((prev) => prev.filter(inst => inst.username !== username));
     } catch (error) {
-      console.error(`Error deleting partnership with ID ${partnerID}:`, error.response.data);
-      alert(`Failed to delete partnership: ${error.response.data.title}`);
+      console.error(`Error deleting User with ID ${username}:`, error.response.data);
+      alert(`Failed to delete User: ${error.response.data.title}`);
     }
   };
 
-  const closeAddPartnershipModal = () => {
+  const closeAddUserModal = () => {
     setIsModalOpen(false);
     setEditMode(false);
     setErrors({});
   };
 
-  const deletePartnershipHandler = (partnerID) => {
-    if (window.confirm(`Are you sure you want to delete partnership with ID ${partnerID}?`)) {
-      deleteExistingPartnership(partnerID);
+  const deleteUserHandler = (username) => {
+    if (window.confirm(`Are you sure you want to delete User with ID ${username}?`)) {
+      deleteExistingUser(username);
     }
   };
 
   return (
     <Layout>
-      <h1 className="text-2xl font-bold mb-4">Partnerships</h1>
+      <h1 className="text-2xl font-bold mb-4">Users</h1>
       <div className="p-4">
         <button
-          onClick={openAddPartnershipModal}
+          onClick={openAddUserModal}
           className="bg-blue-500 text-white p-2 rounded mb-4 flex justify-center items-center mr-auto gap-2"
         >
-             <FaPlus /><span>Partnership</span>  
+             <FaPlus /><span>User</span>  
         </button>
-        <PartnershipTable
-          partnerships={partnerships}
-          openEditModal={openEditPartnershipModal}
-          deletePartnership={deletePartnershipHandler}
+        <UserTable
+          Users={Users}
+          openEditModal={openEditUserModal}
+          deleteUser={deleteUserHandler}
         />
       </div>
-      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddPartnershipModal} contentLabel={editMode ? "Edit Partnership" : "Add Partnership"}>
-        <h2 className="subtitle2 mb-4">{editMode ? 'Edit Partnership' : 'Add Partnership'}</h2>
-        <PartnershipForm 
-          formValues={newPartnership} 
+      <Modal style={customStyles} isOpen={isModalOpen} onRequestClose={closeAddUserModal} contentLabel={editMode ? "Edit User" : "Add User"}>
+        <h2 className="subtitle2 mb-4">{editMode ? 'Edit User' : 'Add User'}</h2>
+        <UserForm 
+          formValues={newUser} 
           handleInputChange={handleInputChange} 
           errors={errors} 
         />
         <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingPartnership : addNewPartnership} className="bg-primary px-5 text-white p-2 rounded mr-2">
+          <button onClick={editMode ? updateExistingUser : addNewUser} className="bg-primary px-5 text-white p-2 rounded mr-2">
             {editMode ? 'Update' : 'Save'}
           </button>
-          <button onClick={closeAddPartnershipModal} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
+          <button onClick={closeAddUserModal} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
             Cancel
           </button>
         </div>
@@ -164,4 +168,4 @@ const AddPartnership = () => {
   );
 };
 
-export default AddPartnership;
+export default AddUser;

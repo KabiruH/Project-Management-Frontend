@@ -15,8 +15,13 @@ const Layout = ({ children }) => {
     setSidebarOpen(!isSidebarOpen);
   };
 
+  const handleLogout = ()=> {
+    setBreadcrum(false);
+    setLogoutModal(true)
+  }
 
   return (
+    <>
     <div className="relative max-width-screen pr-3 h-full">
       <div className="w-full md:hidden py-3 pl-4 sticky top-0 z-[100] bg-white mb-1">
         <IoMenu
@@ -42,7 +47,7 @@ const Layout = ({ children }) => {
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-0">Account settings</a>
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-1">Support</a>
                   <form>
-                    <button onClick={()=>setLogoutModal(true)} class="block w-full px-4 py-2 text-left text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-3">Sign out</button>
+                    <button onClick={handleLogout} class="block w-full px-4 py-2 text-left text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-3">Sign out</button>
                   </form>
                 </div>
           </div>)}
@@ -50,7 +55,9 @@ const Layout = ({ children }) => {
           {children}
           </div>
       </div>
-      <Modal style={smallScreenCustomStyles} isOpen={logoutModal} onRequestClose={()=>setLogoutModal(false)} contentLabel='Logout'>
+      
+    </div>
+    <Modal style={smallScreenCustomStyles} isOpen={logoutModal} onRequestClose={()=>setLogoutModal(false)} contentLabel='Logout'>
        <div className='flex justify-center items-center flex-col h-full'>
        <h2 className="subtitle2 mb-4">Goodbye!! </h2>
        Are you sure you want to Logout?
@@ -68,7 +75,7 @@ const Layout = ({ children }) => {
         </div>
        </div>
       </Modal>
-    </div>
+    </>
   );
 };
 

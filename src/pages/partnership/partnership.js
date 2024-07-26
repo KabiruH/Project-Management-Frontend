@@ -96,7 +96,8 @@ const AddPartnership = () => {
       console.log('Updated Partnership Payload:', partnershipPayload);
 
       const updatedPartnership = await updatePartnership(selectedPartnershipId, partnershipPayload);
-      setPartnerships((prev) => prev.map(inst => (inst.partnerID === selectedPartnershipId ? updatedPartnership : inst)));
+      const newPartnerships = await getPartnership()
+      setPartnerships(newPartnerships)
       setIsModalOpen(false);
       setErrors({});
     } catch (error) {

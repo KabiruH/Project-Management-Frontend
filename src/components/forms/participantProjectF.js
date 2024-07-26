@@ -48,7 +48,8 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
             ...prevValues,
             participantName: participant.name,
             institutionName: participant.institutionName,
-            projects: participant.projects || [],
+            ProjectID: participant.projectID,
+            projects: participant.ProjectID || [], // Ensure this uses project IDs
           }));
           const institutionProjects = allProjects.filter(
             (project) => project.institutionName === participant.institutionName
@@ -73,14 +74,14 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
     const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
     setFormValues((prevValues) => ({
       ...prevValues,
-      projects: selectedOptions,
+      projects: selectedOptions, // Store selected project IDs
     }));
   };
 
-  const handleRemoveProject = (projectId) => {
+  const handleRemoveProject = (projectName) => {
     setFormValues((prevValues) => ({
       ...prevValues,
-      projects: prevValues.projects.filter((id) => id !== projectId),
+      projects: prevValues.projects.filter((name) => name !== projectName),
     }));
   };
 
@@ -110,7 +111,7 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
         </div>
 
         <div>
-          <label htmlFor="institutionID">Institution:</label>
+          <label htmlFor="institutionName">Institution:</label>
           <Input
             name="institutionName"
             placeholder="Institution Name"
@@ -120,29 +121,37 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
           />
           {errors.institutionName && <p className="text-red-500">{errors.institutionName[0]}</p>}
         </div>
-       
+
+        <div>
+          <label htmlFor="ProjectID">ProjectID:</label>
+          <Input
+            name="ProjectID"
+            placeholder="ProjectID"
+            value={formValues.ProjectID}
+            onChange={handleInputChange}
+            disabled
+          />
+          {errors.ProjectID && <p className="text-red-500">{errors.ProjectID[0]}</p>}
+        </div>
+
         <div>
           <label htmlFor="projects">Projects:</label>
           {loadingProjects ? (
             <p>Loading projects...</p>
           ) : (
-            <>
-
-              <select
-                name="projects"
-                multiple
-                value={formValues.projects || []}
-                onChange={handleProjectSelectChange}
-                className="w-full p-2 border border-gray-300 rounded"
-              >
-                {filteredProjects.map((project) => (
-                  <option key={project.projectID} value={project.projectID}>
-                    {project.projectName}
-                  </option>
-                ))}
-              </select>
-
-            </>
+            <select
+              name="projects"
+              multiple
+              value={formValues.projects || []}
+              onChange={handleProjectSelectChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            >
+              {filteredProjects.map((project) => (
+                <option key={project.projectID} value={project.projectID}>
+                  {project.projectName}
+                </option>
+              ))}
+            </select>
           )}
           {errors.projects && <p className="text-red-500">{errors.projects[0]}</p>}
         </div>
@@ -153,7 +162,7 @@ const ParticipantProjectForm = ({ formValues, setFormValues, handleDateChange, e
             const project = allProjects.find((proj) => proj.projectID === projectId);
             return (
               <div key={projectId} className="selected-project">
-                <span>{project?.projectName}</span>
+                <span>{project ? project.projectName : 'Unknown Project'}</span>
                 <button type="button" onClick={() => handleRemoveProject(projectId)}>
                   ×
                 </button>

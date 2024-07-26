@@ -113,8 +113,9 @@ const AddProgram = () => {
       console.log('Updated Program Payload:', budgetPayload);
   
       const updatedProgram = await updatePrograms(selectedProgramId, budgetPayload);
-      setPrograms((prev) => prev.map(inst => (inst.programID === selectedProgramId ? updatedProgram : inst)));
-      setIsModalOpen(false);
+      const newPrograms = await getPrograms ()
+      setPrograms(newPrograms)
+      setIsModalOpen(false); 
       setErrors({});
     } catch (error) {
       console.error(`Error updating programs with ID ${selectedProgramId}:`, error.response.data);

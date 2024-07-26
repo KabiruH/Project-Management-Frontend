@@ -5,8 +5,12 @@ const columns = [
   { Header: 'Participant ID', accessor: 'participantID' },
   { Header: 'Participant Name', accessor: 'participantName' },
   { Header: 'Institution Name', accessor: 'institutionName' },
-  { Header: 'Project', accessor: 'projectID' },
-
+  { Header: 'ProjectID', accessor: 'projectID' },
+  {
+    Header: 'Projects',
+    accessor: 'projects', 
+    Cell: ({ value }) => value.join(', ') // Join project names with comma
+  },
 ];
 
 const ParticipantProjectTable = ({ participantProjects, openEditModal, deleteParticipant }) => {

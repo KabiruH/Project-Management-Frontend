@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Input from '../common/Input';
-import styles from '../../styles/modal.module.css'; // Correct import for CSS modules
+import styles from '../../styles/modal.module.css';
 import { getStages } from '../../services/institutionStageS'
 import { getStatus } from '../../services/institutionStatusS'
 import { getCounty, getSubCounty } from '../../services/countiesS'
@@ -14,7 +14,7 @@ const InstitutionForm = ({ formValues, handleInputChange, errors }) => {
   const [counties, setCounties] = useState([]);
   const [subCounties, setSubCounties] = useState([]);
 
-// Fetch stages
+  // Fetch stages
   useEffect(() => {
     const fetchStages = async () => {
       setLoadingStages(true); // Set loading to true initially
@@ -32,7 +32,7 @@ const InstitutionForm = ({ formValues, handleInputChange, errors }) => {
 
   }, []);
 
-  
+
   //Fetch status
   useEffect(() => {
     const fetchStatuses = async () => {
@@ -51,60 +51,64 @@ const InstitutionForm = ({ formValues, handleInputChange, errors }) => {
     fetchStatuses();
   }, []);
 
-//Fetch counties and subcounties
-useEffect(() => {
-  // Fetch counties when component mounts
-  const fetchCounties = async () => {
-    try {
-      const countyData = await getCounty();
-      setCounties(countyData);
-    } catch (error) {
-      console.error('Error fetching counties:', error);
+  //Fetch counties and subcounties
+  useEffect(() => {
+    // Fetch counties when component mounts
+    const fetchCounties = async () => {
+      try {
+        const countyData = await getCounty();
+        setCounties(countyData);
+        console.log(countyData)
+      } catch (error) {
+        console.error('Error fetching counties:', error);
+      }
+    };
+    fetchCounties();
+  }, []);
+
+
+  const handleCountyChange = async (event) => {
+    const county = event.target.value;
+    const countyName = counties.find(c => c.county === county)?.county || '';
+    console.log('Selected County ID:', county); // Log the countyID for debugging
+
+    // Update form values with selected county ID and county name
+    handleInputChange({ target: { name: 'county', value: county } });
+    handleInputChange({ target: { name: 'countyID', value: county } });
+
+    if (county) {
+      try {
+        const subCountyData = await getSubCounty(county);
+        setSubCounties(subCountyData);
+        console.log('Sub-counties fetched:', subCountyData);
+      } catch (error) {
+        console.error('Error fetching sub-counties:', error);
+        setSubCounties([]); // Clear sub-counties in case of an error
+      }
+    } else {
+      setSubCounties([]);
     }
   };
-  fetchCounties();
-}, []);
 
-const handleCountyChange = async (event) => {
-  const countyID = event.target.value;
-  console.log('Selected County ID:', countyID); // Log the countyID for debugging
-  handleInputChange(event); // Update form values with selected county ID
+  //End date function
+  const handleDateChange = (event) => {
+    const { name, value } = event.target;
 
-  if (countyID) {
-    try {
-      const subCountyData = await getSubCounty(countyID);
-      setSubCounties(subCountyData);
-      console.log('Sub-counties fetched:', subCountyData);
-    } catch (error) {
-      console.error('Error fetching sub-counties:', error);
-      setSubCounties([]); // Clear sub-counties in case of an error
+    if (name === 'licenseStartDate') {
+      const startDate = new Date(value);
+      const endDate = new Date(startDate);
+      endDate.setFullYear(startDate.getFullYear() + 1);
+
+      handleInputChange({
+        target: {
+          name: 'licenseEndDate',
+          value: endDate.toISOString().split('T')[0] // Format as YYYY-MM-DD
+        }
+      });
     }
-  } else {
-    setSubCounties([]);
-  }
-};
 
-//End date function
-const handleDateChange = (event) => {
-  const { name, value } = event.target;
-  
-  if (name === 'licenseStartDate') {
-    const startDate = new Date(value);
-    const endDate = new Date(startDate);
-    endDate.setFullYear(startDate.getFullYear() + 1);
-    
-    handleInputChange({
-      target: {
-        name: 'licenseEndDate',
-        value: endDate.toISOString().split('T')[0] // Format as YYYY-MM-DD
-      }
-    });
-  }
-
-  handleInputChange(event);
-};
-
-
+    handleInputChange(event);
+  };
 
 
   return (
@@ -151,7 +155,7 @@ const handleDateChange = (event) => {
           )}
           {errors.stageID && <p className="text-red-500">{errors.stageID[0]}</p>}
         </div>
-       
+
         <div>
           <label htmlFor="statusID">Status:</label>
           {loadingStatuses ? (
@@ -184,7 +188,7 @@ const handleDateChange = (event) => {
           />
           {errors.institutionEmail && <p className="text-red-500">{errors.institutionEmail[0]}</p>}
         </div>
-      
+
         <div>
           <label htmlFor="institutionContact">Institution Contact:</label>
           <Input
@@ -195,49 +199,50 @@ const handleDateChange = (event) => {
           />
           {errors.institutionContact && <p className="text-red-500">{errors.institutionContact[0]}</p>}
         </div>
-    
-      <div>
-        <label htmlFor="county">County:</label>
-        <select
-          id="countyID"
-          name="countyID"
-          value={formValues.countyID}
-          onChange={handleCountyChange} 
-          className="w-full p-2 border border-gray-300 rounded"
-        >
-          <option value="">Select County</option>
-          {counties.map((county) => (
-            <option key={county.countyID} value={county.countyID}>
-              {county.countyName}
-            </option>
-          ))}
-        </select>
-      </div>
-     
-     
-      <div>
-        <label htmlFor="subCounty">Sub-County:</label>
-        <select
-          id="subCounty"
-          name="subCounty"
-          value={formValues.subCountyID}
-          onChange={handleInputChange}
-          className="w-full p-2 border border-gray-300 rounded"
-        >
-          <option value="">Select Sub-County</option>
-          {subCounties.length === 0 ? (
-            <option value="">Loading Sub-Counties...</option>
-          ) : (
-            subCounties.map((subCounty) => (
-              <option key={subCounty.SubCountyID} value={subCounty.SubCountyName}>
-                {subCounty.SubCountyName}
+
+        <div>
+          <label htmlFor="county">County:</label>
+          <select
+            id="county"
+            name="county"
+            value={formValues.countyID}
+            onChange={handleCountyChange}
+            className="w-full p-2 border border-gray-300 rounded"
+          >
+            <option value="">Select County</option>
+            {counties.map((county) => (
+              <option key={county.countyID} value={county.countyID}>
+                {county.countyName}
               </option>
-            ))
-          )}
-        </select>
-      </div>
-   
-     
+            ))}
+          </select>
+          {errors.county && <p className="text-red-500">{errors.county[0]}</p>}
+        </div>
+
+
+        <div>
+          <label htmlFor="subCounty">Sub-County:</label>
+          <select
+            id="subCounty"
+            name="subCounty"
+            value={formValues.subCountyID}
+            onChange={handleInputChange}
+            className="w-full p-2 border border-gray-300 rounded"
+          >
+            <option value="">Select Sub-County</option>
+            {subCounties.length === 0 ? (
+              <option value="">Loading Sub-Counties...</option>
+            ) : (
+              subCounties.map((subCounty) => (
+                <option key={subCounty.SubCountyID} value={subCounty.SubCountyName}>
+                  {subCounty.SubCountyName}
+                </option>
+              ))
+            )}
+          </select>
+        </div>
+
+
         <div>
           <label htmlFor="contactPerson">Contact Person:</label>
           <Input

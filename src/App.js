@@ -30,6 +30,7 @@ import SignIn from './pages/signin';
 import Signup from './pages/signup'
 import Home from './pages/homepage';
 import UsersReport from './pages/Reports/UsersReport';
+import Users from "./pages/users"
 import { DarkModeProvider } from './components/darkMode';
 import ProtectedRoute from './services/ProtectedRoute';
 
@@ -67,6 +68,7 @@ function App() {
           <Route path="/training/trainingCategory" element={<ProtectedRoute element={AddTrainingCategory} />} />
           {/* reports */}
           <Route path="/reports/users" element={<ProtectedRoute element={UsersReport} />} />
+          <Route path="/users" element={<ProtectedRoute element={Users} />} />
 
           {/* reports end */}
           <Route path="/research/feedback" element={<ProtectedRoute element={AddFeedback} />} />

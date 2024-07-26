@@ -13,6 +13,7 @@ const AddAwards = () => {
     const [awards, setAwards] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newAwards, setnewAwards] = useState({
+        
 
         awardID: '',
         adminNo: '',

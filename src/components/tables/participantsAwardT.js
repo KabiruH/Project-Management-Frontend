@@ -2,7 +2,7 @@ import React from 'react';
 import Table from '../common/Table';
 
 const columns = [
-  { Header: 'AwardID', accessor: 'awardID' },
+  { Header: 'Award ID', accessor: 'awardID' },
   { Header: 'AdminNo', accessor: 'adminNo' },
   { Header: 'Student Name', accessor: 'studentName' },
   { Header: 'Institution Name', accessor: 'institutionName' },

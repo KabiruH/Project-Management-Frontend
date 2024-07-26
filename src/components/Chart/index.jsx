@@ -9,9 +9,9 @@ const ChartComponent = (participants) => {
   // Data for the Bar chart
 
  
-  const bronzeParticipants = participants.participants?.filter(participant => participant.awardLevel == "bronze") || [];
-  const silverParticipants = participants.participants?.filter(participant => participant.awardLevel == "silver") || [];
-  const goldParticipants = participants.participants?.filter(participant => participant.awardLevel === "gold") || [];
+  const bronzeParticipants = participants.participants?.filter(participant => participant.awardLevel == "Bronze") || [];
+  const silverParticipants = participants.participants?.filter(participant => participant.awardLevel == "Silver") || [];
+  const goldParticipants = participants.participants?.filter(participant => participant.awardLevel === "Gold") || [];
   const barData = {
     labels: ["Bronze", "Silver", "Gold"],
     datasets: [

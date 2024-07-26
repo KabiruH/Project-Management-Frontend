@@ -20,21 +20,21 @@ const getUsersById = async (Username) => {
   }
 };
 
-const updateUsers = async (Username, updatedData) => {
+const updateUsers = async (username, updatedData) => {
   try {
-    const response = await apiClient.put(`/api/Users/${Username}`, updatedData);
+    const response = await apiClient.put(`/api/Users/${username}`, updatedData);
     return response.data;
   } catch (error) {
-    console.error(`Error updating Users with ID ${Username}:`, error.response.data);
+    console.error(`Error updating Users with ID ${username }:`, error.response.data);
     throw error;
   }
 };
 
-const deleteUsers = async (Username) => {
+const deleteUsers = async (username) => {
   try {
-    await apiClient.delete(`/api/Users/${Username}`);
+    await apiClient.delete(`/api/Users/${username}`);
   } catch (error) {
-    console.error(`Error deleting Users with ID ${Username}:`, error.response.data);
+    console.error(`Error deleting Users with ID ${username}:`, error.response.data);
     throw error;
   }
 };

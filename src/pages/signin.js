@@ -53,7 +53,10 @@ const Signin = ()=>{
            }
       return(
           <AuthLayout>
+            
               <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-10'>
+             
+
               {loginError && <div role="alert">
                   <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
                     Login Failed

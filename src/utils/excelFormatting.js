@@ -16,15 +16,15 @@ export const formatExcelReport = async (title, data, headers) => {
   const logoUrl = `${process.env.PUBLIC_URL}/assets/logo.png`;
   const logoBase64 = await getImageBase64(logoUrl);
 
-  // Add the logo and company details to the sheet
+  // Add the company details and title to the sheet
   const companyInfo = [
     [{ v: '', t: 's' }], // Placeholder for logo
-    [companyDetails.name],
-    [companyDetails.address],
-    [`Email: ${companyDetails.email}`],
-    [`Phone: ${companyDetails.phone}`],
+    [{ v: companyDetails.name, s: { font: { sz: 14, bold: true }, alignment: { horizontal: 'center' } } }],
+    [{ v: companyDetails.address, s: { font: { sz: 12 }, alignment: { horizontal: 'center' } } }],
+    [{ v: `Email: ${companyDetails.email}`, s: { font: { sz: 12 }, alignment: { horizontal: 'center' } } }],
+    [{ v: `Phone: ${companyDetails.phone}`, s: { font: { sz: 12 }, alignment: { horizontal: 'center' } } }],
     [], // Empty row for spacing
-    [title], // Report title
+    [{ v: title, s: { font: { sz: 16, bold: true }, alignment: { horizontal: 'center' } } }],
   ];
   XLSX.utils.sheet_add_aoa(ws, companyInfo, { origin: 'A1' });
 
@@ -42,36 +42,19 @@ export const formatExcelReport = async (title, data, headers) => {
     { s: { c: 0, r: 6 }, e: { c: totalColumns - 1, r: 6 } }, // Title
   ];
 
-  // Style the merged cells with center alignment and bold text
-  const centerBoldStyle = { font: { sz: 14, bold: true }, alignment: { horizontal: 'center' } };
-  const detailsRows = [0, 1, 2, 3, 4, 6];
-  detailsRows.forEach((row) => {
-    for (let col = 0; col < totalColumns; col++) {
-      const cellRef = XLSX.utils.encode_cell({ r: row, c: col });
-      ws[cellRef] = { t: 's', v: ws[cellRef] ? ws[cellRef].v : '', s: centerBoldStyle };
+  // Add the headers to the sheet using the provided headers
+  const headerRow = headers.map(header => ({
+    v: header.Header,
+    s: {
+      font: { bold: true },
+      alignment: { horizontal: 'center' }
     }
-  });
-
-  // Add the logo as an image in the sheet (if available)
-  if (logoBase64) {
-    const imgCell = ws['A1'];
-    imgCell.l = { Target: logoBase64, Tooltip: 'Company Logo' };
-    imgCell.v = ''; // Ensure the cell value is empty
-  }
-
-  // Add the headers to the sheet
-  XLSX.utils.sheet_add_aoa(ws, [headers.map(header => header.Header)], { origin: `A8` });
-
-  // Apply bold style to headers
-  headers.forEach((header, colIndex) => {
-    const cellRef = XLSX.utils.encode_cell({ r: 7, c: colIndex }); // Header row at index 7 (1-indexed)
-    if (ws[cellRef]) {
-      ws[cellRef].s = { font: { bold: true }, alignment: { horizontal: 'center' } };
-    }
-  });
+  }));
+  XLSX.utils.sheet_add_aoa(ws, [headerRow], { origin: 'A8' });
 
   // Add the table data starting from the 9th row (index 8)
-  XLSX.utils.sheet_add_json(ws, data, { origin: 'A9', skipHeader: true });
+  const tableData = data.map(row => headers.map(header => row[header.accessor]));
+  XLSX.utils.sheet_add_aoa(ws, tableData, { origin: 'A9' });
 
   // Adjust column widths
   ws['!cols'] = headers.map(header => ({ wpx: 100 }));

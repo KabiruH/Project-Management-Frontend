@@ -1,5 +1,6 @@
 // src/services/reportsServices/reportS.js
 import apiClient from '../apiClient';
+import { formatDate } from '../reportsServices/formatDate';
 
 // Endpoint for fetching institution data
 const INSTITUTIONS_API_URL = '/api/Institutions';
@@ -8,7 +9,13 @@ const INSTITUTIONS_API_URL = '/api/Institutions';
 export const fetchInstitutionData = async () => {
   try {
     const response = await apiClient.get(INSTITUTIONS_API_URL);
-    return response.data;
+    // Format dates in the response data
+    const formattedData = response.data.map(item => ({
+      ...item,
+      licenseStartDate: formatDate(item.licenseStartDate),
+      licenseEndDate: formatDate(item.licenseEndDate),
+    }));
+    return formattedData;
   } catch (error) {
     console.error('Error fetching institution data:', error);
     throw error;

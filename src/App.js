@@ -31,8 +31,6 @@ import ReportsPage from './pages/reports/reportsPage';
 import SignIn from './pages/signin';
 import Signup from './pages/signup'
 import Home from './pages/homepage';
-
-import UsersReport from './pages/Reports/UsersReport';
 import Users from "./pages/users"
 
 import { DarkModeProvider } from './components/darkMode';
@@ -75,7 +73,7 @@ function App() {
          <Route path="/reports/reportsPage" element={<ProtectedRoute element={ReportsPage} />} />
 
           
-         <Route path="/reports/users" element={<ProtectedRoute element={UsersReport} />} />
+      
           <Route path="/users" element={<ProtectedRoute element={Users} />} />
 
 

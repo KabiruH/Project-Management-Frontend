@@ -50,27 +50,27 @@ const ChartComponent = (participants) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2  items-center gap-10 mt-20 w-full px-10 mx-auto">
-      <div className="bg-white p-4 rounded-lg shadow-md ">
+    <div className="grid md:grid-cols-2 lg:grid-cols-1  items-center gap-10 mt-20 w-full px-10 mx-auto">
+      <div className="bg-white p-4 rounded-lg shadow-md w-auto">
         <h2 className="text-2xl font-bold mb-4">Award Levels Summary</h2>
-        <div className="w-full h-auto">
+        <div className=" max-h-[100]">
           <Bar data={barData} options={{
             scales: {
               y: {
                 beginAtZero: true,
                 ticks: {
-                  color: '#4A5568', // Gray-700
+                  color: '#4A5568', 
                 },
                 grid: {
-                  color: '#EDF2F7' // Gray-100
+                  color: '#EDF2F7' 
                 }
               },
               x: {
                 ticks: {
-                  color: '#4A5568' // Gray-700
+                  color: '#4A5568'
                 },
                 grid: {
-                  color: '#EDF2F7' // Gray-100
+                  color: '#EDF2F7'
                 }
               }
             },
@@ -79,33 +79,33 @@ const ChartComponent = (participants) => {
                 display: true,
                 position: 'top',
                 labels: {
-                  color: '#4A5568' // Gray-700
+                  color: '#4A5568'
                 }
               }
             }
           }} />
         </div>
       </div>
-      <div className="bg-white p-4 rounded-lg shadow-md ">
+      <div className="bg-white p-4 rounded-lg shadow-md w-auto">
         <h2 className="text-2xl font-bold mb-4">Participation Summary</h2>
-        <div className="w-full h-auto">
+        <div className=" h-auto">
           <Line data={lineData} options={{
             scales: {
               y: {
                 beginAtZero: true,
                 ticks: {
-                  color: '#4A5568', // Gray-700
+                  color: '#4A5568',
                 },
                 grid: {
-                  color: '#EDF2F7' // Gray-100
+                  color: '#EDF2F7' 
                 }
               },
               x: {
                 ticks: {
-                  color: '#4A5568' // Gray-700
+                  color: '#4A5568' 
                 },
                 grid: {
-                  color: '#EDF2F7' // Gray-100
+                  color: '#EDF2F7' 
                 }
               }
             },

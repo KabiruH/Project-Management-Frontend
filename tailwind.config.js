@@ -15,7 +15,11 @@ module.exports = {
         bgColor : '#F4F7FE'
       },
       backgroundImage: {
-        'auth-bg-image': "url('/public/auth-bg-image.png')"
+        'auth-bg-image': "url('/public/auth-bg-image.png')",
+        'card-bg-1': "url('/public/assets/CardImageBgs/card-bg-1.png')",
+        'card-bg-2': "url('/public/assets/CardImageBgs/card-bg-2.png')",
+        'card-bg-3': "url('/public/assets/CardImageBgs/card-bg-3.png')"
+
       }
     },
   },

@@ -54,6 +54,8 @@ function App() {
           <Route path='/institutions/institutionStages' element={<ProtectedRoute element={AddStages} />} />
           <Route path='/institutions/institutionStatus' element={<ProtectedRoute element={AddStatus} />} />
           <Route path="/participants/participant" element={<ProtectedRoute element={AddParticipant} />} />
+          <Route path="/participants/participant-award" element={<ProtectedRoute element={AddAwards} />} />
+          <Route path="/participants/participant-projects" element={<ProtectedRoute element={AddParticipantProject} />} />
           <Route path="/participants/participantLevels" element={<ProtectedRoute element={AddLevels} />} />
           <Route path="/helpers/helper" element={<ProtectedRoute element={AddHelper} />} />
           <Route path="/helpers/helperType" element={<ProtectedRoute element={AddHelperTypes} />} />

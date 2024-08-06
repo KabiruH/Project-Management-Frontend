@@ -50,10 +50,10 @@ const Sidebar = ({ isOpen, onClose }) => {
       dropdown: [
         { name: "Participant", path: "/participants/participant" },
         { name: "Levels", path: "/participants/participantLevels" },
-        { name: "Participants Award", path: "/participants/awardParticipants" },
+        { name: "Participants Award", path: "/participants/participant-award" },
         {
           name: "Participant Projects",
-          path: "/participants/participantsProjects",
+          path: "/participants/participant-projects",
         },
       ],
     },
@@ -135,12 +135,12 @@ const Sidebar = ({ isOpen, onClose }) => {
     <div
       className={`fixed  p-2 rounded-md overflow-y-auto z-[101] md:relative md:p-2 inset-y-0 left-0 transform md:translate-x-0 ${
         isOpen ? "translate-x-0" : "-translate-x-full"
-      } transition-transform duration-300 ease-in-out bg-white shadow-lg z-[101] md:z-auto w-64 lg:w-auto`}>
+      } transition-transform duration-300 ease-in-out bg-white shadow-lg z-[101] md:z-auto w-64 md:w-auto`}>
       <div className="flex justify-between items-center p-4">
         <h2 className="text-lg font-semibold"></h2>
         <IoClose
           type="button"
-          className="text-secondary block text-[24px] lg:hidden"
+          className="text-secondary block text-[24px] md:hidden"
           onClick={onClose}
         />
       </div>

@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
             onClick={toggleSidebar}
           />
         </div>
-        <div className="w-full h-[100vh] grid grid-cols-1 md:grid-cols-[16%_auto] md:p-2 md:gap-3 bg-bgGrey">
+        <div className="w-full h-[100vh] grid grid-cols-1 md:grid-cols-[18%_auto] md:p-2 md:gap-3 bg-bgGrey">
           <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
           <div className="p-3 bg-white rounded grow overflow-auto">
             <div className="w-full p-4 flex justify-end mb-6 ">

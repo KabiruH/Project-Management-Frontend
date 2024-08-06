@@ -50,75 +50,91 @@ const ChartComponent = (participants) => {
   };
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-1  items-center gap-10 mt-20 w-full px-10 mx-auto">
-      <div className="bg-white p-4 rounded-lg shadow-md w-auto">
+    <div className="grid md:grid-cols-2 lg:grid-cols-1  items-center gap-2   mt-10 w-full  mx-auto">
+      <div
+        className="bg-white p-1 rounded-lg  w-auto h-full"
+        style={{
+          boxShadow:
+            "0 4px 6px -1px rgba(59, 130, 246, 0.1), 0 2px 4px -1px rgba(59, 130, 246, 0.06)",
+        }}>
         <h2 className="text-2xl font-bold mb-4">Award Levels Summary</h2>
-        <div className=" max-h-[100]">
-          <Bar data={barData} options={{
-            scales: {
-              y: {
-                beginAtZero: true,
-                ticks: {
-                  color: '#4A5568', 
+        <div className="min-h-[100]">
+          <Bar
+            data={barData}
+            options={{
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: {
+                    color: "#4A5568",
+                  },
+                  grid: {
+                    color: "#EDF2F7",
+                  },
                 },
-                grid: {
-                  color: '#EDF2F7' 
-                }
+                x: {
+                  ticks: {
+                    color: "#4A5568",
+                  },
+                  grid: {
+                    color: "#EDF2F7",
+                  },
+                },
               },
-              x: {
-                ticks: {
-                  color: '#4A5568'
+              plugins: {
+                legend: {
+                  display: true,
+                  position: "top",
+                  labels: {
+                    color: "#4A5568",
+                  },
                 },
-                grid: {
-                  color: '#EDF2F7'
-                }
-              }
-            },
-            plugins: {
-              legend: {
-                display: true,
-                position: 'top',
-                labels: {
-                  color: '#4A5568'
-                }
-              }
-            }
-          }} />
+              },
+            }}
+          />
         </div>
       </div>
-      <div className="bg-white p-4 rounded-lg shadow-md w-auto">
+      <div
+        className="bg-white p-3 rounded-lg w-auto h-full"
+        style={{
+          boxShadow:
+            "0 4px 6px -1px rgba(59, 130, 246, 0.1), 0 2px 4px -1px rgba(59, 130, 246, 0.06)",
+        }}>
         <h2 className="text-2xl font-bold mb-4">Participation Summary</h2>
         <div className=" h-auto">
-          <Line data={lineData} options={{
-            scales: {
-              y: {
-                beginAtZero: true,
-                ticks: {
-                  color: '#4A5568',
+          <Line
+            data={lineData}
+            options={{
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: {
+                    color: "#4A5568",
+                  },
+                  grid: {
+                    color: "#EDF2F7",
+                  },
                 },
-                grid: {
-                  color: '#EDF2F7' 
-                }
+                x: {
+                  ticks: {
+                    color: "#4A5568",
+                  },
+                  grid: {
+                    color: "#EDF2F7",
+                  },
+                },
               },
-              x: {
-                ticks: {
-                  color: '#4A5568' 
+              plugins: {
+                legend: {
+                  display: true,
+                  position: "top",
+                  labels: {
+                    color: "#4A5568", // Gray-700
+                  },
                 },
-                grid: {
-                  color: '#EDF2F7' 
-                }
-              }
-            },
-            plugins: {
-              legend: {
-                display: true,
-                position: 'top',
-                labels: {
-                  color: '#4A5568' // Gray-700
-                }
-              }
-            }
-          }} />
+              },
+            }}
+          />
         </div>
       </div>
     </div>

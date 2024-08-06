@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import Modal from 'react-modal';
 import 'react-calendar/dist/Calendar.css';
-import Layout from '../components/layout'
+import Layout from '../../components/layout'
 
 const CalendarPage = () => {
   const [date, setDate] = useState(new Date());
@@ -55,17 +55,20 @@ const CalendarPage = () => {
 
   return (
     <Layout>
-    <div className="calendar-page p-5 h-full flex flex-col items-center">
+    <div className="calendar-page w-full p-5 h-full flex flex-col items-center">
       <h1 className="text-2xl mb-4">Calendar</h1>
       <div className="w-full flex justify-center">
         <Calendar
           onClickDay={onDateClick}
           value={date}
+          calendarType='islamic'
           tileContent={({ date, view }) => view === 'month' && renderEvents(date)}
-          className="react-calendar w-3/4 md:w-2/3 lg:w-1/2 bg-black p-5 rounded-lg shadow-lg"
+          className="react-calendar w-full bg-black p-5 rounded-lg shadow-lg"
           tileClassName={tileClassName}
         />
+       
       </div>
+     
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

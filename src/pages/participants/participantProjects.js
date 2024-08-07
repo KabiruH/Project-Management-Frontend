@@ -172,7 +172,7 @@ const AddParticipantProject = () => {
           onClick={openAddParticipantModal}
           className="bg-blue-500 text-white p-2 rounded mb-4 flex justify-center items-center mr-auto gap-2"
         >
-          <FaPlus />    <span>Participant</span> 
+          <FaPlus />    <span>participant Project</span> 
         </button>
         <ParticipantProjectTable
           participantProjects={participantProjects}

@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiSearch } from "react-icons/fi";
 import { IoMenu } from "react-icons/io5";
 import Sidebar from "../components/sidebar"
 import { IoSettingsSharp } from "react-icons/io5";

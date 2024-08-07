@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {customStyles} from "../../styles/customStyles"
 import { FaPlus } from "react-icons/fa6";
-
+import { FiSearch } from "react-icons/fi";
+import { splitWordFunc } from '../../utils/splitWordFunc';
 import InstitutionForm from '../../components/forms/institutionF';
 import InstitutionTable from '../../components/tables/institutionT';
 import { addInstitution as addInstitutionService, getInstitutionById, updateInstitution, deleteInstitution, getInstitutions } from '../../services/institutionS';
@@ -29,8 +30,11 @@ const AddInstitution = () => {
   });
   const [errors, setErrors] = useState({});
   const [editMode, setEditMode] = useState(false);
-  const [selectedInstitutionId, setSelectedInstitutionId] = useState(null);
+  const [selectedColumn, setSelectedColumn] = useState("ID");
 
+  const [selectedInstitutionId, setSelectedInstitutionId] = useState(null);
+  const [filteredInstitutions, setFilteredInstitutions] = useState(institutions);
+  const [searchTerm, setSearchTerm] = useState('');
   useEffect(() => {
     const fetchInstitutions = async () => {
       try {
@@ -155,46 +159,89 @@ const AddInstitution = () => {
     }
   };
 
+
+//new changes 
+const filterInstitutions = (searchTerm, column) => {
+  const filtered = institutions?.filter(institution => 
+    institution[column].toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  setFilteredInstitutions(filtered);
+};
+const handleFilterParameterChange = (event) => {
+  const value = event.target.value;
+  setSelectedColumn(value);
+  filterInstitutions(searchTerm, value);
+};
+
+//handle search change
+const handleSearchChange = (event) => {
+  const value = event.target.value;
+  setSearchTerm(value);
+  filterInstitutions(value, selectedColumn);
+};
+
+
+
   return (
     <Layout>
-<div className=''>
-<h1 className="text-2xl font-[600] ml-3 mb-4">Award Center</h1>
-      <div className="p-4">
-        <button
-
-          onClick={()=>setIsModalOpen(true)}
-          className="bg-blue-500 mr-auto text-white p-2 flex justify-center items-center gap-2 rounded mb-4"
-        >
-          <FaPlus />  <span>Award Center</span>
-           
-        </button>
-     
-        <InstitutionTable
-          institutions={institutions}
-          openEditModal={openEditInstitutionModal}
-          deleteInstitution={deleteInstitutionHandler}
-        />
-      </div>
-
-  
-      <Modal isOpen={isModalOpen} onRequestClose={closeAddInstitutionModal} contentLabel={editMode ? "Edit Institution" : "Add Institution"} style={customStyles}>
-        <h2 className="subtitle1 mb-4">{editMode ? 'Edit Award Center' : 'Add Award Center '}</h2>
-        <InstitutionForm 
-          formValues={newInstitution} 
-          handleInputChange={handleInputChange} 
-          handleDateChange={handleDateChange} 
-          errors={errors} 
-        />
-        <div className="flex justify-end mt-4">
-          <button onClick={editMode ? updateExistingInstitution : addNewInstitution} className="bg-primary px-5 text-white p-2 rounded mr-2">
-            {editMode ? 'Update' : 'Save'}
-          </button>
-          <button onClick={closeAddInstitutionModal} className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
-            Cancel
-          </button>
+      <div className="">
+        <h1 className="text-2xl font-[600] ml-3 mb-4">Award Center</h1>
+        <div className="p-4">
+          <div className="flex justify-between">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="bg-blue-500 mr-auto text-white p-2 flex justify-center items-center gap-2 rounded mb-4">
+              <FaPlus /> <span>Award Center</span>
+            </button>
+            <form className="px-2 border-2 border-greys rounded-md flex justify-center items-center gap-2 mb-4">
+              <select value={selectedColumn} onChange={handleFilterParameterChange}>
+                {institutions.length > 0 ? Object.keys(institutions[1]).map(op=><option value={op}>{splitWordFunc(op)}</option>) : <option>No filter property</option>}
+              </select>
+              <input
+                placeholder="search"
+                onChange={handleSearchChange}
+                className="rounded-sm h-10 outline outline-none focus:outline-none  px-2 my-1"
+              />
+              <button className="text-[20px]">
+                <FiSearch />
+              </button>
+            </form>
+          </div>
+          <InstitutionTable
+            institutions={filteredInstitutions}
+            openEditModal={openEditInstitutionModal}
+            deleteInstitution={deleteInstitutionHandler}
+          />
         </div>
-      </Modal> 
-</div>
+
+        <Modal
+          isOpen={isModalOpen}
+          onRequestClose={closeAddInstitutionModal}
+          contentLabel={editMode ? "Edit Institution" : "Add Institution"}
+          style={customStyles}>
+          <h2 className="subtitle1 mb-4">
+            {editMode ? "Edit Award Center" : "Add Award Center "}
+          </h2>
+          <InstitutionForm
+            formValues={newInstitution}
+            handleInputChange={handleInputChange}
+            handleDateChange={handleDateChange}
+            errors={errors}
+          />
+          <div className="flex justify-end mt-4">
+            <button
+              onClick={editMode ? updateExistingInstitution : addNewInstitution}
+              className="bg-primary px-5 text-white p-2 rounded mr-2">
+              {editMode ? "Update" : "Save"}
+            </button>
+            <button
+              onClick={closeAddInstitutionModal}
+              className="outline outline-1 outline-primary text-primary px-5 p-2 rounded">
+              Cancel
+            </button>
+          </div>
+        </Modal>
+      </div>
     </Layout>
   );
 };

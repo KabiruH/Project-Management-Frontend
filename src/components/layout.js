@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiSearch } from "react-icons/fi";
-
 import { IoMenu } from "react-icons/io5";
 import Sidebar from "../components/sidebar"
 import { IoSettingsSharp } from "react-icons/io5";
@@ -40,15 +39,7 @@ const Layout = ({ children }) => {
           <div className="p-3 bg-white rounded grow overflow-auto">
             <div className="w-full p-4 flex justify-end mb-6 ">
               <div className="rounded-[32px] flex gap-3 px-3 py-2 bg-white ">
-                <form className="px-2 border-2 border-greys rounded-md flex justify-center items-center gap-2">
-                  <input
-                    placeholder="search"
-                    className="rounded-sm h-10 outline outline-none focus:outline-none  px-2 my-1"
-                  />
-                  <button className="text-[20px]">
-                    <FiSearch />
-                  </button>
-                </form>
+               
                 <IoSettingsSharp
                   className="text-primary text-3xl cursor-pointer my-auto"
                   onClick={() => setBreadcrum((prev) => !prev)}

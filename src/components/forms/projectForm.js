@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react'
 import Input from '../common/Input';
 import styles from '../../styles/modal.module.css';
 import { getInstitutions } from '../../services/institutionS'
+import { getCounty, getSubCounty } from '../../services/countiesS'
 
 const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }) => {
   const [institutions, setInstitutions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [counties, setCounties] = useState([]);
+  const [subCounties, setSubCounties] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,6 +24,46 @@ const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }
     fetchData();
   }, []);
 
+
+  // Fetch counties and subcounties
+  useEffect(() => {
+    // Fetch counties when component mounts
+    const fetchCounties = async () => {
+      try {
+        const countyData = await getCounty();
+        setCounties(countyData);
+        console.log(countyData)
+      } catch (error) {
+        console.error('Error fetching counties:', error);
+      }
+    };
+    fetchCounties();
+  }, []);
+
+
+
+  const handleCountyChange = async (event) => {
+    const county = event.target.value;
+    const countyName = counties.find(c => c.county === county)?.county || '';
+    console.log('Selected County ID:', county); // Log the countyID for debugging
+
+    // Update form values with selected county ID and county name
+    handleInputChange({ target: { name: 'county', value: county } });
+    handleInputChange({ target: { name: 'countyID', value: county } });
+
+    if (county) {
+      try {
+        const subCountyData = await getSubCounty(county);
+        setSubCounties(subCountyData);
+        console.log('Sub-counties fetched:', subCountyData);
+      } catch (error) {
+        console.error('Error fetching sub-counties:', error);
+        setSubCounties([]); // Clear sub-counties in case of an error
+      }
+    } else {
+      setSubCounties([]);
+    }
+  };
  
  
  
@@ -100,26 +143,48 @@ const ProjectForm = ({ formValues, handleInputChange, handleDateChange, errors }
           />
           {errors.cost && <p className="text-red-500">{errors.cost[0]}</p>}
         </div>
-        <div>
-          <label htmlFor="subCounty">Sub County:</label>
-          <Input
-            name="subCounty"
-            placeholder="Sub County"
-            value={formValues.subCounty}
-            onChange={handleInputChange}
-          />
-          {errors.subCounty && <p className="text-red-500">{errors.subCounty[0]}</p>}
-        </div>
+       
         <div>
           <label htmlFor="county">County:</label>
-          <Input
+          <select
+            id="county"
             name="county"
-            placeholder="County"
             value={formValues.county}
-            onChange={handleInputChange}
-          />
+            onChange={handleCountyChange}
+            className="w-full p-2 border border-gray-300 rounded"
+          >
+            <option value="">Select County</option>
+            {counties.map((county) => (
+              <option key={county.countyID} value={county.countyID}>
+                {county.countyName}
+              </option>
+            ))}
+          </select>
           {errors.county && <p className="text-red-500">{errors.county[0]}</p>}
         </div>
+       
+        <div>
+          <label htmlFor="subCounty">Sub-County:</label>
+          <select
+            id="subCounty"
+            name="subCounty"
+            value={formValues.subCountyID}
+            onChange={handleInputChange}
+            className="w-full p-2 border border-gray-300 rounded"
+          >
+            <option value="">Select Sub-County</option>
+            {subCounties.length === 0 ? (
+              <option value="">Loading Sub-Counties...</option>
+            ) : (
+              subCounties.map((subCounty) => (
+                <option key={subCounty.SubCountyID} value={subCounty.SubCountyName}>
+                  {subCounty.SubCountyName}
+                </option>
+              ))
+            )}
+          </select>
+        </div>
+
         <div>
           <label htmlFor="description">Description:</label>
           <Input

@@ -17,7 +17,8 @@ const AddParticipantProject = () => {
     participantID: '',
     name: '',
     institutionName: '',
-    projectID: '',
+    ProjectID: '',
+    projects: []
   });
   const [errors, setErrors] = useState({});
   const [editMode, setEditMode] = useState(false);
@@ -28,6 +29,7 @@ const AddParticipantProject = () => {
       try {
         const fetchedparticipantProjects = await getParticipantProject();
         setParticipantProjects(fetchedparticipantProjects);
+        console.log(fetchedparticipantProjects)
       } catch (error) {
         console.error('Error fetching participantProjects:', error.response.data);
       }
@@ -89,7 +91,8 @@ const AddParticipantProject = () => {
       participantID: '',
       name: '',
       institutionName: '',
-      projectID: '',
+      ProjectID: '',
+      projects: []
     });
   };
 
@@ -113,14 +116,12 @@ const AddParticipantProject = () => {
     try {
       const participantPayload = { ...newParticipantProject };
 
-      console.log('Updated ParticipantProjectPayload:', participantPayload);
+      // console.log('Updated ParticipantProjectPayload:', participantPayload);
 
       const updatedParticipantProject = await updateParticipantProject(selectedParticipantId, participantPayload);
-      setParticipantProjects((prev) =>
-        prev.map((proj) =>
-          proj.participantID === selectedParticipantId ? updatedParticipantProject : proj
-        )
-      );
+      const newParticipantUpdatedProject = await getParticipantProject()
+      setnewParticipantProject(newParticipantUpdatedProject)
+   
       setIsModalOpen(false);
       setErrors({});
     } catch (error) {

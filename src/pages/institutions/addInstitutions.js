@@ -24,7 +24,10 @@ const AddInstitution = () => {
     contactNumber: '',
     licenseStartDate: '',
     licenseEndDate: '',
-    awardLeader: '',
+    levelType: '',
+    groupType: '',
+    source: '',
+    marginalizsed: '',
     notes: '',
   });
   const [errors, setErrors] = useState({});
@@ -93,7 +96,10 @@ const AddInstitution = () => {
       contactNumber: '',
       licenseStartDate: '',
       licenseEndDate: '',
-      awardLeader: '',
+      levelType: '',
+      groupType: '',
+      source: '',
+      marginalizsed: '',
       notes: '',
     });
   };
@@ -123,7 +129,8 @@ const AddInstitution = () => {
       console.log('Updated Institution Payload:', institutionPayload);
 
       const updatedInstitution = await updateInstitution(selectedInstitutionId, institutionPayload);
-      setInstitutions((prev) => prev.map(inst => (inst.institutionID === selectedInstitutionId ? updatedInstitution : inst)));
+      const newInstitutions = await getInstitutions()
+      setInstitutions(newInstitutions);
       setIsModalOpen(false);
       setErrors({});
     } catch (error) {

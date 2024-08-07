@@ -148,7 +148,7 @@ const InstitutionForm = ({ formValues, handleInputChange, errors }) => {
               <option value="">Select Stage</option>
               {stages.map((stage) => (
                 <option key={stage.stageName} value={stage.stageName}>
-                  {stage.stageName}  {/* Assuming 'name' property holds stage name */}
+                  {stage.stageName}    {/* Assuming 'name' property holds stage name */}
                 </option>
               ))}
             </select>
@@ -286,16 +286,62 @@ const InstitutionForm = ({ formValues, handleInputChange, errors }) => {
           />
           {errors.licenseEndDate && <p className="text-red-500">{errors.licenseEndDate[0]}</p>}
         </div>
-        <div>
-          <label htmlFor="awardLeader">Award Leader:</label>
-          <Input
-            name="awardLeader"
-            placeholder="Award Leader"
-            value={formValues.awardLeader}
-            onChange={handleInputChange}
-          />
-          {errors.awardLeader && <p className="text-red-500">{errors.awardLeader[0]}</p>}
-        </div>
+        
+
+        <div className="space-y-4">
+    <div>
+      <label htmlFor="levelType">Level Type:</label>
+      <Input
+        name="levelType"
+        placeholder="Level Type"
+        value={formValues.levelType}
+        onChange={handleInputChange}
+      />
+      {errors.levelType && <p className="text-red-500">{errors.levelType[0]}</p>}
+    </div>
+
+    <div>
+      <label htmlFor="groupType">Group Type:</label>
+      <Input
+        name="groupType"
+        placeholder="Group Type"
+        value={formValues.groupType}
+        onChange={handleInputChange}
+      />
+      {errors.groupType && <p className="text-red-500">{errors.groupType[0]}</p>}
+    </div>
+
+    <div>
+      <label htmlFor="source">Source:</label>
+      <select
+        className="w-full p-2 border border-gray-300 rounded"
+        name="source"
+        value={formValues.source}
+        onChange={handleInputChange}
+      >
+        <option value="">How did learn about us?</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        </select>
+      {errors.source && <p className="text-red-500">{errors.source[0]}</p>}
+    </div>
+
+    <div>
+      <label htmlFor="marginalised">Marginalised:</label>
+      <select
+        className="w-full p-2 border border-gray-300 rounded"
+        name="marginalised"
+        value={formValues.marginalised}
+        onChange={handleInputChange}
+      >
+        <option value="">Select Marginalized Status</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+      {errors.marginalized && <p className="text-red-500">{errors.marginalized[0]}</p>}
+    </div>
+  </div>
+
         <div>
           <label htmlFor="notes">Notes:</label>
           <textarea

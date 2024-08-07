@@ -141,7 +141,7 @@ const AddFeedback = () => {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-bold mb-4">Feedbacks</h1>
+      <h1 className="text-2xl font-bold mb-4">Feedback</h1>
       <div className="p-4">
         <button
           onClick={openAddFeedbackModal}

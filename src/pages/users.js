@@ -119,7 +119,6 @@ const AddUser = () => {
       alert(`Failed to delete User: ${error.response.data.title}`);
     }
   };
-
   const closeAddUserModal = () => {
     setIsModalOpen(false);
     setEditMode(false);

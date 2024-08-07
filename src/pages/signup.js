@@ -56,15 +56,13 @@ const navigate = useNavigate()
         }catch(err){
           console.log(err)
         }
-        
-
       
-
       }
 
       return(
           <AuthLayout>
               <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 md:gap-10 w-10/12'>
+              <img className='w-[480px] h-[60px] mx-auto' src='/assets/newlogo.png'/>
               <div>
               <div className='flex flex-col gap-2'>
                 <h2 color='secondary' className='text-secondary subtitle1'>Register</h2>
@@ -74,7 +72,7 @@ const navigate = useNavigate()
                <div className='grid md:grid-cols-2 gap-2 w-full'>
                 {inputConfig.map((field,index)=><InputContainer error={errors[field.name]?.message} name={field.name} registerFunction={registerFunction} key={index} label={field.label} placeholder={field.placeholder} type={field.type} />)}
                 <Autocomplete registerFunction={registerFunction} options={[{name: "Male"},{name: "Female"}]} label="Gender" name='gender' error={errors.gender?.message}/>
-                <Autocomplete registerFunction={registerFunction} options={[{name: "Helper"},{name: "Participant"}]} label="Role" name='role' error={errors.role?.message}/>
+                <Autocomplete registerFunction={registerFunction} options={[{name: "Helper"},{name: "Participant"},{name: "Award Leader"}, {name: "Staff"}]} label="Role" name='role' error={errors.role?.message}/>
                 <InputContainer error={errors.password?.message} name='password' registerFunction={registerFunction} label='Password' type='password' placeholder='Enter Password' />
                </div>
                <div>

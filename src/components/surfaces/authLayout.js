@@ -12,6 +12,7 @@ const AuthLayout = ({children }) => {
        <div className='rounded-full bg-white h-[150px] w-[140px] flex justify-center items-center'>
         <img  src='/assets/logo.png'/>
        </div>
+
         <p className='subtitle1 text-white'>President's Award - Kenya</p>
         <p className='h2 text-white'>Project Management Portal</p>
       </div>

@@ -2,7 +2,7 @@ import apiClient from './apiClient';
 
 const addStages = async (StagesData) => {
   try {
-    const response = await apiClient.post('/api/InstitutionStages', StagesData);
+    const response = await apiClient.post('/api/AwardCStages', StagesData);
     return response.data;
   } catch (error) {
     console.error('Error in addInstitutionStages:', error.response.data);
@@ -12,7 +12,7 @@ const addStages = async (StagesData) => {
 
 const getStagesById = async (stagesId) => {
   try {
-    const response = await apiClient.get(`/api/InstitutionStages/${stagesId}`);
+    const response = await apiClient.get(`/api/AwardCStages/${stagesId}`);
     return response.data;
   } catch (error) {
     console.error(`Error fetching InstitutionStages with ID ${stagesId}:`, error.response.data);
@@ -22,7 +22,7 @@ const getStagesById = async (stagesId) => {
 
 const updateStages = async (stagesId, updatedData) => {
   try {
-    const response = await apiClient.put(`/api/InstitutionStages/${stagesId}`, updatedData);
+    const response = await apiClient.put(`/api/AwardCStages/${stagesId}`, updatedData);
     return response.data;
   } catch (error) {
     console.error(`Error updating InstitutionStages with ID ${stagesId}:`, error.response.data);
@@ -32,7 +32,7 @@ const updateStages = async (stagesId, updatedData) => {
 
 const deleteStages = async (stagesId) => {
   try {
-    await apiClient.delete(`/api/InstitutionStages/${stagesId}`);
+    await apiClient.delete(`/api/AwardCStages/${stagesId}`);
   } catch (error) {
     console.error(`Error deleting InstitutionStages with ID ${stagesId}:`, error.response.data);
     throw error;
@@ -41,7 +41,7 @@ const deleteStages = async (stagesId) => {
 
 const getStages = async () => {
   try {
-    const response = await apiClient.get('/api/InstitutionStages');
+    const response = await apiClient.get('/api/AwardCStages');
     return response.data;
   } catch (error) {
     console.error('Error fetching InstitutionStagess:', error.response.data);

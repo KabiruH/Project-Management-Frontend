@@ -24,7 +24,10 @@ const AddInstitution = () => {
     contactNumber: '',
     licenseStartDate: '',
     licenseEndDate: '',
-    awardLeader: '',
+    levelType: '',
+    groupType: '',
+    source: '',
+    marginalizsed: '',
     notes: '',
   });
   const [errors, setErrors] = useState({});
@@ -93,7 +96,10 @@ const AddInstitution = () => {
       contactNumber: '',
       licenseStartDate: '',
       licenseEndDate: '',
-      awardLeader: '',
+      levelType: '',
+      groupType: '',
+      source: '',
+      marginalizsed: '',
       notes: '',
     });
   };

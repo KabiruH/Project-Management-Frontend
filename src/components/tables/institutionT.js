@@ -14,9 +14,13 @@ const columns = [
   { Header: 'Contact Number', accessor: 'contactNumber' },
   { Header: 'License Startdate', accessor: 'licenseStartDate' },
   { Header: 'License Enddate', accessor: 'licenseEndDate' },
-  { Header: 'Award Leader', accessor: 'awardLeader' },
+  { Header: 'level Type', accessor: 'levelType' },
+  { Header: 'Group Type', accessor: 'groupType' },
+  { Header: 'source', accessor: 'source' },
+  { Header: 'marginalizsed', accessor: 'marginalizsed' },
   { Header: 'Notes', accessor: 'notes' },
 ];
+
 
 const InstitutionTable = ({ institutions, openEditModal, deleteInstitution }) => {
   const renderRowActions = ({ institutionID }) => (

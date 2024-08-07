@@ -34,7 +34,6 @@ const AddInstitution = () => {
   const [errors, setErrors] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [selectedColumn, setSelectedColumn] = useState("ID");
-
   const [selectedInstitutionId, setSelectedInstitutionId] = useState(null);
   const [filteredInstitutions, setFilteredInstitutions] = useState(institutions);
   const [searchTerm, setSearchTerm] = useState('');
@@ -43,7 +42,7 @@ const AddInstitution = () => {
       try {
         const fetchedInstitutions = await getInstitutions();
         setInstitutions(fetchedInstitutions);
-        console.log(fetchedInstitutions)
+        setFilteredInstitutions(fetchedInstitutions)
       } catch (error) {
         console.error('Error fetching institutions:', error.response.data);
       }
@@ -202,7 +201,7 @@ const handleSearchChange = (event) => {
             </button>
             <form className="px-2 border-2 border-greys rounded-md flex justify-center items-center gap-2 mb-4">
               <select value={selectedColumn} onChange={handleFilterParameterChange}>
-                {institutions.length > 0 ? Object.keys(institutions[1]).map(op=><option value={op}>{splitWordFunc(op)}</option>) : <option>No filter property</option>}
+                {institutions.length > 0 ? Object.keys(institutions[0])?.map(op=><option value={op}>{splitWordFunc(op)}</option>) : <option>No filter property</option>}
               </select>
               <input
                 placeholder="search"
